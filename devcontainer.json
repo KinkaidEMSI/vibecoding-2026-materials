@@ -9,9 +9,8 @@
         // Live Preview — serves index.html on a local port, no terminal needed
         "ms-vscode.live-server",
 
-        // Codeium — free AI autocomplete, no account verification required
-        // Students who have Copilot approved can add it themselves; this is the baseline
-        "Codeium.codeium",
+        // Google Gemini Code Assist — free AI assistant (API key set in org secrets)
+        "GoogleCloudTools.gemini-code-assist",
 
         // HTML/CSS essentials
         "ecmel.vscode-html-css",
@@ -46,10 +45,16 @@
         "git.enableSmartCommit": false,
         "git.confirmSync": false,
 
-        // Codeium: show completions inline (ghost text)
+        // Gemini & AI suggestions: show completions inline (ghost text)
         "editor.inlineSuggest.enabled": true
       }
     }
+  },
+
+  // ─── Environment variables ──────────────────────────────────────────────────
+  // GEMINI_API_KEY is set in GitHub org Codespaces secrets
+  "containerEnv": {
+    "GEMINI_API_KEY": "${localEnv:GEMINI_API_KEY}"
   },
 
   // ─── Ports ──────────────────────────────────────────────────────────────────

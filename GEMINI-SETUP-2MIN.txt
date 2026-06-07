@@ -1,0 +1,36 @@
+GEMINI API SETUP FOR VIBECODING 2026 (2 MINUTES)
+=================================================
+
+STEP 1: Get Gemini API Key (30 seconds)
+----------------------------------------
+✓ Tab opened: https://aistudio.google.com/apikey
+1. Login with your Google account
+2. Click "Create API Key"
+3. Select "Create API key in new project" (or use existing)
+4. Copy the key (looks like: AIzaSy...)
+
+STEP 2: Add to GitHub Codespaces Secrets (1 minute)
+----------------------------------------------------
+✓ Tab opened: https://github.com/organizations/KinkaidEMSI/settings/codespaces
+1. Scroll to "Secrets" section
+2. Click "New organization secret"
+3. Name: GEMINI_API_KEY
+4. Value: [paste your API key from Step 1]
+5. Repository access: Select "vibecoding-2026-materials" (or "All repositories")
+6. Click "Add secret"
+
+STEP 3: Update devcontainer.json (Already done below)
+------------------------------------------------------
+I'll add the API key injection to your devcontainer.json now.
+
+✅ RESULT: All 28 students automatically get free Gemini AI in their Codespaces!
+
+No individual setup needed - it just works when they open Codespace.
+
+============================================
+WHAT STUDENTS GET:
+- Free Gemini 2.5 Flash AI coding assistant
+- Code completion & debugging
+- No GitHub Education verification needed
+- No Copilot subscription needed
+============================================
