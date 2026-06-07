@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VibeCoding EMSI 2026 — AI Cheat Sheet</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Sora:wght@400;600;700&display=swap');
+
+  :root {
+    --bg: #0e1117;
+    --surface: #161b26;
+    --surface2: #1e2535;
+    --border: #2a3145;
+    --text: #e8eaf0;
+    --muted: #8891a8;
+    --accent: #4f9eff;
+    --accent2: #00e5b0;
+    --warn: #ffb938;
+    --red: #ff5a5a;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'Sora', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+
+  @media print {
+    body { background: #fff; color: #111; font-size: 12px; }
+    :root { --bg: #fff; --surface: #f5f5f5; --surface2: #ebebeb; --border: #ddd; --text: #111; --muted: #666; --accent: #1a5fd4; --accent2: #007a5e; --warn: #8a6100; --red: #c00; }
+    .page { max-width: 100%; padding: 0.5in 0.6in; }
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 36px 40px 56px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 18px;
+    margin-bottom: 28px;
+  }
+  .tag-line {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 5px;
+  }
+  h1 {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.1;
+  }
+  h1 em { font-style: normal; color: var(--accent2); }
+  .header-right {
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .header-right .url {
+    font-size: 12px;
+    color: var(--accent);
+    display: block;
+  }
+
+  /* ── LAYOUT ── */
+  .columns-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .columns-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .span2 { grid-column: span 2; }
+
+  @media (max-width: 680px) {
+    .columns-3, .columns-2 { grid-template-columns: 1fr; }
+    .span2 { grid-column: span 1; }
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 16px 18px;
+  }
+  .card-label {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-label.green { color: var(--accent2); }
+  .card-label.warn { color: var(--warn); }
+  .card-label.red { color: var(--red); }
+
+  /* ── SETTINGS LIST ── */
+  .settings { list-style: none; }
+  .settings li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    gap: 8px;
+  }
+  .settings li:last-child { border-bottom: none; }
+  .settings .key { color: var(--muted); font-size: 12.5px; }
+  .settings .val {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    padding: 2px 8px;
+    font-weight: 600;
+  }
+  .val.on { background: #0e2e1e; color: var(--accent2); }
+  .val.off { background: #2a1a1a; color: var(--red); }
+  .val.pick { background: #1a2e4a; color: var(--accent); }
+
+  /* ── PROMPT BLOCKS ── */
+  .prompt-list { list-style: none; }
+  .prompt-list li {
+    border-left: 3px solid var(--border);
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    background: var(--surface2);
+    font-size: 13px;
+  }
+  .prompt-list li:last-child { margin-bottom: 0; }
+  .prompt-list .prompt-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+  .prompt-list li.starter { border-left-color: var(--accent); }
+  .prompt-list li.iterate { border-left-color: var(--accent2); }
+  .prompt-list li.debug { border-left-color: var(--warn); }
+  .prompt-list li.refine { border-left-color: #a78bfa; }
+
+  code {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    background: var(--surface2);
+    padding: 1px 5px;
+    color: var(--accent2);
+  }
+
+  /* ── FORMULA ── */
+  .formula {
+    background: var(--surface2);
+    border: 1px dashed var(--accent);
+    padding: 14px 18px;
+    font-size: 13.5px;
+    margin-top: 14px;
+    line-height: 1.8;
+  }
+  .formula strong { color: var(--accent); font-family: var(--mono); }
+
+  /* ── DO / DON'T ── */
+  .dd-list { list-style: none; }
+  .dd-list li {
+    padding: 7px 0 7px 24px;
+    position: relative;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.4;
+  }
+  .dd-list li:last-child { border-bottom: none; }
+  .dd-list li::before {
+    position: absolute;
+    left: 0;
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 12px;
+  }
+  .dd-list li.do::before { content: '✓'; color: var(--accent2); }
+  .dd-list li.dont::before { content: '✗'; color: var(--red); }
+
+  /* ── TROUBLE TABLE ── */
+  .trouble { list-style: none; }
+  .trouble li {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    align-items: start;
+  }
+  .trouble li:last-child { border-bottom: none; }
+  .trouble .prob { color: var(--red); }
+  .trouble .fix { color: var(--accent2); }
+
+  /* ── PLAN B ── */
+  .plan-b-bar {
+    background: #1c1400;
+    border: 1px solid var(--warn);
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+  .plan-b-bar .label {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--warn);
+    white-space: nowrap;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <div>
+      <div class="tag-line">VibeCoding · EMSI 2026 · Kinkaid School</div>
+      <h1>Google AI Studio — <em>Coding Cheat Sheet</em></h1>
+    </div>
+    <div class="header-right">
+      Your AI assistant
+      <span class="url">aistudio.google.com/prompts/new_chat</span>
+      Sign in with your Google account · Free · No card needed
+    </div>
+  </header>
+
+  <!-- ROW 1: SETTINGS + WHAT IT IS -->
+  <div class="columns-3" style="margin-bottom:16px;">
+
+    <div class="card">
+      <div class="card-label">Step 1 — Settings to use every time</div>
+      <ul class="settings">
+        <li>
+          <span class="key">Model</span>
+          <span class="val pick">Gemini 3 Flash</span>
+        </li>
+        <li>
+          <span class="key">Thinking</span>
+          <span class="val pick">Minimal</span>
+        </li>
+        <li>
+          <span class="key">Grounding / Search</span>
+          <span class="val off">OFF</span>
+        </li>
+        <li>
+          <span class="key">Temperature</span>
+          <span class="val pick">Default (1.0)</span>
+        </li>
+        <li>
+          <span class="key">System instructions</span>
+          <span class="val off">Leave blank</span>
+        </li>
+      </ul>
+      <div style="margin-top:12px; font-size:12px; color:var(--muted); line-height:1.6;">
+        Why Gemini 3 Flash? It's the fastest free model that's actually good at writing code. Gemini 3.1 Flash-Lite is faster but weaker — use it only when 3 Flash is slow.
+      </div>
+    </div>
+
+    <div class="card span2">
+      <div class="card-label green">Step 2 — How to talk to it (the formula)</div>
+      <div class="formula">
+        <strong>[What you want]</strong> + <strong>[specific details]</strong> + <strong>[constraints]</strong>
+      </div>
+      <div style="margin-top:12px; font-size:12.5px; line-height:1.7; color:var(--muted);">
+        AI is not a search engine. You're not typing keywords — you're giving instructions to a coding assistant that will do exactly what you say. The more specific you are, the better the code you get back.
+        <br><br>
+        <span style="color:var(--text)">Bad prompt:</span> <code>make my site look cool</code><br>
+        <span style="color:var(--text)">Good prompt:</span> <code>Add a dark navy background to the body, change the h1 font color to bright orange (#ff6b35), and add a 2px white bottom border to the nav links on hover. Only change the CSS, don't touch the HTML.</code>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ROW 2: PROMPT TEMPLATES -->
+  <div class="columns-2" style="margin-bottom:16px;">
+
+    <div class="card">
+      <div class="card-label">Starter prompts — use these to begin</div>
+      <ul class="prompt-list">
+        <li class="starter">
+          <div class="prompt-label">Build from scratch</div>
+          Write a single HTML file for a personal website about [your topic]. Include: a header with my name, a short about section, and one section about [hobby/interest]. Use CSS inside a &lt;style&gt; tag. Make it dark themed with orange accents. No JavaScript needed.
+        </li>
+        <li class="starter">
+          <div class="prompt-label">Build an interactive project</div>
+          Write a single HTML file for a [quiz / clicker game / random generator / trivia game] about [topic]. All CSS and JavaScript in the same file. Keep it simple — one screen, no routing, no external libraries.
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-label green">Iteration prompts — after you have code running</div>
+      <ul class="prompt-list">
+        <li class="iterate">
+          <div class="prompt-label">Add a feature</div>
+          Here is my current HTML file: [paste code]. Add a [feature — e.g. "score counter that increments when the button is clicked"]. Don't change anything else. Return the full updated file.
+        </li>
+        <li class="iterate">
+          <div class="prompt-label">Change the style</div>
+          Here is my CSS: [paste]. Change only the colors — replace all instances of blue with [color]. Keep everything else identical.
+        </li>
+        <li class="refine">
+          <div class="prompt-label">Make it mobile-friendly</div>
+          Here is my code: [paste]. Add a media query so on screens narrower than 600px the layout stacks vertically instead of side by side. Return only the CSS changes, not the full file.
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- ROW 3: DEBUG + DO/DON'T -->
+  <div class="columns-2" style="margin-bottom:16px;">
+
+    <div class="card">
+      <div class="card-label warn">Debug prompts — when something breaks</div>
+      <ul class="prompt-list">
+        <li class="debug">
+          <div class="prompt-label">Something is broken</div>
+          Here is my HTML: [paste code]. When I [describe the problem — e.g. "click the button"], nothing happens. What is wrong? Explain what's broken, then give me the fixed code.
+        </li>
+        <li class="debug">
+          <div class="prompt-label">It doesn't look right</div>
+          Here is my CSS: [paste]. My [element name — e.g. "nav bar"] is not centered on the page. Fix just the CSS for that element. Show me the corrected lines only.
+        </li>
+        <li class="debug">
+          <div class="prompt-label">I got an error message</div>
+          I see this error in the browser console: "[paste error]". Here is the JavaScript that's causing it: [paste code]. What does this error mean and how do I fix it?
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="card" style="margin-bottom:14px;">
+        <div class="card-label green">Good prompting habits</div>
+        <ul class="dd-list">
+          <li class="do">Always paste your current code when asking for changes — AI can't see your screen</li>
+          <li class="do">Say "return the full updated file" or "return only the changed lines" — pick one</li>
+          <li class="do">Describe what you <em>want</em> to happen, not just what's wrong</li>
+          <li class="do">If the first answer is bad, add more detail and ask again — don't give up</li>
+          <li class="dont">Don't type just "fix it" or "make it better" — AI needs specifics</li>
+          <li class="dont">Don't paste 500 lines of code without explaining what part to focus on</li>
+          <li class="dont">Don't trust AI blindly — read the code before you paste it into your file</li>
+        </ul>
+      </div>
+
+      <!-- PLAN B INLINE -->
+      <div class="plan-b-bar">
+        <div class="label">Plan B</div>
+        <div>If AI Studio is down → go to <code>gemini.google.com</code>. Same Gemini model, same Google account. Slightly simpler interface. Your work is identical.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ROW 4: TROUBLESHOOTING -->
+  <div class="columns-2">
+
+    <div class="card">
+      <div class="card-label red">When things go wrong</div>
+      <ul class="trouble">
+        <li>
+          <span class="prob">AI gave me code that doesn't work</span>
+          <span class="fix">Paste the broken code back in and say "this doesn't work — [explain what happens]. Fix it."</span>
+        </li>
+        <li>
+          <span class="prob">AI changed something I didn't ask it to change</span>
+          <span class="fix">Say "undo that change and only do what I asked." Or use Git — the last commit has your old code.</span>
+        </li>
+        <li>
+          <span class="prob">AI keeps giving me the wrong answer</span>
+          <span class="fix">Start a new chat. Long conversations sometimes confuse the model. Paste your full code fresh.</span>
+        </li>
+        <li>
+          <span class="prob">I don't understand what the code does</span>
+          <span class="fix">Ask it: "Explain what this code does line by line in simple terms." Understanding it = better prompts later.</span>
+        </li>
+        <li>
+          <span class="prob">"Rate limit" or "too many requests" error</span>
+          <span class="fix">Wait 60 seconds and try again. You have 1,500 requests per day — don't spam it.</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-label">The commit loop — don't forget this</div>
+      <div style="font-size:13px; line-height:1.8; margin-bottom:14px;">
+        Every time you get code working in your browser, commit it. If you break something later, your last commit is your save point.
+      </div>
+      <ul class="settings" style="margin-bottom:14px;">
+        <li>
+          <span class="key" style="font-family:var(--mono); font-size:12px;">1. git add .</span>
+          <span style="font-size:12px; color:var(--muted);">stage everything</span>
+        </li>
+        <li>
+          <span class="key" style="font-family:var(--mono); font-size:12px;">2. git commit -m "what you did"</span>
+          <span style="font-size:12px; color:var(--muted);">save snapshot</span>
+        </li>
+        <li>
+          <span class="key" style="font-family:var(--mono); font-size:12px;">3. git push</span>
+          <span style="font-size:12px; color:var(--muted);">go live on Pages</span>
+        </li>
+      </ul>
+      <div style="background:var(--surface2); padding:10px 14px; font-size:12.5px; line-height:1.6; color:var(--muted);">
+        <strong style="color:var(--text);">Commit message tips:</strong><br>
+        ✓ "added score counter to quiz"<br>
+        ✓ "changed background to dark mode"<br>
+        ✗ "fixed stuff" — too vague, useless in a week
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>VibeCoding EMSI 2026 · Kinkaid School · Jun 8–29</span>
+    <span>aistudio.google.com/prompts/new_chat · Model: Gemini 3 Flash · Thinking: Minimal · Grounding: OFF</span>
+  </footer>
+
+</div>
+</body>
+</html>

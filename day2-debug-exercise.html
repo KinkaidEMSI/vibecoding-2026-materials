@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════╗
+  ║  VibeCoding EMSI 2026 — Day 2 Debugging Exercise        ║
+  ║                                                          ║
+  ║  This file has EXACTLY 5 bugs.                          ║
+  ║  Use Google AI Studio to find and fix them.             ║
+  ║  When all 5 are fixed, the site will:                   ║
+  ║    • Show a proper heading                              ║
+  ║    • Show a styled paragraph in the right color         ║
+  ║    • Show a working navigation link                     ║
+  ║    • Show an image placeholder box                      ║
+  ║    • Show a working button that alerts a message        ║
+  ╚══════════════════════════════════════════════════════════╝
+
+  TEACHER NOTES (do not share with students):
+  Bug 1 — Line 19: <titl> tag is not closed with </title> (it says </titl>)
+  Bug 2 — Line 27: CSS rule has a typo: "backgrond-color" should be "background-color"
+  Bug 3 — Line 35: The <h1> tag is never closed — missing </h1>
+  Bug 4 — Line 39: <a href tag is malformed — href="Projects" (no http/https, and the href value has an unmatched quote)
+  Bug 5 — Line 47: JavaScript function has a syntax error — missing closing parenthesis on alert()
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <titl>VibeCoding Debug Challenge</titl>   <!-- BUG 1 is on this line -->
+
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #0a0a0a;
+      color: #eeeeee;
+      margin: 40px;
+    }
+
+    .highlight {
+      backgrond-color: #ff6b35;   /* BUG 2 is on this line */
+      color: white;
+      padding: 10px;
+      border-radius: 4px;
+    }
+
+    nav a {
+      color: #ff6b35;
+      text-decoration: none;
+      margin-right: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Welcome to My Site    <!-- BUG 3: this tag is never properly closed -->
+
+  <p class="highlight">
+    This paragraph should have an orange background.
+    If it looks wrong, check the CSS.
+  </p>
+
+  <nav>
+    <a href="Projects>My Projects</a>   <!-- BUG 4 is on this line -->
+    <a href="#about">About Me</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div id="about">
+    <h2>About Me</h2>
+    <p>I am learning to build websites with AI tools.</p>
+  </div>
+
+  <button onclick="showMessage()">Click me!</button>
+
+  <script>
+    function showMessage() {
+      alert("Hello from JavaScript!"   // BUG 5 is on this line — missing )
+    }
+  </script>
+
+</body>
+</html>

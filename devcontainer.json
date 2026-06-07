@@ -1,0 +1,73 @@
+{
+  "name": "VibeCoding EMSI 2026",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye",
+
+  // ─── Extensions installed automatically when the Codespace opens ───────────
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // Live Preview — serves index.html on a local port, no terminal needed
+        "ms-vscode.live-server",
+
+        // Codeium — free AI autocomplete, no account verification required
+        // Students who have Copilot approved can add it themselves; this is the baseline
+        "Codeium.codeium",
+
+        // HTML/CSS essentials
+        "ecmel.vscode-html-css",
+        "formulahendry.auto-close-tag",
+        "formulahendry.auto-rename-tag",
+
+        // Prettier — auto-formats on save so code stays readable
+        "esbenp.prettier-vscode"
+      ],
+
+      "settings": {
+        // Format on save — one less thing students have to think about
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+        // Prettier defaults that match what students will see in examples
+        "prettier.singleQuote": true,
+        "prettier.tabWidth": 2,
+
+        // Open Live Preview in a split panel by default
+        "livePreview.openPreviewTarget": "embeddedPreview",
+
+        // Larger font for classroom / projector visibility
+        "editor.fontSize": 15,
+        "editor.lineHeight": 1.6,
+        "editor.wordWrap": "on",
+
+        // Show file extensions — students need to see .html not just "index"
+        "explorer.sortOrder": "default",
+
+        // Git: always show the source control panel
+        "git.enableSmartCommit": false,
+        "git.confirmSync": false,
+
+        // Codeium: show completions inline (ghost text)
+        "editor.inlineSuggest.enabled": true
+      }
+    }
+  },
+
+  // ─── Ports ──────────────────────────────────────────────────────────────────
+  // Live Preview runs on 3000; forward it so students can open a browser tab
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": {
+      "label": "Live Preview",
+      "onAutoForward": "openPreview"
+    }
+  },
+
+  // ─── Post-create script ─────────────────────────────────────────────────────
+  // Runs once after the container is built. Keeps the terminal clean on Day 1.
+  "postCreateCommand": "echo '✅ VibeCoding environment ready. Open index.html and click Go Live!'",
+
+  // ─── Container settings ─────────────────────────────────────────────────────
+  // 2-core is the free tier machine type — do NOT change to 4-core
+  // Idle timeout is set in GitHub org settings, not here
+  "remoteUser": "node"
+}

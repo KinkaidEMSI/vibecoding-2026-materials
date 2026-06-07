@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VibeCoding EMSI 2026 — Teacher & TA Operations Manual</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #f8f7f4;
+    --surface: #ffffff;
+    --surface2: #f2f0ec;
+    --border: #e0ddd7;
+    --text: #1a1916;
+    --muted: #7a7870;
+    --accent: #d94f1e;
+    --blue: #1a6cbf;
+    --green: #1a8a4a;
+    --yellow: #c47d00;
+    --red: #c42020;
+    --purple: #6b3ec4;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Outfit', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  @media print {
+    .tab-nav, .toc-sidebar { display: none !important; }
+    .tab-panel { display: block !important; }
+    body { font-size: 12px; background: #fff; }
+    .page { max-width: 100%; flex-direction: column; }
+    .main-content { max-width: 100%; }
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--text);
+    color: white;
+    padding: 20px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .site-header h1 {
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .site-header h1 span { color: #ff7a50; }
+  .header-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #aaa;
+    text-align: right;
+    line-height: 1.7;
+  }
+
+  /* ── TABS ── */
+  .tab-nav {
+    background: var(--surface);
+    border-bottom: 2px solid var(--border);
+    padding: 0 32px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    position: sticky;
+    top: 62px;
+    z-index: 99;
+  }
+  .tab-btn {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 12px 20px;
+    border: none;
+    border-bottom: 3px solid transparent;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+    margin-bottom: -2px;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* ── LAYOUT ── */
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px;
+    display: flex;
+    gap: 28px;
+  }
+
+  .toc-sidebar {
+    width: 200px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 120px;
+    height: fit-content;
+  }
+  .toc-sidebar ul { list-style: none; }
+  .toc-sidebar li { margin-bottom: 2px; }
+  .toc-sidebar a {
+    font-size: 12.5px;
+    color: var(--muted);
+    text-decoration: none;
+    display: block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border-left: 2px solid transparent;
+    transition: all 0.1s;
+  }
+  .toc-sidebar a:hover {
+    color: var(--text);
+    background: var(--surface2);
+    border-left-color: var(--border);
+  }
+  .toc-section {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    padding: 12px 8px 4px;
+    font-weight: 600;
+  }
+
+  .main-content { flex: 1; min-width: 0; }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── TYPOGRAPHY ── */
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 40px 0 12px;
+    padding-top: 8px;
+  }
+  h2:first-child { margin-top: 0; }
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 28px 0 8px;
+    color: var(--text);
+  }
+  h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 16px 0 6px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: var(--mono);
+    font-size: 11px;
+  }
+  p { margin-bottom: 12px; }
+  code {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: var(--surface2);
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--blue);
+  }
+  pre {
+    background: #1a1916;
+    color: #e8e4dc;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    padding: 16px 20px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 12px 0 16px;
+    line-height: 1.7;
+  }
+  pre .comment { color: #7a7870; }
+  pre .string { color: #a8d8a8; }
+  pre .key { color: #ffb950; }
+
+  /* ── CARDS & CALLOUTS ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+  }
+  .callout {
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 12px 0 16px;
+    font-size: 13.5px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    border-left: 4px solid;
+  }
+  .callout-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .callout.warn { background: #fff8e7; border-color: #c47d00; }
+  .callout.danger { background: #fff0f0; border-color: #c42020; }
+  .callout.info { background: #eef5ff; border-color: #1a6cbf; }
+  .callout.success { background: #efffed; border-color: #1a8a4a; }
+  .callout.tip { background: #f5f0ff; border-color: #6b3ec4; }
+
+  /* ── TABLES ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 16px;
+    font-size: 13px;
+  }
+  th {
+    background: var(--surface2);
+    font-weight: 600;
+    text-align: left;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-family: var(--mono);
+  }
+  td {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #faf9f7; }
+
+  /* ── STEPS ── */
+  .steps { list-style: none; counter-reset: step; }
+  .steps li {
+    counter-increment: step;
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+  }
+  .steps li:last-child { border-bottom: none; }
+  .steps li::before {
+    content: counter(step);
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--accent);
+    background: #fff2ee;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  /* ── CHECKLIST ── */
+  .checklist { list-style: none; }
+  .checklist li {
+    padding: 7px 0 7px 26px;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: '☐';
+    position: absolute;
+    left: 0;
+    font-size: 16px;
+    color: var(--border);
+    line-height: 1.3;
+  }
+  .checklist li.done::before { content: '☑'; color: var(--green); }
+
+  /* ── TAGS ── */
+  .tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 2px 8px;
+    border-radius: 3px;
+    vertical-align: middle;
+  }
+  .tag.blue { background: #ddeeff; color: #1a6cbf; }
+  .tag.green { background: #ddf5e7; color: #1a8a4a; }
+  .tag.orange { background: #fff0e6; color: #c44e00; }
+  .tag.red { background: #ffe8e8; color: #c42020; }
+  .tag.purple { background: #f0e8ff; color: #6b3ec4; }
+  .tag.gray { background: var(--surface2); color: var(--muted); }
+
+  /* ── DAY CARDS ── */
+  .day-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .day-header {
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+  }
+  .day-header:hover { background: var(--surface2); }
+  .day-num {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--accent);
+    min-width: 48px;
+  }
+  .day-title-block { flex: 1; }
+  .day-title { font-weight: 600; font-size: 15px; }
+  .day-subtitle { font-size: 12.5px; color: var(--muted); margin-top: 1px; }
+  .day-meta {
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .day-chevron {
+    font-size: 12px;
+    color: var(--muted);
+    transition: transform 0.2s;
+    margin-left: 8px;
+  }
+  .day-card.open .day-chevron { transform: rotate(90deg); }
+  .day-body { display: none; padding: 20px; }
+  .day-card.open .day-body { display: block; }
+
+  .timeline {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 0;
+    font-size: 13px;
+  }
+  .tl-time {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    padding: 8px 12px 8px 0;
+    border-right: 2px solid var(--border);
+    text-align: right;
+    white-space: nowrap;
+  }
+  .tl-content {
+    padding: 8px 0 8px 16px;
+    border-bottom: 1px solid var(--surface2);
+  }
+  .tl-content:last-child { border-bottom: none; }
+  .tl-content strong { display: block; font-weight: 600; margin-bottom: 2px; }
+  .tl-content .sub { font-size: 12px; color: var(--muted); margin-top: 3px; }
+
+  /* ── PHASE BADGES ── */
+  .phase-bar {
+    padding: 10px 16px;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin: 24px 0 8px;
+    border-radius: 4px;
+  }
+  .phase-bar.p0 { background: #f5f0ff; color: #6b3ec4; }
+  .phase-bar.p1 { background: #eef5ff; color: #1a6cbf; }
+  .phase-bar.p2 { background: #efffed; color: #1a8a4a; }
+
+  /* ── GRADING SECTION ── */
+  .grade-row {
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .grade-row:last-child { border-bottom: none; }
+  .grade-pct {
+    font-family: var(--mono);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--accent);
+    text-align: center;
+  }
+
+  /* ── COMMAND BLOCK ── */
+  .cmd-block {
+    background: #1a1916;
+    color: #e8e4dc;
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin: 8px 0;
+    line-height: 1.8;
+  }
+  .cmd-block .prompt { color: #7a7870; }
+  .cmd-block .cmd { color: #a8d8a8; }
+  .cmd-block .comment { color: #555; font-size: 11px; }
+
+  /* ── SCROLL TO TOP ── */
+  .back-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--text);
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    cursor: pointer;
+    border-radius: 4px;
+    opacity: 0.8;
+    z-index: 200;
+  }
+  .back-top:hover { opacity: 1; }
+
+  /* ── PRINT BOUNDARY ── */
+  .print-break { page-break-before: always; }
+
+  hr { border: none; border-top: 2px solid var(--border); margin: 28px 0; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="site-header">
+  <h1>VibeCoding EMSI 2026 · <span>Teacher & TA Manual</span></h1>
+  <div class="header-meta">
+    Jun 8–29, 2026 · 13 sessions · Kinkaid School<br>
+    Last updated: Jun 7, 2026
+  </div>
+</div>
+
+<!-- TABS -->
+<nav class="tab-nav" role="tablist">
+  <button class="tab-btn active" onclick="showTab('setup')" role="tab">Platform Setup</button>
+  <button class="tab-btn" onclick="showTab('daily')" role="tab">Daily Schedule</button>
+  <button class="tab-btn" onclick="showTab('grading')" role="tab">Grading</button>
+  <button class="tab-btn" onclick="showTab('ta')" role="tab">TA Runbook</button>
+  <button class="tab-btn" onclick="showTab('contingency')" role="tab">Contingency</button>
+  <button class="tab-btn" onclick="showTab('reference')" role="tab">Quick Reference</button>
+</nav>
+
+<!-- PAGE -->
+<div class="page">
+
+<!-- SIDEBAR TOC (updates per tab via JS) -->
+<aside class="toc-sidebar" id="toc">
+  <div class="toc-section">On this page</div>
+  <ul id="toc-list"></ul>
+</aside>
+
+<main class="main-content">
+
+<!-- ═══════════════════════════════════════════════════════ TAB: SETUP -->
+<div id="tab-setup" class="tab-panel active">
+
+  <h2 id="s-overview">Platform Setup — Complete Guide</h2>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠</span>
+    <div><strong>Do this before June 8.</strong> This section is written for you, but also clear enough for a tech-savvy TA or colleague to execute if needed. Follow steps in order — some steps are dependencies for others.</div>
+  </div>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ</span>
+    <div><strong>What students need:</strong> A browser. That's it. No installs. No downloads. GitHub Codespaces runs VS Code entirely in the browser. This is the whole reason we chose it — locked-down school MacBook Airs are not a problem.</div>
+  </div>
+
+  <!-- ── SECTION: PLATFORM OVERVIEW ── -->
+  <h3 id="s-platforms">The 4 platforms and what each one does</h3>
+
+  <table>
+    <tr><th>Platform</th><th>What it does in this course</th><th>Who logs in</th><th>Cost</th></tr>
+    <tr><td><strong>GitHub.com</strong></td><td>Where all code lives. Each student has one repo per project. You see every commit they make.</td><td>You + students</td><td>Free</td></tr>
+    <tr><td><strong>GitHub Codespaces</strong></td><td>VS Code in a browser tab. Students edit code here — no install needed. Saves to GitHub automatically on commit.</td><td>Students (from their repo)</td><td>Free tier (60 hrs/month per user on free plan)</td></tr>
+    <tr><td><strong>GitHub Classroom</strong></td><td>Your teacher dashboard. Creates student repos automatically when they accept an assignment link. Shows commit history.</td><td>You only</td><td>Free</td></tr>
+    <tr><td><strong>Google Classroom</strong></td><td>Where you post assignments, due dates, announcements. Students submit their live site URL here.</td><td>You + students (school accounts)</td><td>Free (G Suite Edu)</td></tr>
+    <tr><td><strong>Google AI Studio</strong></td><td>The AI coding assistant. Students use it in a separate browser tab to generate and fix code.</td><td>Students (personal Google accounts)</td><td>Free forever</td></tr>
+  </table>
+
+  <div class="callout tip">
+    <span class="callout-icon">💡</span>
+    <div><strong>Mental model:</strong> GitHub is the filing cabinet. Codespaces is the desk. Classroom is the gradebook. AI Studio is the assistant sitting next to the student. Google Classroom is the bulletin board.</div>
+  </div>
+
+  <!-- ── SECTION A: GITHUB ORG ── -->
+  <h3 id="s-github-org">A · GitHub Organization setup</h3>
+
+  <p>You already have a GitHub Enterprise org for Kinkaid/EMSI. These are the settings to verify before Day 1.</p>
+
+  <ol class="steps">
+    <li>
+      <div><strong>Sign in at github.com</strong> with your educator account. Navigate to your org: <code>github.com/[your-org-name]</code></div>
+    </li>
+    <li>
+      <div><strong>Verify Codespaces is enabled for the org.</strong> Go to <code>Org Settings → Codespaces</code>. Make sure "Enable for all members" is ON. If you don't see the option, it may need to be enabled at the Enterprise level — contact your GitHub admin.</div>
+    </li>
+    <li>
+      <div><strong>Set Codespace machine type limit.</strong> In <code>Org Settings → Codespaces → Machine types</code>, restrict to <strong>2-core only</strong>. This prevents students from accidentally spinning up expensive machines. Each student gets 60 free hours/month on the free GitHub plan — 2-core uses those hours most efficiently.</div>
+    </li>
+    <li>
+      <div><strong>Set idle timeout.</strong> In <code>Org Settings → Codespaces → Idle timeout</code>, set to <strong>30 minutes</strong>. A Codespace that sits idle will auto-suspend after 30 min, saving hours. Students can resume instantly by reopening the tab.</div>
+    </li>
+    <li>
+      <div><strong>Invite students to the org.</strong> Go to <code>Org Settings → Members → Invite members</code>. You'll need their GitHub usernames. Do this after they create accounts on Day 1 — or beforehand if you collect usernames via the Google Form. Students get an email and must accept.</div>
+    </li>
+  </ol>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠</span>
+    <div><strong>Codespaces hours budget check.</strong> Free GitHub accounts get 60 hours/month of 2-core Codespaces. With 13 sessions × 80 minutes = ~17.3 hours per student per month. You're well within budget. But if a student leaves a Codespace running overnight (common!), they'll drain it fast. The 30-min idle timeout protects against this.</div>
+  </div>
+
+  <!-- ── SECTION B: GITHUB CLASSROOM ── -->
+  <h3 id="s-gh-classroom">B · GitHub Classroom setup</h3>
+
+  <p>GitHub Classroom is what automates repo creation for each student. When a student clicks your assignment link, GitHub automatically creates a private repo for them, pre-loaded with your starter template.</p>
+
+  <ol class="steps">
+    <li>
+      <div><strong>Go to classroom.github.com</strong> and sign in. Click <strong>New Classroom</strong>. Connect it to your org (the one you just set up). Name it "VibeCoding EMSI 2026".</div>
+    </li>
+    <li>
+      <div><strong>Set up your roster.</strong> GitHub Classroom can import students from your GitHub org, or you can skip the roster — students self-identify when they accept the assignment. For simplicity: skip the roster, just share the invitation link. Students' repos will be named <code>[assignment-prefix]-[github-username]</code>.</div>
+    </li>
+    <li>
+      <div><strong>Create Assignment 1: Personal Website.</strong>
+        <ul style="margin-top:6px; padding-left:16px;">
+          <li>Assignment title: <code>project1-personal-site</code></li>
+          <li>Repo prefix: <code>project1-</code> (student repos become <code>project1-jsmith</code>)</li>
+          <li>Visibility: <strong>Private</strong> (students can only see their own repo)</li>
+          <li>Template repo: your starter template (see Section C below)</li>
+          <li>Enable Feedback PRs: No (too complex for this course)</li>
+          <li>Copy the invitation link — you'll paste this into Google Classroom</li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <div><strong>Create Assignment 2: Interactive Project.</strong> Same settings, prefix <code>project2-</code>, same template repo. Copy this second invitation link too.</div>
+    </li>
+    <li>
+      <div><strong>How GitHub Pages auto-deploys.</strong> When a student pushes to <code>main</code>, GitHub Pages automatically rebuilds their site. You need to enable Pages on the template repo first:
+        <ul style="margin-top:6px; padding-left:16px;">
+          <li>In the template repo → Settings → Pages</li>
+          <li>Source: <strong>Deploy from a branch</strong></li>
+          <li>Branch: <code>main</code>, folder: <code>/ (root)</code></li>
+          <li>Save. This setting is inherited by all repos created from the template.</li>
+        </ul>
+      </div>
+    </li>
+  </ol>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ</span>
+    <div><strong>How to check student commits from GitHub Classroom:</strong> Go to classroom.github.com → your classroom → the assignment → click any student's name. You see their repo with full commit history. This is your gradebook for the 20% Git workflow grade.</div>
+  </div>
+
+  <!-- ── SECTION C: TEMPLATE REPO ── -->
+  <h3 id="s-template">C · Starter template repo</h3>
+
+  <p>This repo is the blank canvas every student starts from. It needs to exist before you create GitHub Classroom assignments.</p>
+
+  <ol class="steps">
+    <li>
+      <div><strong>Create a new repo in your org</strong> called <code>vibecoding-2026-template</code>. Initialize with a README.</div>
+    </li>
+    <li>
+      <div><strong>Create the folder structure:</strong>
+        <pre><code>vibecoding-2026-template/
+  .devcontainer/
+    devcontainer.json      ← the file from this package
+  index.html               ← starter HTML (see below)
+  README.md                ← brief instructions for students
+  style.css                ← blank CSS file
+  script.js                ← blank JS file</code></pre>
+      </div>
+    </li>
+    <li>
+      <div><strong>Paste this into <code>index.html</code>:</strong>
+        <pre><span class="comment">&lt;!-- VibeCoding EMSI 2026 — Your starter file --&gt;
+&lt;!-- Replace EVERYTHING between the tags with your own content --&gt;</span>
+<span class="string">&lt;!DOCTYPE html&gt;</span>
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;<span class="string">Your Name — VibeCoding 2026</span>&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+  &lt;style&gt;
+    body { font-family: sans-serif; margin: 40px; background: #0a0a0a; color: #eee; }
+    h1 { color: #ff6b35; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;<span class="key">Your Name Here</span>&lt;/h1&gt;
+  &lt;p&gt;<span class="key">Tell us something about you.</span>&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+      </div>
+    </li>
+    <li>
+      <div><strong>Mark the repo as a template.</strong> In repo Settings → check "Template repository". Now GitHub Classroom can use it.</div>
+    </li>
+    <li>
+      <div><strong>Add the <code>devcontainer.json</code></strong> to the <code>.devcontainer/</code> folder. This file (included in this package) tells Codespaces what extensions to install — Live Preview, Codeium, Prettier, etc. Without it, students get a bare VS Code.</div>
+    </li>
+  </ol>
+
+  <!-- ── SECTION D: GOOGLE CLASSROOM ── -->
+  <h3 id="s-google-classroom">D · Google Classroom setup</h3>
+
+  <p>Google Classroom is your bulletin board and submission system. Students use their school Google accounts.</p>
+
+  <ol class="steps">
+    <li>
+      <div><strong>Go to classroom.google.com</strong> with your teacher school account. Click <strong>+</strong> → <strong>Create class</strong>. Name it "VibeCoding EMSI 2026". Section: "Summer 2026". Room: your room number.</div>
+    </li>
+    <li>
+      <div><strong>Enroll students.</strong> Share the class enrollment code (displayed in the class header) verbally on Day 1. Students go to classroom.google.com, click <strong>+</strong> → <strong>Join class</strong>, enter the code. Takes 2 minutes.</div>
+    </li>
+    <li>
+      <div><strong>Create Topics</strong> (like folder categories for assignments). Go to Classwork tab → Create → Topic. Create these four topics:
+        <ul style="margin-top:6px; padding-left:16px;">
+          <li>📌 Course Materials (for handouts, cheat sheets)</li>
+          <li>Phase 0 — Git Basics</li>
+          <li>Phase 1 — Personal Website</li>
+          <li>Phase 2 — Interactive Project</li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <div><strong>Create the assignments.</strong> See the table below for what to create and when.</div>
+    </li>
+    <li>
+      <div><strong>Upload your handouts</strong> to the Course Materials topic: Day 1 onboarding one-pager, AI Cheat Sheet. Students can always access them here.</div>
+    </li>
+  </ol>
+
+  <h4>Google Classroom assignments to create before Day 1</h4>
+  <table>
+    <tr><th>Assignment</th><th>Topic</th><th>Due</th><th>What students submit</th></tr>
+    <tr><td>GitHub Username Collection</td><td>Course Materials</td><td>Jun 8 (Day 1)</td><td>Google Form link OR short answer: their GitHub username</td></tr>
+    <tr><td>Accept GitHub Classroom — Project 1</td><td>Phase 1</td><td>Jun 10 (Day 3)</td><td>Paste the GitHub Classroom invitation link as the assignment description. Students click it, not submit anything here.</td></tr>
+    <tr><td>Project 1 — Idea Ticket</td><td>Phase 1</td><td>Jun 10 (Day 3)</td><td>Short answer: 2–3 sentences describing their site</td></tr>
+    <tr><td>Project 1 — Submit Live URL</td><td>Phase 1</td><td>Jun 17 (Day 7)</td><td>Link — their GitHub Pages URL</td></tr>
+    <tr><td>Project 1 — Reflection</td><td>Phase 1</td><td>Jun 17 (Day 7)</td><td>Short paragraph response</td></tr>
+    <tr><td>Accept GitHub Classroom — Project 2</td><td>Phase 2</td><td>Jun 22 (Day 9)</td><td>Same as Project 1 — paste invitation link in description</td></tr>
+    <tr><td>Project 2 — Idea Ticket</td><td>Phase 2</td><td>Jun 22 (Day 9)</td><td>Short answer: what kind of project + one feature</td></tr>
+    <tr><td>Project 2 — Submit Live URL</td><td>Phase 2</td><td>Jun 25 (Day 12)</td><td>Link — GitHub Pages URL</td></tr>
+    <tr><td>Project 2 — Reflection + Demo Notes</td><td>Phase 2</td><td>Jun 29 (Day 13)</td><td>Short paragraph + what they'd add with more time</td></tr>
+  </table>
+
+  <div class="callout tip">
+    <span class="callout-icon">💡</span>
+    <div><strong>Workflow tip:</strong> Set all assignments to "No grade" except the final URL submissions for Project 1 and Project 2. You grade those holistically using the checklist in the Grading tab. Keep Google Classroom as a submission tracker, not a grading tool — your real grading happens by checking GitHub commit counts.</div>
+  </div>
+
+  <!-- ── SECTION E: AI STUDIO ── -->
+  <h3 id="s-ai-studio">E · Google AI Studio (student AI tool)</h3>
+
+  <p>No setup needed on your end. Students sign in with their <strong>personal</strong> Google accounts (not school accounts) at <code>aistudio.google.com/prompts/new_chat</code>. It's free. No credit card. No verification.</p>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ</span>
+    <div><strong>Why personal accounts, not school accounts?</strong> School Google accounts may have domain restrictions that block third-party apps. Personal accounts work reliably. AI Studio does not store student data in any FERPA-relevant way — it's a chat interface they use themselves. The code they generate lives in their GitHub repo, not in AI Studio.</div>
+  </div>
+
+  <h4>Settings to tell every student at the start of each class</h4>
+  <table>
+    <tr><th>Setting</th><th>Value</th><th>Why</th></tr>
+    <tr><td>Model</td><td><strong>Gemini 3 Flash</strong></td><td>Best quality on the free tier for code generation</td></tr>
+    <tr><td>Thinking</td><td><strong>Minimal</strong></td><td>Faster responses; full thinking is slower and overkill for HTML/CSS/JS</td></tr>
+    <tr><td>Grounding / Search</td><td><strong>OFF</strong></td><td>Grounding is for research, not coding. Leaving it on wastes quota and adds irrelevant citations</td></tr>
+  </table>
+
+  <p><strong>Plan B:</strong> If AI Studio is slow or down, send students to <code>gemini.google.com</code>. Same model, same Google account, simpler interface. Works identically.</p>
+
+  <!-- ── SECTION F: WIFI TEST ── -->
+  <h3 id="s-wifi">F · Critical pre-launch test: School WiFi</h3>
+
+  <div class="callout danger">
+    <span class="callout-icon">🚨</span>
+    <div><strong>This is the highest-risk item in the entire course.</strong> GitHub Codespaces uses WebSockets to stream the VS Code interface. If the school network blocks WebSockets, students will see a loading spinner that never resolves. Do this test before Day 1 — not on Day 1 itself.</div>
+  </div>
+
+  <ol class="steps">
+    <li><div><strong>Use a school-issued device</strong> (MacBook Air) on the school WiFi network. Do not use a personal device or a hotspot — the test must replicate exactly what students will experience.</div></li>
+    <li><div><strong>Go to github.com and open a repo.</strong> Any repo. Click the green Code button → Codespaces → Create codespace.</div></li>
+    <li><div><strong>Wait 90 seconds.</strong> You should see VS Code loading in the browser. If it loads: you're good. If it shows a spinning wheel that never resolves, or an error about connection: WebSockets are blocked.</div></li>
+    <li><div><strong>If blocked:</strong> Contact your IT department. Ask them to whitelist <code>*.githubpreview.dev</code>, <code>*.github.dev</code>, and WebSocket connections to GitHub. Alternatively, see the Contingency tab for an offline-first backup plan.</div></li>
+  </ol>
+
+  <!-- ── SECTION G: PRE-LAUNCH CHECKLIST ── -->
+  <h3 id="s-checklist">G · Pre-launch checklist (complete before Jun 8)</h3>
+
+  <div class="card">
+    <h4>Infrastructure</h4>
+    <ul class="checklist">
+      <li>GitHub org: Codespaces enabled for all members</li>
+      <li>GitHub org: machine type limited to 2-core</li>
+      <li>GitHub org: idle timeout set to 30 minutes</li>
+      <li>Template repo created with devcontainer.json, index.html, README</li>
+      <li>Template repo: GitHub Pages enabled (Settings → Pages → main branch)</li>
+      <li>Template repo: marked as Template repository</li>
+      <li>GitHub Classroom: classroom created and linked to org</li>
+      <li>GitHub Classroom: Assignment 1 (project1-) created with template</li>
+      <li>GitHub Classroom: Assignment 2 (project2-) created with template</li>
+      <li>GitHub Classroom: both invitation links copied</li>
+      <li>Google Classroom: class created, topics set up</li>
+      <li>Google Classroom: all 9 assignments created (see table above)</li>
+      <li>Google Classroom: GitHub Classroom links pasted into assignment descriptions</li>
+      <li>Google Classroom: handouts uploaded (Day 1 onboarding, AI cheat sheet)</li>
+    </ul>
+
+    <h4 style="margin-top:16px;">Tests</h4>
+    <ul class="checklist">
+      <li>WiFi WebSocket test: done on school MacBook on school network</li>
+      <li>Codespace cold start: timed (should be 60-90 sec) — pre-warm one Codespace on Day 1 morning</li>
+      <li>GitHub Pages deploy: pushed a test commit to template, confirmed site goes live within 60 sec</li>
+      <li>AI Studio: signed in on personal Google account, confirmed Gemini 3 Flash is available</li>
+    </ul>
+
+    <h4 style="margin-top:16px;">Print for Day 1</h4>
+    <ul class="checklist">
+      <li>Day 1 onboarding one-pager (1 per student + 2 spares)</li>
+      <li>AI cheat sheet (1 per student)</li>
+      <li>This manual printed or on teacher device</li>
+    </ul>
+  </div>
+
+</div><!-- /tab-setup -->
+
+
+<!-- ═══════════════════════════════════════════════════════ TAB: DAILY -->
+<div id="tab-daily" class="tab-panel">
+
+  <h2 id="d-overview">13-Day Session Guides</h2>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ</span>
+    <div>Each session is 80 minutes. Times below are relative to class start (T+0). Expand any day for the full rundown. The TA Runbook tab has simplified versions for TA-only days.</div>
+  </div>
+
+  <div class="phase-bar p0">Phase 0 — Git Onboarding · Days 1–2 · Jun 8–9</div>
+
+  <!-- DAY 1 -->
+  <div class="day-card" id="day1">
+    <div class="day-header" onclick="toggleDay('day1')">
+      <div class="day-num">D1</div>
+      <div class="day-title-block">
+        <div class="day-title">Setup Day — Everyone gets online</div>
+        <div class="day-subtitle">GitHub account → org → Codespace → first edit</div>
+      </div>
+      <div class="day-meta">Mon Jun 8<br><span class="tag blue">Phase 0</span></div>
+      <span class="day-chevron">▶</span>
+    </div>
+    <div class="day-body">
+      <div class="callout warn"><span class="callout-icon">⚠</span><div><strong>Before class:</strong> Pre-warm one Codespace yourself so students can see it in its loaded state. Have Day 1 one-pagers and AI cheat sheets on desks. Display the GitHub Classroom invitation link on the projector.</div></div>
+
+      <div class="timeline">
+        <div class="tl-time">T+0</div><div class="tl-content"><strong>Welcome + context (5 min)</strong><div class="sub">What this course is. What they'll build. "By June 29 you'll have two live websites you built with AI." Show a finished example from last year or a demo you made.</div></div>
+
+        <div class="tl-time">T+5</div><div class="tl-content"><strong>GitHub account creation (20 min)</strong><div class="sub">Everyone opens github.com/signup. Use school email. Free plan. They write their username on the Day 1 sheet. You or TA circulate — watch for people getting stuck on email verification. Common issue: school email may delay the verification email. Have them use personal email as backup. Once they have a username, they fill in the Google Form on the board (or tell you directly).</div></div>
+
+        <div class="tl-time">T+25</div><div class="tl-content"><strong>Invite students to org + accept GitHub Classroom (15 min)</strong><div class="sub">As usernames come in, send org invites. Students check email, accept the org invite, then click the GitHub Classroom assignment link (projected on board). GitHub creates their repo automatically. Have students navigate to their new repo — they should see index.html and README.md already there.</div></div>
+
+        <div class="tl-time">T+40</div><div class="tl-content"><strong>Open Codespace (10 min)</strong><div class="sub">In their repo: click green Code button → Codespaces tab → "Create codespace on main". WARN them: first load is 60-90 seconds. Don't close the tab. While waiting, explain what's happening ("GitHub is spinning up a tiny Linux computer just for you, in a data center"). Once loaded, they'll see VS Code in the browser.</div></div>
+
+        <div class="tl-time">T+50</div><div class="tl-content"><strong>First edit + Live Preview (20 min)</strong><div class="sub">Click index.html in the sidebar. Find the h1 tag. Change "Your Name Here" to their actual name. Hit Ctrl+S (or Cmd+S on Mac). Show them Live Preview: click the little browser icon in the bottom status bar (or Go Live). A preview panel opens showing their page. "You're running a web server." Walk around and make sure every student can see their name in the preview. This is the moment of magic — celebrate it.</div></div>
+
+        <div class="tl-time">T+70</div><div class="tl-content"><strong>Wrap-up + show AI Studio (10 min)</strong><div class="sub">Open aistudio.google.com in a new tab. Sign in with personal Google account. Select Gemini 3 Flash. Show them: type "Add a line of blue text below the h1 that says Hello World". Watch it generate code. "Tomorrow we'll use this all class." Don't have them use it today — just show it exists.</div></div>
+      </div>
+
+      <div class="callout success"><span class="callout-icon">✓</span><div><strong>Day 1 checkpoint:</strong> Every student has a GitHub account, is in your org, has a repo, has a Codespace open, and can see their name in Live Preview. If anyone is behind, they should NOT move to Day 2 activities until they clear this. Latecomers can finish setup at the start of Day 2.</div></div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-card" id="day2">
+    <div class="day-header" onclick="toggleDay('day2')">
+      <div class="day-num">D2</div>
+      <div class="day-title-block">
+        <div class="day-title">Git loop + debugging exercise</div>
+        <div class="day-subtitle">add → commit → push → Pages live for first time</div>
+      </div>
+      <div class="day-meta">Tue Jun 9<br><span class="tag blue">Phase 0</span></div>
+      <span class="day-chevron">▶</span>
+    </div>
+    <div class="day-body">
+      <div class="callout info"><span class="callout-icon">ℹ</span><div><strong>Goal:</strong> Every student runs <code>git add . && git commit -m "first commit" && git push</code> and sees their live GitHub Pages URL. This is the commit loop they'll use every day for 3 weeks.</div></div>
+
+      <div class="timeline">
+        <div class="tl-time">T+0</div><div class="tl-content"><strong>Catch up stragglers (10 min)</strong><div class="sub">Any student who didn't finish Day 1 setup gets it done now with TA help. Everyone else: open their Codespace (if it went idle, click Resume — takes ~10 sec).</div></div>
+
+        <div class="tl-time">T+10</div><div class="tl-content"><strong>The terminal (5 min)</strong><div class="sub">Show how to open the terminal in VS Code: top menu → Terminal → New Terminal. A panel appears at the bottom. Explain: "This is how you talk directly to your computer using text commands." Show that the prompt shows the current folder. That's it for now.</div></div>
+
+        <div class="tl-time">T+15</div><div class="tl-content"><strong>First git commit (15 min)</strong><div class="sub">Everyone types these three commands in the terminal. Write them on the board. Walk through each one:<br><br><code>git add .</code> — "Stage everything. The dot means all files."<br><code>git commit -m "first commit"</code> — "Take a snapshot. Give it a message."<br><code>git push</code> — "Send the snapshot to GitHub."<br><br>They should see output after push that says something like "Branch main set up to track origin/main." That means it worked.</div></div>
+
+        <div class="tl-time">T+30</div><div class="tl-content"><strong>GitHub Pages live (5 min)</strong><div class="sub">Have students go to their GitHub repo page (github.com/[org]/[their-repo-name]). Click Settings → Pages. They should see a green banner with their URL: <code>https://[org].github.io/[repo-name]</code>. Click it. Their site is live on the internet. First one who gets there: cheer.</div></div>
+
+        <div class="tl-time">T+35</div><div class="tl-content"><strong>Shared debugging exercise (35 min)</strong><div class="sub">This is the most important teaching moment of Phase 0. You provide everyone the same broken HTML file (see the debugging exercise file in this package). It has 5 intentional bugs — missing closing tags, wrong attribute syntax, a broken link, a CSS rule with a typo, and a JavaScript syntax error. Students paste it into their index.html and try to fix all 5 bugs using AI Studio. They can ask AI Studio to explain what's wrong. The goal is: <em>learn to read an error, form a clear question, paste the code, get a fix, understand why it works</em>. Circulate and ask students "what does that error mean?" before they ask AI. Force the thinking step first.</div></div>
+
+        <div class="tl-time">T+70</div><div class="tl-content"><strong>Commit the fixed file (10 min)</strong><div class="sub">Everyone runs the commit loop again on their fixed code. Message: "fixed all 5 bugs". Push. Check Pages updated. This is their second commit. Write the date and both commit messages somewhere they can reference — later they'll see what a good commit history looks like vs a bad one.</div></div>
+      </div>
+
+      <div class="callout success"><span class="callout-icon">✓</span><div><strong>Checkpoint 0 complete:</strong> Every student has (1) a live GitHub Pages URL, (2) at least 2 commits, (3) has successfully run the git loop. Anyone missing these three things needs to complete them before Day 3.</div></div>
+    </div>
+  </div>
+
+  <div class="phase-bar p1">Phase 1 — Personal Website · Days 3–8 · Jun 10–18</div>
+
+  <!-- DAY 3 -->
+  <div class="day-card" id="day3">
+    <div class="day-header" onclick="toggleDay('day3')">
+      <div class="day-num">D3</div>
+      <div class="day-title-block">
+        <div class="day-title">Idea ticket + scaffold</div>
+        <div class="day-subtitle">What will your site be about? Plan before building.</div>
+      </div>
+      <div class="day-meta">Wed Jun 10<br><span class="tag orange">Phase 1</span></div>
+      <span class="day-chevron">▶</span>
+    </div>
+    <div class="day-body">
+      <div class="callout info"><span class="callout-icon">ℹ</span><div><strong>Idea ticket = the gate.</strong> Students do not write a single line of code today until their idea ticket is approved. The idea ticket prevents scope creep and forces intentional thinking before building.</div></div>
+      <div class="timeline">
+        <div class="tl-time">T+0</div><div class="tl-content"><strong>Idea ticket (20 min)</strong><div class="sub">Students write in Google Classroom (Project 1 Idea Ticket assignment): <br>1. What is your site about? (1 sentence)<br>2. Who is it for? (audience)<br>3. List 3 things it will contain (sections, not features)<br>You or TA reads and approves. Reject vague ones ("a cool site about stuff") — push them to be specific. Approved = emoji reaction or "Approved" comment in Google Classroom.</div></div>
+        <div class="tl-time">T+20</div><div class="tl-content"><strong>AI Studio: scaffold the HTML (40 min)</strong><div class="sub">Only approved students open AI Studio. They use this prompt template (on the board / cheat sheet): <em>"Write a single HTML file for a personal website about [their topic]. Include: a header with my name, a navigation bar with 3 links, an 'About' section, a [their section 2] section, and a [their section 3] section. Use CSS inside a style tag. Dark theme, any accent color I can change later."</em><br><br>They paste the generated code into their index.html, save, Live Preview to see it, then adjust the placeholder text to their real content. Circulate: make sure they're editing the content, not just staring at generated code.</div></div>
+        <div class="tl-time">T+60</div><div class="tl-content"><strong>Commit (10 min)</strong><div class="sub">Commit loop. Message: "scaffold: added basic structure". Push. Verify Pages updated.</div></div>
+        <div class="tl-time">T+70</div><div class="tl-content"><strong>Closing prompt (10 min)</strong><div class="sub">Ask 3-4 students to share their screen and describe what their site is about in one sentence. Quick show-and-tell. Builds social momentum.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-card" id="day4">
+    <div class="day-header" onclick="toggleDay('day4')">
+      <div class="day-num">D4</div>
+      <div class="day-title-block">
+        <div class="day-title">Build — real content day</div>
+        <div class="day-subtitle">Replace placeholder text. Add actual content about yourself.</div>
+      </div>
+      <div class="day-meta">Thu Jun 11<br><span class="tag orange">Phase 1</span></div>
+      <span class="day-chevron">▶</span>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="tl-time">T+0</div><div class="tl-content"><strong>Open Codespace + AI Studio (5 min)</strong><div class="sub">Resume Codespaces (if idle). Open AI Studio in separate tab. Confirm Gemini 3 Flash + Minimal thinking + Grounding OFF.</div></div>
+        <div class="tl-time">T+5</div><div class="tl-content"><strong>Content writing sprint (50 min)</strong><div class="sub">Main work session. Students should be writing <em>real content</em> — their bio, their interests, their projects. They use AI Studio to generate/improve individual sections, not the whole page at once. Encourage iteration: generate → paste → read → tweak → generate again. Circulate and ask "what are you working on right now?" If someone is just staring: they need a specific prompt to type.</div></div>
+        <div class="tl-time">T+55</div><div class="tl-content"><strong>Add one CSS thing you like (15 min)</strong><div class="sub">Pick one thing: change the font, change the color scheme, add a hover effect on the nav links. Use AI Studio: "Here is my CSS. Add a hover effect to nav links that changes them to [color] with an underline." Copy just the CSS changes, not the full file.</div></div>
+        <div class="tl-time">T+70</div><div class="tl-content"><strong>Commit #1 (10 min)</strong><div class="sub">Commit loop. Message should describe what was added: "added about section and changed colors to blue". Not "update" or "stuff". Walk around and read commit messages — correct vague ones before they push.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day-card" id="day5">
+    <div class="day-header" onclick="toggleDay('day5')">
+      <div class="day-num">D5</div>
+      <div class="day-title-block">
+        <div class="day-title">CSS polish + peer feedback</div>
+        <div class="day-subtitle">Look at someone else's site. Write two specific suggestions.</div>
+      </div>
+      <div class="day-meta">Mon Jun 15<br><span class="tag orange">Phase 1</span></div>
+      <span class="day-chevron">▶</span>
+    </div>
+    <div class="day-body">
+      <div class="callout tip"><span class="callout-icon">💡</span><div>Pair students before class. Assign A → reviews B, B → reviews A. Use adjacent seats or a pre-made list. Don't let them choose their own partners — they'll pick friends and give empty praise.</div></div>
+      <div class="timeline">
+        <div class="tl-time">T+0</div><div class="tl-content"><strong>CSS prompt practice (20 min)</strong><div class="sub">Mini-lesson: show students how to ask AI Studio for specific CSS changes. Demo on projector: take a plain gray site, ask AI "Make this look like a gaming website — dark background, neon green text, monospace font". Show how to paste only the CSS back, not the whole file. Key teaching: <em>always say "return only the CSS changes"</em> or you get the full file again.</div></div>
+        <div class="tl-time">T+20</div><div class="tl-content"><strong>Polish sprint (25 min)</strong><div class="sub">Students use what they just learned to improve their site's look. Guided prompts to try: add a background color, add a Google Font, make images responsive, add spacing between sections. Commit after this sprint.</div></div>
+        <div class="tl-time">T+45</div><div class="tl-content"><strong>Peer feedback (25 min)</strong><div class="sub">Each student opens their partner's GitHub Pages URL. They give written feedback on a notecard or in Google Classroom comments:<br>1. One specific thing that looks great<br>2. One specific thing to improve (must be actionable, e.g. "the nav is hard to read because the text color blends with the background" — not "make it better")</div></div>
+        <div class="tl-time">T+70</div><div class="tl-content"><strong>Commit #2 + read feedback (10 min)</strong><div class="sub">Commit current state. Read feedback from partner. No implementation needed today — that's Day 6.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 6 -->
+  <div class="day-card" id="day6">
+    <div class="day-header" onclick="toggleDay('day6')">
+      <div class="day-num">D6</div>
+      <div class="day-title-block">
+        <div class="day-title">Iterate on feedback</div>
+        <div class="day-subtitle">Act on at least one peer suggestion.</div>
+      </div>
+      <div class="day-meta">Tue Jun 16<br><span class="tag orange">Phase 1</span></div>
+      <span class="day-chevron">▶</span>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="tl-time">T+0</div><div class="tl-content"><strong>Feedback review (5 min)</strong><div class="sub">Students re-read their peer feedback. Pick one thing to act on.</div></div>
+        <div class="tl-time">T+5</div><div class="tl-content"><strong>Build session (60 min)</strong><div class="sub">Open build time. Priority order: (1) Implement the feedback suggestion. (2) Fill in any content gaps. (3) Polish anything unfinished. TA and teacher circulate constantly — this is the session where students get the most stuck because they're trying to do more complex things.</div></div>
+        <div class="tl-time">T+65</div><div class="tl-content"><strong>Commit #3 + push (15 min)</strong><div class="sub">Commit. Message must mention what was changed based on feedback: "fixed nav contrast per feedback". Push. Verify Pages.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 7 -->
+  <div class="day-card" id="day7">
+    <div class="day-header" onclick="toggleDay('day7')">
+      <div class="day-num">D7</div>
+      <div class="day-title-block">
+        <div class="day-title">Final polish + submit Project 1</div>
+        <div class="day-subtitle">Last chance to improve. Submit URL and write reflection.</div>
+      </div>
+      <div class="day-meta">Wed Jun 17<br><span class="tag orange">Phase 1</span></div>
+      <span class="day-chevron">▶</span>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="tl-time">T+0</div><div class="tl-content"><strong>Final polish (45 min)</strong><div class="sub">Last build session. Fix anything broken. Add a final personal touch. No new features — polish only. Students who are "done" can help a neighbor.</div></div>
+        <div class="tl-time">T+45</div><div class="tl-content"><strong>Submit to Google Classroom (10 min)</strong><div class="sub">Google Classroom → Project 1 — Submit Live URL. They paste their GitHub Pages URL. Hit submit. Done.</div></div>
+        <div class="tl-time">T+55</div><div class="tl-content"><strong>Write reflection (15 min)</strong><div class="sub">Google Classroom → Project 1 — Reflection. Prompt: "What was the hardest part? What would you add if you had more time? What did you learn about working with AI?" Minimum 3 sentences. This is the participation evidence — even if their site has issues, a thoughtful reflection gets full credit.</div></div>
+        <div class="tl-time">T+70</div><div class="tl-content"><strong>Final commit (10 min)</strong><div class="sub">Commit. Message: "final version, project 1 submitted". Push.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 8 -->
+  <div class="day-card" id="day8">
+    <div class="day-header" onclick="toggleDay('day8')">
+      <div class="day-num">D8</div>
+      <div class="day-title-block">
+        <div class="day-title">Buffer day — finish or plan ahead</div>
+        <div class="day-subtitle">Latecomers finish P1. Fast finishers write Project 2 idea ticket.</div>
+      </div>
+      <div class="day-meta">Thu Jun 18<br><span class="tag orange">Phase 1 buffer</span></div>
+      <span class="day-chevron">▶</span>
+    </div>
+    <div class="day-body">
+      <div class="callout warn"><span class="callout-icon">⚠</span><div><strong>Jun 19 is OFF (Juneteenth).</strong> Next class is Monday Jun 22 = Day 9, first day of Phase 2.</div></div>
+      <div class="timeline">
+        <div class="tl-time">T+0</div><div class="tl-content"><strong>Two tracks</strong><div class="sub"><strong>Track A (still working on P1):</strong> Continue building with TA/teacher support. Submit before end of class.<br><strong>Track B (P1 done):</strong> Start brainstorming Project 2. What kind of interactive project? Quiz, game, random generator, clicker, interactive story? Write a rough Project 2 idea ticket in their notes — not submitted yet, just drafted. They'll submit it formally on Day 9.</div></div>
+        <div class="tl-time">T+70</div><div class="tl-content"><strong>Confirm all P1 submissions</strong><div class="sub">Check Google Classroom — everyone should have a P1 URL submitted. If not, chase them down now. After today, P1 is closed.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#f5f0ff; border:1px solid #d4b8ff; border-radius:6px; padding:12px 16px; margin:16px 0; font-size:13.5px; color:#6b3ec4; font-weight:600;">
+    ⛔ Jun 19 — NO CLASS (Juneteenth)
+  </div>
+
+  <div class="phase-bar p2">Phase 2 — Interactive Project · Days 9–13 · Jun 22–29</div>
+
+  <!-- DAY 9 -->
+  <div class="day-card" id="day9">
+    <div class="day-header" onclick="toggleDay('day9')">
+      <div class="day-num">D9</div>
+      <div class="day-title-block">
+        <div class="day-title">Project 2 idea ticket — gates building</div>
+        <div class="day-subtitle">No code until idea is approved. Accept GitHub Classroom Assignment 2.</div>
+      </div>
+      <div class="day-meta">Mon Jun 22<br><span class="tag green">Phase 2</span></div>
+      <span class="day-chevron">▶</span>
+    </div>
+    <div class="day-body">
+      <div class="callout danger"><span class="callout-icon">🚨</span><div><strong>Hard gate:</strong> No student opens Codespace for Project 2 until their idea ticket is approved. Last year's mistake was letting students build without a plan — they ran out of scope on day 1.</div></div>
+      <div class="timeline">
+        <div class="tl-time">T+0</div><div class="tl-content"><strong>Phase 2 intro (10 min)</strong><div class="sub">Explain the project types: quiz (questions + answers + score counter), game (a mechanic: click, type, guess), random generator (outputs a random thing from a list), clicker (number goes up with game mechanics), interactive story (choices → branches). Key constraint: <strong>single HTML file only</strong>. No multiple pages, no external files that get lost.</div></div>
+        <div class="tl-time">T+10</div><div class="tl-content"><strong>Accept GitHub Classroom — Project 2 (5 min)</strong><div class="sub">Students click the Assignment 2 link (from Google Classroom). New repo created automatically. It has the same starter template.</div></div>
+        <div class="tl-time">T+15</div><div class="tl-content"><strong>Write idea ticket (20 min)</strong><div class="sub">Google Classroom → Project 2 Idea Ticket. Must answer: (1) What type of project (pick from list above)? (2) What is the topic or theme? (3) Describe ONE specific mechanic or feature that makes it interactive. Example: "A trivia quiz about soccer. Players get 10 questions, one at a time. After each answer, they see if they were right and the current score updates."</div></div>
+        <div class="tl-time">T+35</div><div class="tl-content"><strong>Approval loop (10 min)</strong><div class="sub">Teacher/TA approves via Google Classroom comment. Reject if: too vague, too ambitious ("an open world RPG"), or not actually interactive. When approved: student opens their Project 2 Codespace and starts building.</div></div>
+        <div class="tl-time">T+45</div><div class="tl-content"><strong>V0 scaffolding (approved students only) (25 min)</strong><div class="sub">Use this prompt template: "Write a single HTML file for a [project type] about [topic]. All HTML, CSS, and JavaScript in one file. Include: [their mechanic description]. Keep it simple — just the core mechanic working. No external libraries."</div></div>
+        <div class="tl-time">T+70</div><div class="tl-content"><strong>Commit V0 (10 min)</strong><div class="sub">Even if it's just a scaffold. Message: "initial scaffold". Push.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 10 -->
+  <div class="day-card" id="day10">
+    <div class="day-header" onclick="toggleDay('day10')">
+      <div class="day-num">D10</div>
+      <div class="day-title-block">
+        <div class="day-title">V1 — get it running in browser</div>
+        <div class="day-subtitle">Core mechanic must work by end of class. Commit V1.</div>
+      </div>
+      <div class="day-meta">Tue Jun 23<br><span class="tag green">Phase 2</span></div>
+      <span class="day-chevron">▶</span>
+    </div>
+    <div class="day-body">
+      <div class="callout warn"><span class="callout-icon">⚠</span><div><strong>V1 definition:</strong> The core mechanic works. For a quiz: questions display, user can answer, score updates. For a game: you can play one round. It doesn't have to be pretty. It has to be functional.</div></div>
+      <div class="timeline">
+        <div class="tl-time">T+0</div><div class="tl-content"><strong>Build sprint — 60 min continuous</strong><div class="sub">Biggest uninterrupted build block of the course. Teacher and TA circulate constantly. Common issues at this stage:<br>• JavaScript not working: check browser console (right-click → Inspect → Console tab)<br>• "AI gave me code that doesn't work": use debug prompt from cheat sheet<br>• "I don't know what to add": ask "what's the minimum for this to be playable?"</div></div>
+        <div class="tl-time">T+60</div><div class="tl-content"><strong>Self-test (10 min)</strong><div class="sub">Student closes Live Preview, opens their GitHub Pages URL in a new tab (may need to push first). They test it as a user. Does the core mechanic work? Write down one thing that's broken.</div></div>
+        <div class="tl-time">T+70</div><div class="tl-content"><strong>Commit V1 (10 min)</strong><div class="sub">Commit. Message: "V1: [describe what works]". Example: "V1: questions display, score counter works, need end screen".</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 11 -->
+  <div class="day-card" id="day11">
+    <div class="day-header" onclick="toggleDay('day11')">
+      <div class="day-num">D11</div>
+      <div class="day-title-block">
+        <div class="day-title">Add one feature + peer swap</div>
+        <div class="day-subtitle">Add exactly one new thing. Then test someone else's project.</div>
+      </div>
+      <div class="day-meta">Wed Jun 24<br><span class="tag green">Phase 2</span></div>
+      <span class="day-chevron">▶</span>
+    </div>
+    <div class="day-body">
+      <div class="callout tip"><span class="callout-icon">💡</span><div><strong>"One feature" rule:</strong> Students who try to add 5 things at once break everything and get nothing. Enforce this explicitly. Ask each student: "What ONE thing are you adding today?" before they start.</div></div>
+      <div class="timeline">
+        <div class="tl-time">T+0</div><div class="tl-content"><strong>Feature choice (5 min)</strong><div class="sub">Each student announces to their neighbor: "I'm adding [X]". Forces commitment. Neighbor remembers.</div></div>
+        <div class="tl-time">T+5</div><div class="tl-content"><strong>Feature build (40 min)</strong><div class="sub">Build the one feature. Common good feature choices: high score display, win/loss screen, difficulty levels, sound (HTML5 Audio), timer, reset button, progress bar. All of these can be added with one AI Studio prompt.</div></div>
+        <div class="tl-time">T+45</div><div class="tl-content"><strong>Peer swap (25 min)</strong><div class="sub">Students open their neighbor's GitHub Pages URL. They play/use the project for 5 minutes. Then they write feedback (Google Classroom comment OR on paper): (1) What does this project do? (one sentence) (2) Did the core mechanic work? (3) What would you add?<br><br>This is also a QA pass — students catch bugs that the builder missed because they're too close to it.</div></div>
+        <div class="tl-time">T+70</div><div class="tl-content"><strong>Commit (10 min)</strong><div class="sub">Commit. Message describes the added feature.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 12 -->
+  <div class="day-card" id="day12">
+    <div class="day-header" onclick="toggleDay('day12')">
+      <div class="day-num">D12</div>
+      <div class="day-title-block">
+        <div class="day-title">Debug clinic + V2 polish</div>
+        <div class="day-subtitle">Fix broken things. Commit V2. Submit URL.</div>
+      </div>
+      <div class="day-meta">Thu Jun 25<br><span class="tag green">Phase 2</span></div>
+      <span class="day-chevron">▶</span>
+    </div>
+    <div class="day-body">
+      <div class="timeline">
+        <div class="tl-time">T+0</div><div class="tl-content"><strong>Debug clinic (20 min)</strong><div class="sub">Public debugging session. Ask: "Who has something broken they can't fix?" Pick 2-3 volunteers. Project their screen. As a class, diagnose the bug: check console, read error message, form the AI Studio prompt together. Model the debugging process out loud: "The error says X. That means Y is wrong. So I'll ask AI to fix Z."</div></div>
+        <div class="tl-time">T+20</div><div class="tl-content"><strong>Polish sprint (35 min)</strong><div class="sub">Fix bugs. Polish visual design. Make sure mobile doesn't look broken. One final feature if they have time.</div></div>
+        <div class="tl-time">T+55</div><div class="tl-content"><strong>Submit URL (10 min)</strong><div class="sub">Google Classroom → Project 2 — Submit Live URL. Paste Pages URL. Submit.</div></div>
+        <div class="tl-time">T+65</div><div class="tl-content"><strong>Commit V2 (15 min)</strong><div class="sub">Commit. Message: "V2: polished, submitted". Push. Verify Pages.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 13 -->
+  <div class="day-card" id="day13">
+    <div class="day-header" onclick="toggleDay('day13')">
+      <div class="day-num">D13</div>
+      <div class="day-title-block">
+        <div class="day-title">DEMO DAY</div>
+        <div class="day-subtitle">3-minute live demos from GitHub Pages. Reflection. Done.</div>
+      </div>
+      <div class="day-meta">Mon Jun 29<br><span class="tag purple">Demo Day</span></div>
+      <span class="day-chevron">▶</span>
+    </div>
+    <div class="day-body">
+      <div class="callout success"><span class="callout-icon">🎉</span><div>This is the payoff day. Every student demos from their live GitHub Pages URL — not from Codespace, not from Live Preview. The public URL is real. Celebrate that.</div></div>
+      <div class="timeline">
+        <div class="tl-time">T+0</div><div class="tl-content"><strong>Final fixes (15 min)</strong><div class="sub">Last chance to fix anything embarrassing. Must commit and push by T+15.</div></div>
+        <div class="tl-time">T+15</div><div class="tl-content"><strong>Demo order + setup (5 min)</strong><div class="sub">Pick demo order (random, or volunteers first). Each student opens their Pages URL on the projector computer — not their own laptop. Tests that it loads.</div></div>
+        <div class="tl-time">T+20</div><div class="tl-content"><strong>Demos (45 min)</strong><div class="sub">Each student gets 3 minutes: 1 min to describe what their project is, 2 min to demonstrate it live. Audience plays/interacts if applicable. After each demo: one classmate says something specific they liked. Keep it moving — 3 min is strict or you run out of time with 15-20 students.</div></div>
+        <div class="tl-time">T+65</div><div class="tl-content"><strong>Reflection (10 min)</strong><div class="sub">Google Classroom → Project 2 — Reflection + Demo Notes. Prompt: "What was the hardest thing you built? What would you add with more time? What surprised you about working with AI?" This is their last submission.</div></div>
+        <div class="tl-time">T+75</div><div class="tl-content"><strong>Closing (5 min)</strong><div class="sub">Brief closing remarks. Remind them: their GitHub repos and live sites stay up indefinitely. These are real portfolio pieces. They can keep building after the course ends.</div></div>
+      </div>
+      <div class="callout success"><span class="callout-icon">✓</span><div><strong>Checkpoint 2 / Final:</strong> Every student has a live Project 2 on GitHub Pages, ≥3 commits on that project, submitted the URL, and submitted the reflection. That's full credit on everything.</div></div>
+    </div>
+  </div>
+
+</div><!-- /tab-daily -->
+
+
+<!-- ═══════════════════════════════════════════════════════ TAB: GRADING -->
+<div id="tab-grading" class="tab-panel">
+
+  <h2 id="g-overview">Grading System</h2>
+
+  <div class="callout success">
+    <span class="callout-icon">✓</span>
+    <div><strong>Core principle:</strong> This is a participation grade. A student who shows up, builds something imperfect, commits, and reflects gets full credit. You are not grading code quality, visual design, or technical sophistication. You are grading engagement.</div>
+  </div>
+
+  <h3 id="g-breakdown">Grade breakdown</h3>
+
+  <div class="card">
+    <div class="grade-row">
+      <div><strong>Git workflow</strong><br><span style="font-size:12.5px;color:var(--muted)">Commits every class day. Meaningful commit messages. Evidence of working incrementally.</span></div>
+      <div class="grade-pct">20%</div>
+      <div><span class="tag green">Ongoing</span><br><span style="font-size:12px;color:var(--muted)">Checked via GitHub Classroom — count commits per project per student</span></div>
+    </div>
+    <div class="grade-row">
+      <div><strong>Project 1 — Personal Website</strong><br><span style="font-size:12.5px;color:var(--muted)">Live site on GitHub Pages. Real content. Submitted to Google Classroom. Reflection submitted.</span></div>
+      <div class="grade-pct">35%</div>
+      <div><span class="tag orange">Due Jun 17</span></div>
+    </div>
+    <div class="grade-row">
+      <div><strong>Project 2 — Interactive Project</strong><br><span style="font-size:12.5px;color:var(--muted)">Live site on GitHub Pages. Core mechanic works. Submitted URL + reflection.</span></div>
+      <div class="grade-pct">35%</div>
+      <div><span class="tag orange">Due Jun 25</span></div>
+    </div>
+    <div class="grade-row">
+      <div><strong>Demo Day participation</strong><br><span style="font-size:12.5px;color:var(--muted)">Presented their project. Gave feedback to one classmate.</span></div>
+      <div class="grade-pct">10%</div>
+      <div><span class="tag purple">Jun 29</span></div>
+    </div>
+  </div>
+
+  <h3 id="g-checklist">How to grade each component</h3>
+
+  <h4>Git workflow (20%) — GitHub Classroom</h4>
+  <table>
+    <tr><th>Evidence</th><th>Points</th></tr>
+    <tr><td>≥8 commits across both projects (roughly one per working day)</td><td>Full credit</td></tr>
+    <tr><td>4–7 commits</td><td>Partial credit (75%)</td></tr>
+    <tr><td>&lt;4 commits OR all commits are "update" / "stuff" with no real messages</td><td>Minimal credit (40%)</td></tr>
+    <tr><td>No commits / never pushed</td><td>0</td></tr>
+  </table>
+  <p style="font-size:13px;color:var(--muted)">How to check: GitHub Classroom → your classroom → assignment → click student name → see commit history. Or go directly to their repo on GitHub.</p>
+
+  <h4>Project 1 — Personal Website (35%)</h4>
+  <table>
+    <tr><th>Criterion</th><th>Full credit requires</th></tr>
+    <tr><td>Site is live</td><td>URL works. Not a 404. Not a blank page.</td></tr>
+    <tr><td>Real content</td><td>Has actual info about the student, not placeholder text like "Your Name Here"</td></tr>
+    <tr><td>Multiple sections</td><td>At least 3 distinct sections visible</td></tr>
+    <tr><td>Reflection submitted</td><td>Minimum 3 sentences. Shows they actually thought about the experience.</td></tr>
+  </table>
+  <div class="callout tip"><span class="callout-icon">💡</span><div>If their site has broken CSS or looks ugly but has real content and is live: full credit. The site being imperfect is normal. The site not existing is the only failure mode.</div></div>
+
+  <h4>Project 2 — Interactive Project (35%)</h4>
+  <table>
+    <tr><th>Criterion</th><th>Full credit requires</th></tr>
+    <tr><td>Site is live</td><td>URL works.</td></tr>
+    <tr><td>Core mechanic works</td><td>You can actually use the interactive part. Quiz questions show up. Game can be played. Generator generates something. It doesn't have to be polished.</td></tr>
+    <tr><td>Idea ticket submitted and approved</td><td>They planned before they built.</td></tr>
+    <tr><td>Reflection submitted</td><td>Same standard as P1.</td></tr>
+  </table>
+
+  <h4>Demo Day (10%)</h4>
+  <table>
+    <tr><th>Criterion</th><th>Full credit requires</th></tr>
+    <tr><td>Presented</td><td>Was present, showed their live URL, described what it does.</td></tr>
+    <tr><td>Gave feedback</td><td>Said something specific to at least one other student's demo.</td></tr>
+  </table>
+  <p style="font-size:13px;color:var(--muted)">If a student is absent on Demo Day but did everything else: 7/10 on this component (they lost 3% for missing the demo). Don't penalize absence with 0 if they were otherwise engaged throughout the course.</p>
+
+  <h3 id="g-gradebook">How to enter grades — Google Classroom</h3>
+
+  <ol class="steps">
+    <li><div>Open Google Classroom → your class → Grades tab. You'll see a spreadsheet-style view with every assignment and every student.</div></li>
+    <li><div>For the URL submissions: click the cell for each student, click their submitted link, verify the site loads. Grade based on the checklist above. Enter a number 0–100.</div></li>
+    <li><div>For the Git workflow grade: have GitHub Classroom open in another tab. For each student, note their commit count and enter the appropriate score.</div></li>
+    <li><div>Post grades when all scores are entered. Students get a notification. You can add private comments per student if you want to explain a grade.</div></li>
+  </ol>
+
+  <h3 id="g-accommodations">Edge cases and accommodations</h3>
+  <table>
+    <tr><th>Situation</th><th>Handle it this way</th></tr>
+    <tr><td>Student was absent for 2-3 days</td><td>Reach out via Google Classroom message. Give them a 48-hour extension to catch up. Their commit history will show the gap — don't penalize if they made up the work.</td></tr>
+    <tr><td>Student's site breaks after submission</td><td>Check the last commit before the due date. Grade what it was at submission time. GitHub preserves all historical versions.</td></tr>
+    <tr><td>Student has a really impressive site but few commits</td><td>Grade what the rubric says (commits matter). You can note their technical skill in a comment but don't override the rubric — commits were the explicit instruction.</td></tr>
+    <tr><td>Student's project doesn't run (JavaScript error on load)</td><td>That's a broken project. Partial credit on P2 core mechanic (50%). If they submitted it and wrote a reflection, they still get credit for site existing + reflection.</td></tr>
+  </table>
+
+</div><!-- /tab-grading -->
+
+
+<!-- ═══════════════════════════════════════════════════════ TAB: TA RUNBOOK -->
+<div id="tab-ta" class="tab-panel">
+
+  <h2 id="ta-overview">TA Runbook — If Mr. V is absent</h2>
+
+  <div class="callout danger">
+    <span class="callout-icon">🚨</span>
+    <div><strong>This section is written for the TA.</strong> If you are the TA reading this because Vladimir is absent: everything you need is in here. You do not need to understand all the technology. You need to keep students on task and troubleshoot the most common problems. The students know more about coding than you need to — your job is logistics and support.</div>
+  </div>
+
+  <h3 id="ta-daily">What to do each day (simplified)</h3>
+
+  <div class="card">
+    <h4>Start of every class (first 5 minutes)</h4>
+    <ul class="checklist">
+      <li>Tell students to open their Codespace. (github.com → their repo → Code → Codespaces → Resume)</li>
+      <li>Tell students to open AI Studio in a new tab. (aistudio.google.com)</li>
+      <li>Write on the board: today's goal (from the Daily Schedule tab)</li>
+      <li>Tell students to open Google Classroom for today's assignments</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h4>End of every class (last 10 minutes)</h4>
+    <ul class="checklist">
+      <li>Remind students: "Commit and push before you leave"</li>
+      <li>Walk the room — make sure everyone has their terminal open and has run the 3 git commands</li>
+      <li>If a student can't push: help them open terminal, type the commands one by one</li>
+      <li>Check that Google Classroom assignments for today are submitted</li>
+    </ul>
+  </div>
+
+  <h3 id="ta-troubleshoot">Top 10 problems you'll see and how to fix them</h3>
+
+  <table>
+    <tr><th>#</th><th>What student says</th><th>What to do</th></tr>
+    <tr><td>1</td><td>"My Codespace won't load / is stuck"</td><td>Hard-refresh the tab (Ctrl+Shift+R). If still stuck: go to github.com/codespaces, find their codespace, click the three dots → Stop codespace. Wait 10 sec. Then Resume. Takes 30-60 sec to restart.</td></tr>
+    <tr><td>2</td><td>"I can't see my changes in Live Preview"</td><td>Make sure they saved the file (Ctrl+S). Check Live Preview is actually open — there's a small browser icon in the VS Code status bar at the bottom. Click it to open.</td></tr>
+    <tr><td>3</td><td>"Git push is asking for a username/password"</td><td>This means authentication broke. Tell them to go to their GitHub repo in the browser → Code → Codespaces → delete this Codespace → create a new one. Takes 60 sec. Their code is saved in the repo — they won't lose work they already pushed.</td></tr>
+    <tr><td>4</td><td>"I pasted the AI code but nothing changed"</td><td>Make sure they pasted it into the right file (index.html) and saved with Ctrl+S. Also: did they paste correctly? Sometimes they paste in the wrong place and create broken HTML. Have them select all (Ctrl+A), delete, then paste the full code fresh.</td></tr>
+    <tr><td>5</td><td>"AI Studio isn't giving me good code"</td><td>Ask them to read their prompt out loud. It's probably too vague. Have them add: "Return only the changed code, not the full file." Or: "Explain what's wrong, then show the fix." Prompt quality = output quality.</td></tr>
+    <tr><td>6</td><td>"My site is broken on GitHub Pages but looks fine in Live Preview"</td><td>This is usually a file path issue (a link to a file that doesn't exist). Tell them to push all their files and wait 60 seconds for Pages to rebuild. If still broken: the issue is a broken link or missing file — have them describe what's broken to AI Studio with the error.</td></tr>
+    <tr><td>7</td><td>"I accidentally deleted my code"</td><td>Don't panic. If they had committed before: open terminal, type <code>git log</code>, find the last good commit message, type <code>git checkout HEAD -- index.html</code>. If they never committed: it may be gone. Ask them to re-open AI Studio and start from the last version they remember.</td></tr>
+    <tr><td>8</td><td>"I don't know what to do next"</td><td>Ask: "What did you plan to build?" Open their idea ticket in Google Classroom. If they've finished their plan, suggest: add a color change, add more text, add a button. If totally stuck: have them type in AI Studio: "I'm building a [describe project]. What's the simplest next thing I could add?"</td></tr>
+    <tr><td>9</td><td>"AI Studio says 'rate limit' or 'too many requests'"</td><td>Wait 60 seconds. Don't spam the refresh. They have 1,500 requests/day — they won't hit this limit from normal use. If they keep hitting it: they're probably submitting the same broken prompt over and over. Help them write one good prompt instead of many bad ones.</td></tr>
+    <tr><td>10</td><td>"The JavaScript doesn't work"</td><td>Open the browser console: right-click anywhere on the Live Preview → Inspect → Console tab. Red text = errors. Have them copy the red error text and paste it into AI Studio with: "I got this error: [paste error]. Here is my code: [paste code]. What's wrong?"</td></tr>
+  </table>
+
+  <h3 id="ta-thresholds">What counts as "done" each day</h3>
+  <table>
+    <tr><th>Day</th><th>A student is "done" for the day when...</th></tr>
+    <tr><td>Day 1</td><td>Has GitHub account, is in org, has Codespace open, can see their name in Live Preview</td></tr>
+    <tr><td>Day 2</td><td>Has run git add / commit / push at least twice and can see their GitHub Pages URL</td></tr>
+    <tr><td>Days 3–7</td><td>Has committed at least once during class and submitted any Google Classroom assignments due that day</td></tr>
+    <tr><td>Days 9–12</td><td>Same as above for Project 2</td></tr>
+    <tr><td>Day 13</td><td>Has demo'd their project and submitted reflection</td></tr>
+  </table>
+
+  <h3 id="ta-escalate">When to contact Mr. V</h3>
+  <ul style="padding-left:16px; font-size:13.5px; line-height:2;">
+    <li>A student's entire Codespace environment is destroyed and a fresh one doesn't fix it</li>
+    <li>GitHub is down (check github.com/status) — use the contingency plan (Contingency tab)</li>
+    <li>A student is having a behavioral issue that isn't just frustration at code</li>
+    <li>More than 5 students are stuck on the same thing simultaneously — likely a setup issue, not a student issue</li>
+    <li>A student's project contains inappropriate content</li>
+  </ul>
+
+</div><!-- /tab-ta -->
+
+
+<!-- ═══════════════════════════════════════════════════════ TAB: CONTINGENCY -->
+<div id="tab-contingency" class="tab-panel">
+
+  <h2 id="c-overview">Contingency Plans</h2>
+
+  <h3 id="c-wifi">Plan B: School WiFi blocks Codespaces (WebSockets blocked)</h3>
+
+  <div class="callout danger"><span class="callout-icon">🚨</span><div>If students see a spinner that never resolves when opening a Codespace, WebSockets are blocked. This is the most catastrophic single failure mode. Here's how to survive it.</div></div>
+
+  <p><strong>Immediate fix for IT:</strong> Ask them to whitelist <code>*.github.dev</code>, <code>*.githubpreview.dev</code>, and allow WebSocket connections on port 443 to those domains. This often resolves the same day.</p>
+
+  <p><strong>If IT can't fix it same day — offline fallback:</strong></p>
+  <ol class="steps">
+    <li><div><strong>Download VS Code</strong> on each MacBook Air. It's free: code.visualstudio.com. Install it. This may be blocked by MDM — contact IT if so, or request a teacher-installed exception.</div></li>
+    <li><div><strong>Students work locally.</strong> They create a folder on their desktop. Open VS Code. Open that folder. Create index.html. The Live Preview extension still works locally — it's built into VS Code.</div></li>
+    <li><div><strong>Git still works.</strong> VS Code has a built-in Git panel (the branch icon in the left sidebar). Students can still add/commit/push to GitHub. GitHub Pages still deploys.</div></li>
+    <li><div><strong>The only thing lost:</strong> Cloud sync. Students' code now lives on their MacBook, not in the cloud. If the MacBook breaks, they lose uncommitted work. Emphasize: push every 20 minutes.</div></li>
+  </ol>
+
+  <h3 id="c-github-down">Plan C: GitHub is down</h3>
+  <p>Check status.github.com. GitHub has ~99.9% uptime. If it's down: run a non-coding session.</p>
+  <ul style="padding-left:16px; font-size:13.5px; line-height:2;">
+    <li>Students plan/sketch their project on paper (idea ticket + wireframe)</li>
+    <li>Teach a 30-minute prompt engineering workshop using AI Studio (which doesn't require GitHub)</li>
+    <li>Code review session: students share screens and explain their code to a neighbor</li>
+  </ul>
+
+  <h3 id="c-ai-down">Plan D: AI Studio is down</h3>
+  <div class="callout warn"><span class="callout-icon">⚠</span><div>First: try gemini.google.com. Same model, different URL, usually works when AI Studio has a front-end issue.</div></div>
+  <p>If both are down:</p>
+  <ul style="padding-left:16px; font-size:13.5px; line-height:2;">
+    <li>Students work on manual HTML/CSS edits — changing colors, text, adding/removing sections</li>
+    <li>Show them basic HTML tags directly: they can add a new paragraph, change a font size, add a link</li>
+    <li>This is actually a good backup lesson: "what can you do without AI?"</li>
+  </ul>
+
+  <h3 id="c-student-issues">Common student failure modes</h3>
+  <table>
+    <tr><th>Failure mode</th><th>How to catch it early</th><th>Fix</th></tr>
+    <tr><td>Student never pushes — builds only in Codespace</td><td>Check GitHub Classroom commit counts every 2 days</td><td>Pull them aside, walk them through a push, explain they'll lose work if Codespace expires</td></tr>
+    <tr><td>Student copies classmate's code verbatim</td><td>Open both GitHub Pages URLs side by side. Also visible in GitHub Classroom — two repos with identical commit messages</td><td>Private conversation. Have them explain the code to you. If they can't explain it, they didn't build it.</td></tr>
+    <tr><td>Student is way behind — multiple sessions missed</td><td>Zero or one commit after Day 4</td><td>Realistic conversation: they may not finish Project 2. Focus on completing Project 1 well and doing the reflection. They can still pass with partial credit.</td></tr>
+    <tr><td>Student's project is wildly over-scope</td><td>Idea ticket review on Day 9 (P2) — catch this at approval stage</td><td>Reject the idea ticket. Ask them to scope down to one mechanic. "What's the core loop? Just build that."</td></tr>
+  </table>
+
+</div><!-- /tab-contingency -->
+
+
+<!-- ═══════════════════════════════════════════════════════ TAB: REFERENCE -->
+<div id="tab-reference" class="tab-panel">
+
+  <h2 id="r-overview">Quick Reference</h2>
+
+  <h3 id="r-urls">Key URLs (bookmark these)</h3>
+  <table>
+    <tr><th>What</th><th>URL</th><th>Who uses it</th></tr>
+    <tr><td>GitHub</td><td>github.com</td><td>Everyone</td></tr>
+    <tr><td>GitHub Classroom</td><td>classroom.github.com</td><td>Teacher only</td></tr>
+    <tr><td>GitHub Codespaces dashboard</td><td>github.com/codespaces</td><td>Students (manage their spaces)</td></tr>
+    <tr><td>Google Classroom</td><td>classroom.google.com</td><td>Everyone</td></tr>
+    <tr><td>AI Studio</td><td>aistudio.google.com/prompts/new_chat</td><td>Students</td></tr>
+    <tr><td>AI Studio (Plan B)</td><td>gemini.google.com</td><td>Students</td></tr>
+    <tr><td>GitHub status</td><td>githubstatus.com</td><td>Teacher (when things break)</td></tr>
+  </table>
+
+  <h3 id="r-commands">Git commands reference</h3>
+  <div class="cmd-block">
+    <div><span class="prompt">$</span> <span class="cmd">git add .</span>  <span class="comment">← stage all changed files</span></div>
+    <div><span class="prompt">$</span> <span class="cmd">git commit -m "describe what you did"</span>  <span class="comment">← save a snapshot</span></div>
+    <div><span class="prompt">$</span> <span class="cmd">git push</span>  <span class="comment">← send to GitHub + triggers Pages rebuild</span></div>
+    <div style="margin-top:8px;"><span class="prompt">$</span> <span class="cmd">git log --oneline</span>  <span class="comment">← see all commits (press Q to exit)</span></div>
+    <div><span class="prompt">$</span> <span class="cmd">git status</span>  <span class="comment">← see what's changed since last commit</span></div>
+    <div><span class="prompt">$</span> <span class="cmd">git checkout HEAD -- index.html</span>  <span class="comment">← restore file to last commit (emergency undo)</span></div>
+  </div>
+
+  <h3 id="r-calendar">Course calendar at a glance</h3>
+  <table>
+    <tr><th>Date</th><th>Day</th><th>Phase</th><th>Key deliverable</th></tr>
+    <tr><td>Mon Jun 8</td><td>D1</td><td>Phase 0</td><td>GitHub account + Codespace open</td></tr>
+    <tr><td>Tue Jun 9</td><td>D2</td><td>Phase 0</td><td>First commit + Pages live</td></tr>
+    <tr><td>Wed Jun 10</td><td>D3</td><td>Phase 1</td><td>Idea ticket approved + scaffold committed</td></tr>
+    <tr><td>Thu Jun 11</td><td>D4</td><td>Phase 1</td><td>Real content + commit #1</td></tr>
+    <tr><td>Mon Jun 15</td><td>D5</td><td>Phase 1</td><td>CSS polish + peer feedback</td></tr>
+    <tr><td>Tue Jun 16</td><td>D6</td><td>Phase 1</td><td>Iterate on feedback + commit #3</td></tr>
+    <tr><td>Wed Jun 17</td><td>D7</td><td>Phase 1</td><td><strong>Submit P1 URL + reflection</strong></td></tr>
+    <tr><td>Thu Jun 18</td><td>D8</td><td>Buffer</td><td>Catch up / start P2 planning</td></tr>
+    <tr><td style="color:var(--muted)">Fri Jun 19</td><td style="color:var(--muted)">—</td><td style="color:var(--muted)">OFF</td><td style="color:var(--muted)">Juneteenth</td></tr>
+    <tr><td>Mon Jun 22</td><td>D9</td><td>Phase 2</td><td>Idea ticket approved + V0 scaffold</td></tr>
+    <tr><td>Tue Jun 23</td><td>D10</td><td>Phase 2</td><td>V1 — core mechanic works</td></tr>
+    <tr><td>Wed Jun 24</td><td>D11</td><td>Phase 2</td><td>One feature added + peer swap</td></tr>
+    <tr><td>Thu Jun 25</td><td>D12</td><td>Phase 2</td><td><strong>Submit P2 URL</strong> + commit V2</td></tr>
+    <tr><td>Mon Jun 29</td><td>D13</td><td>Demo Day</td><td>Live demos + reflection</td></tr>
+  </table>
+
+  <h3 id="r-ai-settings">AI Studio settings (post on board every day)</h3>
+  <div class="card" style="font-size:14px; line-height:2.2;">
+    <strong>Go to:</strong> aistudio.google.com/prompts/new_chat<br>
+    <strong>Model:</strong> Gemini 3 Flash<br>
+    <strong>Thinking:</strong> Minimal<br>
+    <strong>Grounding / Search:</strong> OFF<br>
+    <strong>Plan B:</strong> gemini.google.com
+  </div>
+
+  <h3 id="r-pages-url">GitHub Pages URL format</h3>
+  <p>Every student's site URL follows this pattern:</p>
+  <div class="cmd-block">
+    <span class="comment"># Project 1:</span><br>
+    https://<span class="key">[org-name]</span>.github.io/<span class="key">project1-[github-username]</span>/<br><br>
+    <span class="comment"># Project 2:</span><br>
+    https://<span class="key">[org-name]</span>.github.io/<span class="key">project2-[github-username]</span>/
+  </div>
+  <p style="font-size:13px;color:var(--muted)">Replace [org-name] with your GitHub organization name. Students' repos are named automatically by GitHub Classroom using the prefix + their GitHub username.</p>
+
+</div><!-- /tab-reference -->
+
+</main>
+</div><!-- /page -->
+
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Top</button>
+
+<script>
+function showTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+  buildTOC(name);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function toggleDay(id) {
+  const card = document.getElementById(id);
+  card.classList.toggle('open');
+}
+
+function buildTOC(tabName) {
+  const panel = document.getElementById('tab-' + tabName);
+  const headings = panel.querySelectorAll('h2[id], h3[id]');
+  const list = document.getElementById('toc-list');
+  list.innerHTML = '';
+  headings.forEach(h => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = '#' + h.id;
+    a.textContent = h.textContent.replace(/[📌⚠🚨✓💡ℹ🎉⛔]/g, '').trim();
+    a.style.paddingLeft = h.tagName === 'H3' ? '18px' : '8px';
+    a.style.fontSize = h.tagName === 'H3' ? '12px' : '13px';
+    li.appendChild(a);
+    list.appendChild(li);
+  });
+}
+
+// Build initial TOC
+buildTOC('setup');
+
+// Open Day 1 by default
+document.getElementById('day1').classList.add('open');
+</script>
+</body>
+</html>
