@@ -10,7 +10,7 @@
         "ms-vscode.live-server",
 
         // Google Gemini Code Assist — free AI assistant (API key set in org secrets)
-        "GoogleCloudTools.gemini-code-assist",
+        "Google.geminicodeassist",
 
         // HTML/CSS essentials
         "ecmel.vscode-html-css",
