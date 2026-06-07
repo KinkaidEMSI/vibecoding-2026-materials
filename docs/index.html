@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VibeCoding 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #090E1A; --surface: #0F1829; --border: #1B2D48;
+  --text: #B8C8DC; --bright: #E8F0FA; --dim: #4A607A;
+  --cyan: #22D3EE; --green: #4ADE80; --yellow: #FCD34D; --red: #F87171;
+  --mono: 'Space Mono', monospace; --sans: 'DM Sans', sans-serif;
+}
+body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.6; min-height: 100vh; }
+nav { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 24px; display: flex; align-items: center; gap: 20px; height: 52px; flex-wrap: wrap; }
+.logo { font-family: var(--mono); font-size: 12px; color: var(--cyan); text-decoration: none; letter-spacing: .04em; }
+nav a { font-size: 14px; color: var(--dim); text-decoration: none; transition: color .15s; }
+nav a:hover { color: var(--bright); }
+main { max-width: 800px; margin: 0 auto; padding: 48px 24px 80px; }
+h1 { font-family: var(--mono); font-size: 1.75rem; color: var(--bright); margin-bottom: 8px; line-height: 1.2; }
+h2 { font-family: var(--mono); font-size: .8rem; color: var(--cyan); margin: 40px 0 14px; letter-spacing: .1em; }
+h3 { font-size: 1rem; font-weight: 600; color: var(--bright); margin-bottom: 6px; }
+p { margin-bottom: 12px; }
+p:last-child { margin-bottom: 0; }
+.sub { color: var(--dim); font-size: 14px; margin-bottom: 36px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 12px; }
+a.clink { text-decoration: none; display: block; color: inherit; }
+a.clink .card { transition: border-color .15s; }
+a.clink .card:hover { border-color: rgba(34,211,238,.5); }
+table { width: 100%; border-collapse: collapse; }
+th { text-align: left; padding: 8px 12px; color: var(--cyan); font-family: var(--mono); font-size: 11px; letter-spacing: .05em; border-bottom: 1px solid var(--border); }
+td { padding: 10px 12px; font-size: 15px; }
+tr + tr td { border-top: 1px solid var(--border); }
+@media (max-width: 600px) { h1 { font-size: 1.4rem; } main { padding: 28px 16px 60px; } }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">VIBECODING 2026</a>
+  <a href="day1.html">Day 1</a>
+  <a href="ai-guide.html">AI Guide</a>
+  <a href="project-tickets.html">Projects</a>
+  <a href="git-card.html">Git</a>
+</nav>
+<main>
+  <h1>VibeCoding 2026</h1>
+  <p class="sub">Kinkaid EMSI &middot; Jun 8&ndash;29 &middot; 13 sessions &middot; 3 projects</p>
+
+  <h2>MATERIALS</h2>
+
+  <a href="day1.html" class="clink">
+    <div class="card">
+      <h3>Day 1 Setup Guide &nbsp;<span style="display:inline-block;font-size:11px;font-family:var(--mono);padding:2px 8px;border-radius:4px;background:rgba(252,211,77,.1);color:var(--yellow);border:1px solid rgba(252,211,77,.25)">40 min</span></h3>
+      <p style="font-size:15px">GitHub account &rarr; Codespace &rarr; Gemini AI &rarr; first page &rarr; first push.</p>
+    </div>
+  </a>
+
+  <a href="ai-guide.html" class="clink">
+    <div class="card">
+      <h3>AI Guide</h3>
+      <p style="font-size:15px">How to use Gemini Code Assist. Prompts that work. What to do when AI gives you garbage.</p>
+    </div>
+  </a>
+
+  <a href="project-tickets.html" class="clink">
+    <div class="card">
+      <h3>Project Tickets</h3>
+      <p style="font-size:15px">Idea starters for all three projects: personal page, interactive page, free project.</p>
+    </div>
+  </a>
+
+  <a href="git-card.html" class="clink">
+    <div class="card">
+      <h3>Git Cheat Sheet</h3>
+      <p style="font-size:15px">3 commands. Print it, memorize it, use it every class.</p>
+    </div>
+  </a>
+
+  <h2>SCHEDULE</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>PROJECT</th><th>DAYS</th><th>DATES</th><th>GOAL</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--bright)">P1 &mdash; Personal Page</strong></td>
+          <td style="color:var(--dim);font-family:var(--mono);font-size:13px">1&ndash;3</td>
+          <td style="color:var(--dim)">Jun 8&ndash;10</td>
+          <td>A page about you. Ship it.</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--bright)">P2 &mdash; Interactive</strong></td>
+          <td style="color:var(--dim);font-family:var(--mono);font-size:13px">4&ndash;8</td>
+          <td style="color:var(--dim)">Jun 11&ndash;18</td>
+          <td>Something that does something. Quiz, game, generator.</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--bright)">P3 &mdash; Free Project</strong></td>
+          <td style="color:var(--dim);font-family:var(--mono);font-size:13px">9&ndash;12</td>
+          <td style="color:var(--dim)">Jun 22&ndash;25</td>
+          <td>Your idea, your call.</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--bright)">Demo Day</strong></td>
+          <td style="color:var(--dim);font-family:var(--mono);font-size:13px">13</td>
+          <td style="color:var(--dim)">Jun 29</td>
+          <td>3-min live demo from your Pages URL.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>HOW GRADING WORKS</h2>
+  <div class="card">
+    <p style="margin-bottom:16px"><strong style="color:var(--bright)">Show up, commit your work, ship your project = full credit.</strong> There is no code quality rubric. The grade is about whether you built something and pushed it.</p>
+    <table>
+      <tbody>
+        <tr><td>Daily commits (show up + push)</td><td style="text-align:right;font-family:var(--mono);color:var(--cyan)">20%</td></tr>
+        <tr><td>3 shipped projects</td><td style="text-align:right;font-family:var(--mono);color:var(--cyan)">70%</td></tr>
+        <tr><td>Demo Day</td><td style="text-align:right;font-family:var(--mono);color:var(--cyan)">10%</td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+</body>
+</html>
