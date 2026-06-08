@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 2 — Debug Exercise · VibeCoding EMSI 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#0f7e9b;--teal-dark:#0b5f77;
+  --teal-gradient:linear-gradient(160deg,#0d839f,#0b5f77);
+  --amber:#d67b19;--amber-light:#ffd9a6;
+  --surface-white:#ffffff;--surface-alt:#f7fcff;--surface-wash:#f0f8fb;
+  --border:#c8dbe3;--text-strong:#123140;--text-body:#4b6570;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:#f0f4f8;color:var(--text-strong);font-size:15px;line-height:1.5;}
+
+.nav{background:var(--teal-dark);border-bottom:4px solid var(--amber);padding:0 2rem;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:100;}
+.nav-brand{font-size:0.88rem;font-weight:700;color:#fff;padding:1rem 1.5rem 1rem 0;margin-right:1rem;border-right:1px solid rgba(255,255,255,0.15);white-space:nowrap;}
+.nav-brand span{color:var(--amber);}
+.nav-back{color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.72rem;font-weight:600;padding:0.4rem 0.75rem;border:1px solid rgba(255,255,255,0.2);border-radius:5px;transition:all 0.15s;}
+.nav-back:hover{color:#fff;border-color:rgba(255,255,255,0.5);}
+
+.hero{background:var(--teal-gradient);padding:2.8rem 2rem 2.4rem;}
+.hero-inner{max-width:860px;margin:0 auto;}
+.hero-eyebrow{font-size:0.62rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--amber-light);margin-bottom:0.5rem;}
+.hero-title{font-size:2rem;font-weight:700;color:#fff;line-height:1.15;margin-bottom:0.4rem;}
+.hero-rule{height:3px;background:linear-gradient(90deg,var(--amber),rgba(255,255,255,0.15));width:60px;margin:0.8rem 0 1rem;}
+.hero-sub{font-size:0.9rem;color:rgba(255,255,255,0.75);font-family:'IBM Plex Sans',sans-serif;max-width:540px;}
+
+.main{max-width:860px;margin:0 auto;padding:2.5rem 2rem 4rem;}
+.eyebrow{font-size:0.62rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal-dark);margin-bottom:0.3rem;}
+.sub-heading{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal-dark);padding-bottom:0.4rem;border-bottom:2px solid rgba(15,126,155,0.2);margin:2.2rem 0 1.2rem;}
+
+/* Bug cards */
+.bug-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;}
+@media(max-width:600px){.bug-grid{grid-template-columns:1fr;}}
+.bug-card{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(12,54,68,0.06);}
+.bug-card-header{background:var(--teal);padding:0.65rem 1rem;display:flex;align-items:center;gap:0.6rem;}
+.bug-num{background:rgba(255,255,255,0.2);color:#fff;font-size:0.7rem;font-weight:700;padding:0.15rem 0.45rem;border-radius:3px;font-family:'IBM Plex Mono',monospace;}
+.bug-type{font-size:0.75rem;font-weight:700;color:#fff;}
+.bug-severity{margin-left:auto;font-size:0.62rem;font-weight:700;letter-spacing:0.08em;color:var(--amber-light);}
+.bug-body{padding:1rem;}
+.bug-body p{font-size:0.82rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;line-height:1.5;margin-bottom:0.5rem;}
+.bug-hint{font-size:0.75rem;color:var(--teal);font-family:'IBM Plex Mono',monospace;background:var(--surface-wash);padding:0.35rem 0.6rem;border-radius:4px;border:1px solid var(--border);}
+.bug-hint::before{content:'Hint: ';font-weight:700;}
+
+/* Broken HTML block */
+.broken-code{background:#0d1117;border-radius:10px;overflow:hidden;margin-bottom:1.5rem;border:1px solid #1e3a4a;}
+.broken-code-bar{background:#1e3a4a;padding:0.5rem 1rem;display:flex;align-items:center;gap:0.5rem;border-bottom:1px solid #2d5166;}
+.broken-code-bar span{font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#8b949e;}
+.broken-code-bar .filename{font-family:'IBM Plex Mono',monospace;color:var(--amber);font-size:0.75rem;}
+.broken-code-bar .bug-count{margin-left:auto;background:#dc2626;color:#fff;font-size:0.62rem;font-weight:700;padding:0.1rem 0.45rem;border-radius:3px;}
+.code-inner{padding:1.2rem 1.4rem;font-family:'IBM Plex Mono',monospace;font-size:0.78rem;line-height:1.7;color:#e6edf3;overflow-x:auto;}
+.code-inner .c{color:#8b949e;}
+.code-inner .tag{color:#79c0ff;}
+.code-inner .attr{color:#d2a8ff;}
+.code-inner .val{color:#a5d6ff;}
+.code-inner .text{color:#e6edf3;}
+.code-inner .bug{color:#f97583;text-decoration:underline;text-decoration-color:#dc2626;text-underline-offset:3px;}
+.code-inner .comment{color:#8b949e;font-style:italic;}
+
+/* Info & warn */
+.info-box{border:1.5px solid var(--teal);border-radius:8px;background:var(--surface-wash);padding:1rem 1.2rem;margin-bottom:1.5rem;}
+.info-head{font-weight:700;color:var(--teal-dark);font-size:0.82rem;margin-bottom:0.4rem;}
+.info-box p,.info-box li{font-size:0.82rem;color:var(--text-body);line-height:1.6;font-family:'IBM Plex Sans',sans-serif;}
+.info-box ul{padding-left:1.2rem;margin-top:0.4rem;}
+
+.warn{background:#fff5f5;border:1.5px solid #dc2626;border-radius:8px;padding:0.8rem 1.1rem;margin:1rem 0;}
+.warn-head{font-weight:700;color:#991b1b;font-size:0.78rem;margin-bottom:0.3rem;}
+.warn p{font-size:0.8rem;color:#7f1d1d;font-family:'IBM Plex Sans',sans-serif;line-height:1.5;}
+
+/* Steps */
+.steps{list-style:none;padding:0;margin:0.8rem 0;}
+.steps li{display:flex;gap:0.75rem;align-items:flex-start;padding:0.55rem 0;border-bottom:1px solid var(--border);font-size:0.84rem;font-family:'IBM Plex Sans',sans-serif;color:var(--text-body);}
+.steps li:last-child{border-bottom:none;}
+.step-n{width:22px;height:22px;border-radius:50%;background:var(--teal);color:#fff;font-size:0.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:0.1rem;}
+.steps strong{color:var(--text-strong);}
+
+/* Commit reminder */
+.commit-box{background:var(--teal-gradient);border-radius:10px;padding:1.4rem 1.6rem;margin:2rem 0;}
+.commit-box h3{font-size:0.9rem;font-weight:700;color:#fff;margin-bottom:0.5rem;}
+.commit-box p{font-size:0.82rem;color:rgba(255,255,255,0.8);font-family:'IBM Plex Sans',sans-serif;margin-bottom:0.8rem;}
+.code-inline{background:rgba(255,255,255,0.12);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:0.78rem;padding:0.65rem 1rem;border-radius:6px;line-height:1.7;display:block;}
+
+.checkpoint{background:var(--surface-wash);border:1.5px solid var(--teal);border-left:5px solid var(--teal);border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin:1.8rem 0 1rem;}
+.checkpoint-head{font-weight:700;color:var(--teal-dark);font-size:0.82rem;display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;}
+.checkpoint ul{padding-left:1rem;margin:0;}
+.checkpoint li{font-size:0.82rem;color:var(--text-body);line-height:1.7;font-family:'IBM Plex Sans',sans-serif;}
+
+footer{background:var(--teal-dark);border-top:4px solid var(--amber);padding:1.5rem 2rem;text-align:center;}
+footer p{font-size:0.72rem;color:rgba(255,255,255,0.5);font-family:'IBM Plex Sans',sans-serif;}
+footer strong{color:rgba(255,255,255,0.8);}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">Vibe<span>Coding</span> · EMSI 2026</div>
+  <a href="index.html" class="nav-back">← All Materials</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Day 2 · June 9, 2026 · 80 Minutes</p>
+    <h1 class="hero-title">Debug Exercise</h1>
+    <div class="hero-rule"></div>
+    <p class="hero-sub">Every student has the same broken file. Find all 8 bugs, fix them, commit, and push. Your Pages URL goes live for the first time today.</p>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="info-box">
+    <div class="info-head">🎯 What You're Learning</div>
+    <p>Debugging is reading carefully. Most HTML bugs are typos, missing tags, or wrong punctuation. Today you'll fix a broken file and commit the fix — the same loop you'll use for every project. By the end of class, your GitHub Pages URL will be live.</p>
+  </div>
+
+  <div class="sub-heading">The 8 Bugs — Find Them All</div>
+
+  <div class="bug-grid">
+    <div class="bug-card">
+      <div class="bug-card-header"><span class="bug-num">BUG 1</span><span class="bug-type">Missing closing tag</span><span class="bug-severity">Easy</span></div>
+      <div class="bug-body"><p>An HTML element is opened but never closed. The browser will try to guess — and guess wrong.</p><div class="bug-hint">Look at the &lt;title&gt; element in &lt;head&gt;</div></div>
+    </div>
+    <div class="bug-card">
+      <div class="bug-card-header"><span class="bug-num">BUG 2</span><span class="bug-type">Typo in attribute</span><span class="bug-severity">Easy</span></div>
+      <div class="bug-body"><p>An attribute name is misspelled. The feature it controls will silently not work.</p><div class="bug-hint">Check the &lt;meta charset&gt; tag spelling</div></div>
+    </div>
+    <div class="bug-card">
+      <div class="bug-card-header"><span class="bug-num">BUG 3</span><span class="bug-type">Wrong quote type</span><span class="bug-severity">Medium</span></div>
+      <div class="bug-body"><p>Someone used curly quotes ("smart quotes") instead of straight quotes. HTML won't recognize the attribute value.</p><div class="bug-hint">Look in the &lt;link&gt; href attribute</div></div>
+    </div>
+    <div class="bug-card">
+      <div class="bug-card-header"><span class="bug-num">BUG 4</span><span class="bug-type">Unclosed attribute</span><span class="bug-severity">Medium</span></div>
+      <div class="bug-body"><p>A quote is opened but never closed. Everything after it becomes part of the attribute value.</p><div class="bug-hint">Check the &lt;img&gt; alt attribute</div></div>
+    </div>
+    <div class="bug-card">
+      <div class="bug-card-header"><span class="bug-num">BUG 5</span><span class="bug-type">Wrong nesting order</span><span class="bug-severity">Medium</span></div>
+      <div class="bug-body"><p>An element closes before its parent, or elements overlap. Nesting must be clean: open inner first, close inner first.</p><div class="bug-hint">Look at the &lt;strong&gt; inside &lt;em&gt; in the paragraph</div></div>
+    </div>
+    <div class="bug-card">
+      <div class="bug-card-header"><span class="bug-num">BUG 6</span><span class="bug-type">Missing required attribute</span><span class="bug-severity">Medium</span></div>
+      <div class="bug-body"><p>An element is missing an attribute that is required for it to work properly. Accessibility and function both break.</p><div class="bug-hint">Check the &lt;img&gt; tag — what's always required?</div></div>
+    </div>
+    <div class="bug-card">
+      <div class="bug-card-header"><span class="bug-num">BUG 7</span><span class="bug-type">Broken link syntax</span><span class="bug-severity">Hard</span></div>
+      <div class="bug-body"><p>A link exists but clicking it does nothing useful. The href value is wrong in a subtle way.</p><div class="bug-hint">Look at the &lt;a&gt; href — is the URL structure correct?</div></div>
+    </div>
+    <div class="bug-card">
+      <div class="bug-card-header"><span class="bug-num">BUG 8</span><span class="bug-type">Invalid element</span><span class="bug-severity">Hard</span></div>
+      <div class="bug-body"><p>A tag name doesn't exist in HTML. Browsers ignore unknown elements and their content disappears.</p><div class="bug-hint">Scan all tag names — one is invented</div></div>
+    </div>
+  </div>
+
+  <div class="sub-heading">The Broken File</div>
+
+  <div class="broken-code">
+    <div class="broken-code-bar">
+      <span class="filename">broken-index.html</span>
+      <span style="font-size:0.68rem;color:#8b949e;">— copy this into your index.html, then fix all bugs</span>
+      <span class="bug-count">8 BUGS</span>
+    </div>
+    <div class="code-inner">
+&lt;<span class="tag">!DOCTYPE</span> html&gt;<br>
+&lt;<span class="tag">html</span> <span class="attr">lang</span>=<span class="val">"en"</span>&gt;<br>
+&lt;<span class="tag">head</span>&gt;<br>
+&nbsp;&nbsp;&lt;<span class="tag">meta</span> <span class="attr"><span class="bug">cahrset</span></span>=<span class="val">"UTF-8"</span>&gt; <span class="comment">&lt;!-- BUG 2 --&gt;</span><br>
+&nbsp;&nbsp;&lt;<span class="tag">title</span>&gt;My First Page <span class="comment">&lt;!-- BUG 1: missing closing tag --&gt;</span><br>
+&nbsp;&nbsp;&lt;<span class="tag">link</span> <span class="attr">rel</span>=<span class="val">"stylesheet"</span> <span class="attr">href</span>=<span class="val"><span class="bug">"style.css</span></span>&gt; <span class="comment">&lt;!-- BUG 3: wrong quotes? BUG 4: unclosed quote --&gt;</span><br>
+&lt;/<span class="tag">head</span>&gt;<br>
+&lt;<span class="tag">body</span>&gt;<br>
+<br>
+&nbsp;&nbsp;&lt;<span class="tag">h1</span>&gt;Welcome to My Site&lt;/<span class="tag">h1</span>&gt;<br>
+<br>
+&nbsp;&nbsp;&lt;<span class="tag">p</span>&gt;This is &lt;<span class="tag">em</span>&gt;really &lt;<span class="tag">strong</span>&gt;important&lt;/<span class="tag">em</span>&gt;&lt;/<span class="tag">strong</span>&gt; stuff.&lt;/<span class="tag">p</span>&gt; <span class="comment">&lt;!-- BUG 5 --&gt;</span><br>
+<br>
+&nbsp;&nbsp;&lt;<span class="tag">img</span> <span class="attr">src</span>=<span class="val">"photo.jpg"</span> <span class="attr">alt</span>=<span class="val">"A cool photo</span>&gt; <span class="comment">&lt;!-- BUG 4 --&gt;</span><br>
+<br>
+&nbsp;&nbsp;&lt;<span class="tag">img</span> <span class="attr">src</span>=<span class="val">"logo.png"</span>&gt; <span class="comment">&lt;!-- BUG 6: what's missing? --&gt;</span><br>
+<br>
+&nbsp;&nbsp;&lt;<span class="tag">a</span> <span class="attr">href</span>=<span class="val"><span class="bug">"www.google.com"</span></span>&gt;Visit Google&lt;/<span class="tag">a</span>&gt; <span class="comment">&lt;!-- BUG 7 --&gt;</span><br>
+<br>
+&nbsp;&nbsp;&lt;<span class="tag"><span class="bug">marquee</span></span>&gt;This is moving text!&lt;/<span class="tag"><span class="bug">marquee</span></span>&gt; <span class="comment">&lt;!-- BUG 8: not valid HTML5 --&gt;</span><br>
+<br>
+&lt;/<span class="tag">body</span>&gt;<br>
+&lt;/<span class="tag">html</span>&gt;
+    </div>
+  </div>
+
+  <div class="sub-heading">How to Work Through This</div>
+
+  <ul class="steps">
+    <li><span class="step-n">1</span><span>Copy the broken code above into your <strong>index.html</strong> (select all, paste)</span></li>
+    <li><span class="step-n">2</span><span>Save and check Live Server. Notice what's broken visually.</span></li>
+    <li><span class="step-n">3</span><span>Work through the bug list top to bottom. Use the hints — but figure out the fix yourself.</span></li>
+    <li><span class="step-n">4</span><span>After each fix, save and check Live Server again. Did it help?</span></li>
+    <li><span class="step-n">5</span><span>If you're stuck on a bug, ask Gemini: <em>"Here is my HTML. Bug 3 says there are wrong quotes on the link href — what does that mean and how do I fix it?"</em></span></li>
+    <li><span class="step-n">6</span><span>When all 8 bugs are fixed, your page should render cleanly with no visible errors.</span></li>
+  </ul>
+
+  <div class="warn">
+    <div class="warn-head">⚠️ Don't just ask Gemini "fix my code"</div>
+    <p>You'll learn nothing. Ask about one bug at a time. Explain what you think the bug is first, then ask Gemini if you're right. That's how debugging actually works.</p>
+  </div>
+
+  <div class="commit-box">
+    <h3>When you're done — commit and push</h3>
+    <p>This pushes to GitHub and triggers your Pages URL to go live for the first time.</p>
+    <code class="code-inline">git add .<br>git commit -m "Day 2: fixed all 8 bugs in debug exercise"<br>git push</code>
+  </div>
+
+  <div class="sub-heading">Fast Finishers — Bonus Challenges</div>
+  <div class="info-box">
+    <div class="info-head">🏃 Done early? Keep going.</div>
+    <ul>
+      <li>Add a second paragraph below the first. Use Gemini to write it.</li>
+      <li>Add a working link to your favorite website. Make sure it has <code style="font-family:'IBM Plex Mono',monospace;font-size:0.85em;background:var(--surface-alt);padding:0.1rem 0.35rem;border-radius:3px;color:var(--teal);">https://</code> at the start.</li>
+      <li>Add a background color using a <code style="font-family:'IBM Plex Mono',monospace;font-size:0.85em;background:var(--surface-alt);padding:0.1rem 0.35rem;border-radius:3px;color:var(--teal);">&lt;style&gt;</code> block. Ask Gemini how.</li>
+      <li>Commit each change separately with a descriptive message.</li>
+    </ul>
+  </div>
+
+  <div class="checkpoint">
+    <div class="checkpoint-head">✅ End of Day 2 Checklist</div>
+    <ul>
+      <li>All 8 bugs found and fixed ✓</li>
+      <li>Page renders cleanly in Live Server ✓</li>
+      <li>Commit message describes what you fixed ✓</li>
+      <li>Pushed to GitHub ✓</li>
+      <li>GitHub Pages URL is live and showing your page ✓</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p><strong>VibeCoding EMSI 2026</strong> · Kinkaid School · Instructor: Vladimir Lopez</p>
+</footer>
+
+</body>
+</html>

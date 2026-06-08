@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day 1 — Setup & Onboarding · VibeCoding EMSI 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#0f7e9b;--teal-dark:#0b5f77;
+  --teal-gradient:linear-gradient(160deg,#0d839f,#0b5f77);
+  --amber:#d67b19;--amber-light:#ffd9a6;
+  --surface-white:#ffffff;--surface-alt:#f7fcff;--surface-wash:#f0f8fb;
+  --border:#c8dbe3;--text-strong:#123140;--text-body:#4b6570;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:#f0f4f8;color:var(--text-strong);font-size:15px;line-height:1.5;}
+
+.nav{background:var(--teal-dark);border-bottom:4px solid var(--amber);padding:0 2rem;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:100;}
+.nav-brand{font-size:0.88rem;font-weight:700;color:#fff;padding:1rem 1.5rem 1rem 0;margin-right:1rem;border-right:1px solid rgba(255,255,255,0.15);white-space:nowrap;}
+.nav-brand span{color:var(--amber);}
+.nav-back{color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.72rem;font-weight:600;padding:0.4rem 0.75rem;border:1px solid rgba(255,255,255,0.2);border-radius:5px;transition:all 0.15s;}
+.nav-back:hover{color:#fff;border-color:rgba(255,255,255,0.5);}
+
+.hero{background:var(--teal-gradient);padding:2.8rem 2rem 2.4rem;}
+.hero-inner{max-width:860px;margin:0 auto;}
+.hero-eyebrow{font-size:0.62rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--amber-light);margin-bottom:0.5rem;}
+.hero-title{font-size:2rem;font-weight:700;color:#fff;line-height:1.15;margin-bottom:0.4rem;}
+.hero-rule{height:3px;background:linear-gradient(90deg,var(--amber),rgba(255,255,255,0.15));width:60px;margin:0.8rem 0 1rem;}
+.hero-sub{font-size:0.9rem;color:rgba(255,255,255,0.75);font-family:'IBM Plex Sans',sans-serif;max-width:520px;}
+
+.main{max-width:860px;margin:0 auto;padding:2.5rem 2rem 4rem;}
+
+/* Step block */
+.step{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.2rem;box-shadow:0 2px 8px rgba(12,54,68,0.06);}
+.step-header{background:var(--teal);display:flex;align-items:center;gap:0.85rem;padding:0.8rem 1.2rem;}
+.step-num{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.2);color:#fff;font-size:0.85rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:2px solid rgba(255,255,255,0.4);}
+.step-title{font-size:0.9rem;font-weight:700;color:#fff;}
+.step-tag{margin-left:auto;font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--amber-light);}
+.step-body{padding:1.2rem 1.4rem;}
+.step-body p{font-size:0.85rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;margin-bottom:0.8rem;line-height:1.6;}
+.step-body p:last-child{margin-bottom:0;}
+
+/* Instruction list */
+.instruct{list-style:none;padding:0;margin:0.6rem 0;}
+.instruct li{display:flex;gap:0.75rem;align-items:flex-start;padding:0.5rem 0;border-bottom:1px solid var(--border);font-size:0.84rem;font-family:'IBM Plex Sans',sans-serif;color:var(--text-body);}
+.instruct li:last-child{border-bottom:none;}
+.instruct-n{width:20px;height:20px;border-radius:50%;background:var(--teal);color:#fff;font-size:0.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:0.1rem;}
+.instruct strong{color:var(--text-strong);}
+
+/* Code snippet */
+.code{background:#0d1117;color:#e6edf3;border-radius:7px;padding:0.8rem 1.1rem;font-family:'IBM Plex Mono',monospace;font-size:0.78rem;line-height:1.65;margin:0.6rem 0;border:1px solid #1e3a4a;overflow-x:auto;}
+.code .c{color:#8b949e;}
+.code .k{color:#79c0ff;}
+.code .s{color:#a5d6ff;}
+.code .v{color:#56d364;}
+
+/* Checkpoint */
+.checkpoint{background:var(--surface-wash);border:1.5px solid var(--teal);border-left:5px solid var(--teal);border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin:1.8rem 0 1rem;}
+.checkpoint-head{font-weight:700;color:var(--teal-dark);font-size:0.82rem;display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;}
+.checkpoint ul{padding-left:1rem;margin:0;}
+.checkpoint li{font-size:0.82rem;color:var(--text-body);line-height:1.7;font-family:'IBM Plex Sans',sans-serif;}
+
+/* Warning */
+.warn{background:#fff5f5;border:1.5px solid #dc2626;border-radius:8px;padding:0.8rem 1.1rem;margin:0.8rem 0;}
+.warn-head{font-weight:700;color:#991b1b;font-size:0.78rem;margin-bottom:0.3rem;}
+.warn p{font-size:0.8rem;color:#7f1d1d;font-family:'IBM Plex Sans',sans-serif;line-height:1.5;}
+
+/* Tip */
+.tip{background:rgba(214,123,25,0.07);border:1.5px solid rgba(214,123,25,0.35);border-radius:8px;padding:0.75rem 1rem;margin:0.7rem 0;}
+.tip p{font-size:0.8rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;line-height:1.5;}
+.tip strong{color:var(--amber);}
+
+.sub-heading{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal-dark);padding-bottom:0.4rem;border-bottom:2px solid rgba(15,126,155,0.2);margin:2.2rem 0 1.2rem;}
+
+footer{background:var(--teal-dark);border-top:4px solid var(--amber);padding:1.5rem 2rem;text-align:center;}
+footer p{font-size:0.72rem;color:rgba(255,255,255,0.5);font-family:'IBM Plex Sans',sans-serif;}
+footer strong{color:rgba(255,255,255,0.8);}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">Vibe<span>Coding</span> · EMSI 2026</div>
+  <a href="index.html" class="nav-back">← All Materials</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Day 1 · June 8, 2026 · 80 Minutes</p>
+    <h1 class="hero-title">Setup &amp; Onboarding</h1>
+    <div class="hero-rule"></div>
+    <p class="hero-sub">By the end of today you will have a live website on the internet. Zero experience required. Follow every step in order.</p>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="checkpoint">
+    <div class="checkpoint-head">🎯 Today's Goal</div>
+    <ul>
+      <li>GitHub account created and joined to the class org</li>
+      <li>GitHub Classroom assignment accepted — your repo exists</li>
+      <li>Codespace open in your browser — VS Code is live</li>
+      <li>Gemini AI is active and responding</li>
+      <li>Your <code style="font-family:'IBM Plex Mono',monospace;font-size:0.8em;background:var(--surface-alt);padding:0.1rem 0.35rem;border-radius:3px;color:var(--teal);">index.html</code> is visible in your browser via Live Server</li>
+    </ul>
+  </div>
+
+  <div class="sub-heading">Part 1 — GitHub Account (10 min)</div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">Create a free GitHub account</div>
+      <div class="step-tag">~5 min</div>
+    </div>
+    <div class="step-body">
+      <p>If you already have a GitHub account, skip to step 2.</p>
+      <ol class="instruct">
+        <li><span class="instruct-n">1</span><span>Go to <strong>github.com</strong> and click <strong>Sign up</strong></span></li>
+        <li><span class="instruct-n">2</span><span>Enter your email address. Use a personal email — not your school email.</span></li>
+        <li><span class="instruct-n">3</span><span>Create a username. Keep it professional — you may use this for years. Example: <strong>jsmith2026</strong> or <strong>janedoe</strong></span></li>
+        <li><span class="instruct-n">4</span><span>Verify your email address when GitHub sends you a confirmation link.</span></li>
+      </ol>
+      <div class="tip"><p><strong>Username tip:</strong> No spaces, keep it lowercase, avoid numbers at the start. This appears in your project URLs.</p></div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">Accept the class organization invite</div>
+      <div class="step-tag">~2 min</div>
+    </div>
+    <div class="step-body">
+      <p>Your instructor will share a link. Click it while logged into GitHub. This adds you to the <strong>KinkaidEMSI</strong> organization.</p>
+      <div class="warn">
+        <div class="warn-head">⚠️ Must be logged in to GitHub when you click the link</div>
+        <p>If you click the link while logged out, it won't attach to your account. Log in first, then open the link.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-heading">Part 2 — Accept Your Assignment (10 min)</div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title">Accept the GitHub Classroom assignment</div>
+      <div class="step-tag">~3 min</div>
+    </div>
+    <div class="step-body">
+      <p>Open the GitHub Classroom invitation link below while logged into GitHub.</p>
+      <ol class="instruct">
+        <li><span class="instruct-n">1</span><span>Open this link: <a href="https://classroom.github.com/a/xuJPS0u1">https://classroom.github.com/a/xuJPS0u1</a></span></li>
+        <li><span class="instruct-n">2</span><span>Click <strong>Accept this assignment</strong></span></li>
+        <li><span class="instruct-n">3</span><span>Wait ~15 seconds. GitHub creates your personal repo. The URL will look like:<br><code style="font-family:'IBM Plex Mono',monospace;font-size:0.8em;">github.com/KinkaidEMSI/vibeproject1-2026-yourusername</code></span></li>
+        <li><span class="instruct-n">4</span><span>Click the link GitHub gives you to open your repo.</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="sub-heading">Part 3 — Open Your Codespace (15 min)</div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div class="step-title">Launch your Codespace</div>
+      <div class="step-tag">~10 min (first time is slow)</div>
+    </div>
+    <div class="step-body">
+      <p>A Codespace is VS Code running in your browser. No downloads. No installs. It lives in the cloud.</p>
+      <ol class="instruct">
+        <li><span class="instruct-n">1</span><span>In your repo, click the green <strong>Code</strong> button</span></li>
+        <li><span class="instruct-n">2</span><span>Click the <strong>Codespaces</strong> tab</span></li>
+        <li><span class="instruct-n">3</span><span>Click <strong>Create codespace on main</strong></span></li>
+        <li><span class="instruct-n">4</span><span>A new browser tab opens. VS Code loads. <strong>This takes 1–2 minutes the first time.</strong> Normal. Wait.</span></li>
+      </ol>
+      <div class="warn">
+        <div class="warn-head">⚠️ First launch takes 60–90 seconds — this is normal</div>
+        <p>The container is being built. Don't close the tab or click anything. When VS Code appears, you're in.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">5</div>
+      <div class="step-title">Verify Gemini AI is working</div>
+      <div class="step-tag">~3 min</div>
+    </div>
+    <div class="step-body">
+      <p>Gemini should be installed automatically. Let's confirm.</p>
+      <ol class="instruct">
+        <li><span class="instruct-n">1</span><span>Open the terminal in VS Code: top menu → <strong>Terminal</strong> → <strong>New Terminal</strong></span></li>
+        <li><span class="instruct-n">2</span><span>Type this and press Enter:</span></li>
+      </ol>
+      <div class="code"><span class="v">echo</span> $GEMINI_API_KEY</div>
+      <p>You should see a long string of characters. If you see something, Gemini is ready. If it's blank, tell your instructor.</p>
+      <ol class="instruct" style="margin-top:0.5rem;">
+        <li><span class="instruct-n">3</span><span>Look for the Gemini icon in the left sidebar. Click it to open the chat panel.</span></li>
+        <li><span class="instruct-n">4</span><span>Type <strong>"Hello"</strong> and press Enter. If Gemini responds, you're good to go.</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="sub-heading">Part 4 — Your First HTML File (25 min)</div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">6</div>
+      <div class="step-title">Open index.html and launch Live Server</div>
+      <div class="step-tag">~5 min</div>
+    </div>
+    <div class="step-body">
+      <p>Your repo already has an <code style="font-family:'IBM Plex Mono',monospace;font-size:0.8em;background:var(--surface-alt);padding:0.1rem 0.35rem;border-radius:3px;color:var(--teal);">index.html</code> file. Let's open it and see it in a browser.</p>
+      <ol class="instruct">
+        <li><span class="instruct-n">1</span><span>In the left file panel, click <strong>index.html</strong> to open it</span></li>
+        <li><span class="instruct-n">2</span><span>Right-click anywhere in the file → click <strong>Open with Live Server</strong></span></li>
+        <li><span class="instruct-n">3</span><span>A preview opens. This is your site. Every time you save the file, it refreshes automatically.</span></li>
+      </ol>
+      <div class="tip"><p><strong>Keyboard shortcut:</strong> <strong>Ctrl + S</strong> (Windows) or <strong>Cmd + S</strong> (Mac) to save. Get used to saving constantly.</p></div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">7</div>
+      <div class="step-title">Ask Gemini to add your name to the page</div>
+      <div class="step-tag">~10 min</div>
+    </div>
+    <div class="step-body">
+      <p>This is vibe coding. You're not typing HTML — you're directing AI to write it. Try this prompt in the Gemini chat panel:</p>
+      <div class="code"><span class="s">Add an h1 heading with my name "[Your Name]" and a short paragraph 
+that says I'm a student in the EMSI summer program at Kinkaid School. 
+Give me the complete updated index.html file in a single code block.</span></div>
+      <ol class="instruct" style="margin-top:0.5rem;">
+        <li><span class="instruct-n">1</span><span>Copy the entire code block Gemini gives you</span></li>
+        <li><span class="instruct-n">2</span><span>Select all the text in index.html: <strong>Ctrl+A</strong> (or Cmd+A)</span></li>
+        <li><span class="instruct-n">3</span><span>Paste the new code: <strong>Ctrl+V</strong> (or Cmd+V)</span></li>
+        <li><span class="instruct-n">4</span><span>Save: <strong>Ctrl+S</strong>. Check the Live Server preview — your name should appear.</span></li>
+      </ol>
+      <div class="tip"><p><strong>Key rule:</strong> Always ask Gemini for <strong>"the complete updated file in a single code block."</strong> Never paste partial code — it breaks things.</p></div>
+    </div>
+  </div>
+
+  <div class="sub-heading">Part 5 — Your First Commit (15 min)</div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">8</div>
+      <div class="step-title">Add, commit, and push</div>
+      <div class="step-tag">~10 min</div>
+    </div>
+    <div class="step-body">
+      <p>A commit is a saved snapshot. Pushing sends it to GitHub. This is the loop you'll do every session.</p>
+      <ol class="instruct">
+        <li><span class="instruct-n">1</span><span>Open the terminal (Terminal → New Terminal if it's closed)</span></li>
+        <li><span class="instruct-n">2</span><span>Type these three commands, pressing Enter after each:</span></li>
+      </ol>
+      <div class="code"><span class="v">git</span> <span class="k">add</span> .
+<span class="v">git</span> <span class="k">commit</span> <span class="s">-m "Day 1: added my name to index.html"</span>
+<span class="v">git</span> <span class="k">push</span></div>
+      <ol class="instruct" style="margin-top:0.5rem;">
+        <li><span class="instruct-n">3</span><span>Go to <strong>github.com/KinkaidEMSI/vibeproject1-2026-yourusername</strong> — your commit should appear.</span></li>
+      </ol>
+      <div class="warn">
+        <div class="warn-head">⚠️ Commit messages matter — be specific</div>
+        <p>Bad: "update". Good: "Day 1: added heading and intro paragraph". Your instructor reads these.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">9</div>
+      <div class="step-title">Enable GitHub Pages — get your live URL</div>
+      <div class="step-tag">~5 min</div>
+    </div>
+    <div class="step-body">
+      <p>GitHub Pages turns your repo into a public website. One-time setup.</p>
+      <ol class="instruct">
+        <li><span class="instruct-n">1</span><span>In your repo on GitHub, click <strong>Settings</strong></span></li>
+        <li><span class="instruct-n">2</span><span>In the left menu, click <strong>Pages</strong></span></li>
+        <li><span class="instruct-n">3</span><span>Under "Source", select <strong>Deploy from a branch</strong></span></li>
+        <li><span class="instruct-n">4</span><span>Set branch to <strong>main</strong>, folder to <strong>/ (root)</strong></span></li>
+        <li><span class="instruct-n">5</span><span>Click <strong>Save</strong>. Wait ~1 minute. Refresh the Settings → Pages page.</span></li>
+        <li><span class="instruct-n">6</span><span>Your live URL appears: <code style="font-family:'IBM Plex Mono',monospace;font-size:0.8em;">kinkaidemsi.github.io/vibeproject1-2026-yourusername</code></span></li>
+      </ol>
+      <div class="tip"><p><strong>That's your project URL.</strong> Every push to main automatically updates it. This is what you'll submit to Google Classroom.</p></div>
+    </div>
+  </div>
+
+  <div class="checkpoint">
+    <div class="checkpoint-head">✅ End of Day 1 Checklist</div>
+    <ul>
+      <li>GitHub account created ✓</li>
+      <li>Joined KinkaidEMSI org ✓</li>
+      <li>Assignment accepted — repo exists ✓</li>
+      <li>Codespace open, Gemini responding ✓</li>
+      <li>index.html has your name and shows in Live Server ✓</li>
+      <li>First commit + push completed ✓</li>
+      <li>GitHub Pages URL is live ✓</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p><strong>VibeCoding EMSI 2026</strong> · Kinkaid School · Instructor: Vladimir Lopez</p>
+</footer>
+
+</body>
+</html>

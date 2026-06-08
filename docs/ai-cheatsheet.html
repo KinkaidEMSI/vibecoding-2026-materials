@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Cheat Sheet · VibeCoding EMSI 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#0f7e9b;--teal-dark:#0b5f77;
+  --teal-gradient:linear-gradient(160deg,#0d839f,#0b5f77);
+  --amber:#d67b19;--amber-light:#ffd9a6;
+  --surface-white:#ffffff;--surface-alt:#f7fcff;--surface-wash:#f0f8fb;
+  --border:#c8dbe3;--text-strong:#123140;--text-body:#4b6570;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:#f0f4f8;color:var(--text-strong);font-size:15px;line-height:1.5;}
+
+.nav{background:var(--teal-dark);border-bottom:4px solid var(--amber);padding:0 2rem;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:100;}
+.nav-brand{font-size:0.88rem;font-weight:700;color:#fff;padding:1rem 1.5rem 1rem 0;margin-right:1rem;border-right:1px solid rgba(255,255,255,0.15);white-space:nowrap;}
+.nav-brand span{color:var(--amber);}
+.nav-back{color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.72rem;font-weight:600;padding:0.4rem 0.75rem;border:1px solid rgba(255,255,255,0.2);border-radius:5px;transition:all 0.15s;}
+.nav-back:hover{color:#fff;border-color:rgba(255,255,255,0.5);}
+
+.hero{background:var(--teal-gradient);padding:2.8rem 2rem 2.4rem;}
+.hero-inner{max-width:900px;margin:0 auto;}
+.hero-eyebrow{font-size:0.62rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--amber-light);margin-bottom:0.5rem;}
+.hero-title{font-size:2rem;font-weight:700;color:#fff;line-height:1.15;margin-bottom:0.4rem;}
+.hero-rule{height:3px;background:linear-gradient(90deg,var(--amber),rgba(255,255,255,0.15));width:60px;margin:0.8rem 0 1rem;}
+.hero-sub{font-size:0.9rem;color:rgba(255,255,255,0.75);font-family:'IBM Plex Sans',sans-serif;max-width:560px;}
+
+.main{max-width:900px;margin:0 auto;padding:2.5rem 2rem 4rem;}
+.sub-heading{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal-dark);padding-bottom:0.4rem;border-bottom:2px solid rgba(15,126,155,0.2);margin:2.2rem 0 1.2rem;}
+
+/* Core rule box */
+.core-rule{background:var(--teal-gradient);border-radius:10px;padding:1.5rem 1.8rem;margin-bottom:2rem;}
+.core-rule h2{font-size:1rem;font-weight:700;color:#fff;margin-bottom:0.4rem;}
+.core-rule p{font-size:0.85rem;color:rgba(255,255,255,0.85);font-family:'IBM Plex Sans',sans-serif;line-height:1.6;}
+.core-rule .rule-highlight{background:rgba(255,255,255,0.15);border-radius:6px;padding:0.65rem 1rem;margin-top:0.8rem;font-family:'IBM Plex Mono',monospace;font-size:0.82rem;color:#fff;line-height:1.5;}
+
+/* Prompt patterns */
+.pattern-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;}
+@media(max-width:640px){.pattern-grid{grid-template-columns:1fr;}}
+.pattern-card{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(12,54,68,0.06);}
+.pattern-header{background:var(--surface-wash);border-bottom:2px solid var(--teal);padding:0.65rem 1rem;display:flex;align-items:center;gap:0.6rem;}
+.pattern-tag{font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal);}
+.pattern-body{padding:1rem;}
+.pattern-label{font-size:0.68rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-body);margin-bottom:0.4rem;}
+.prompt{background:var(--surface-wash);border:1.5px solid var(--teal);border-left:4px solid var(--teal);border-radius:0 6px 6px 0;padding:0.7rem 0.9rem;font-family:'IBM Plex Mono',monospace;font-size:0.75rem;line-height:1.65;color:var(--text-strong);white-space:pre-wrap;margin-bottom:0.7rem;}
+.prompt:last-child{margin-bottom:0;}
+.pattern-note{font-size:0.75rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;line-height:1.5;margin-top:0.5rem;padding-top:0.5rem;border-top:1px solid var(--border);}
+
+/* Do/Don't */
+.do-dont{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;}
+@media(max-width:600px){.do-dont{grid-template-columns:1fr;}}
+.do-card,.dont-card{border-radius:8px;overflow:hidden;border:1.5px solid var(--border);}
+.do-head{background:#d1fae5;color:#065f46;padding:0.6rem 0.9rem;font-weight:700;font-size:0.78rem;}
+.dont-head{background:#fee2e2;color:#991b1b;padding:0.6rem 0.9rem;font-weight:700;font-size:0.78rem;}
+.do-body,.dont-body{background:#fff;padding:0.9rem;font-size:0.8rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;line-height:1.7;}
+.do-body li,.dont-body li{margin-bottom:0.3rem;padding-left:0.2rem;}
+
+/* Single wide prompt */
+.prompt-wide{background:var(--surface-wash);border:1.5px solid var(--teal);border-left:5px solid var(--amber);border-radius:0 8px 8px 0;padding:1rem 1.2rem;font-family:'IBM Plex Mono',monospace;font-size:0.78rem;line-height:1.7;color:var(--text-strong);white-space:pre-wrap;margin-bottom:1rem;}
+.prompt-label{font-family:'Inter',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);margin-bottom:0.6rem;display:block;}
+
+/* Git quick ref */
+.git-table{width:100%;border-collapse:collapse;font-size:0.82rem;margin-bottom:1.5rem;}
+.git-table th{background:var(--teal);color:#fff;padding:0.55rem 0.9rem;text-align:left;font-size:0.68rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;}
+.git-table td{padding:0.55rem 0.9rem;border-bottom:1px solid var(--border);font-family:'IBM Plex Sans',sans-serif;color:var(--text-body);vertical-align:top;}
+.git-table tr:nth-child(even) td{background:var(--surface-alt);}
+.git-table td:first-child{font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:var(--teal);white-space:nowrap;}
+
+.info-box{border:1.5px solid var(--teal);border-radius:8px;background:var(--surface-wash);padding:1rem 1.2rem;margin-bottom:1.5rem;}
+.info-head{font-weight:700;color:var(--teal-dark);font-size:0.82rem;margin-bottom:0.4rem;}
+.info-box p,.info-box li{font-size:0.82rem;color:var(--text-body);line-height:1.6;font-family:'IBM Plex Sans',sans-serif;}
+.info-box ul{padding-left:1.2rem;margin-top:0.4rem;}
+
+footer{background:var(--teal-dark);border-top:4px solid var(--amber);padding:1.5rem 2rem;text-align:center;}
+footer p{font-size:0.72rem;color:rgba(255,255,255,0.5);font-family:'IBM Plex Sans',sans-serif;}
+footer strong{color:rgba(255,255,255,0.8);}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">Vibe<span>Coding</span> · EMSI 2026</div>
+  <a href="index.html" class="nav-back">← All Materials</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Reference · All Sessions</p>
+    <h1 class="hero-title">AI Cheat Sheet</h1>
+    <div class="hero-rule"></div>
+    <p class="hero-sub">Prompt patterns that work. How to get complete, usable code every time — and what to do when you don't.</p>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="core-rule">
+    <h2>🔑 The One Rule That Prevents 90% of Problems</h2>
+    <p>Every time you ask Gemini (or any AI) to write or change code, end your prompt with this exact phrase:</p>
+    <div class="rule-highlight">Give me the complete updated file in a single code block.</div>
+    <p style="margin-top:0.6rem;">Never paste partial code into the middle of a file. Always replace the whole thing. Partial pastes cause cascading bugs that are hard to track down.</p>
+  </div>
+
+  <div class="sub-heading">Core Prompt Patterns</div>
+
+  <div class="pattern-grid">
+    <div class="pattern-card">
+      <div class="pattern-header"><span class="pattern-tag">🏗️ Start from Scratch</span></div>
+      <div class="pattern-body">
+        <div class="pattern-label">Use this when:</div>
+        <p style="font-size:0.78rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;margin-bottom:0.7rem;">Building a new section, page, or feature from zero.</p>
+        <div class="prompt">Create a single HTML file for a personal website.
+It should have:
+- A header with my name "[Name]" in large text
+- A short bio paragraph (2–3 sentences)
+- A section showing 3 of my interests as cards
+- A simple dark navy and white color scheme
+
+Give me the complete file in a single code block.</div>
+      </div>
+    </div>
+    <div class="pattern-card">
+      <div class="pattern-header"><span class="pattern-tag">✏️ Modify Existing Code</span></div>
+      <div class="pattern-body">
+        <div class="pattern-label">Use this when:</div>
+        <p style="font-size:0.78rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;margin-bottom:0.7rem;">Changing something that already exists. Always paste your current code.</p>
+        <div class="prompt">Here is my current index.html:
+
+[paste your entire current file here]
+
+Please change the background color to a dark navy blue
+and make the heading font larger. Do not change anything else.
+
+Give me the complete updated file in a single code block.</div>
+      </div>
+    </div>
+    <div class="pattern-card">
+      <div class="pattern-header"><span class="pattern-tag">🐛 Debug a Problem</span></div>
+      <div class="pattern-body">
+        <div class="pattern-label">Use this when:</div>
+        <p style="font-size:0.78rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;margin-bottom:0.7rem;">Something looks wrong or broken in the browser.</p>
+        <div class="prompt">Here is my HTML file:
+
+[paste your current file here]
+
+The problem I see is: my navigation links don't show up
+on mobile — the menu just disappears.
+
+What is causing this and how do I fix it?
+Give me the complete corrected file in a single code block.</div>
+      </div>
+    </div>
+    <div class="pattern-card">
+      <div class="pattern-header"><span class="pattern-tag">✨ Add a Feature</span></div>
+      <div class="pattern-body">
+        <div class="pattern-label">Use this when:</div>
+        <p style="font-size:0.78rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;margin-bottom:0.7rem;">Your base page works and you want to add something new.</p>
+        <div class="prompt">Here is my current index.html:
+
+[paste your current file here]
+
+Add a "dark mode" toggle button in the top right corner.
+When clicked, it should switch the background to dark navy
+and text to white. Clicking again switches back.
+Use only HTML, CSS, and JavaScript — no libraries.
+
+Give me the complete updated file in a single code block.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-heading">Prompts for the Interactive Project (Phase 2)</div>
+
+  <span class="prompt-label">Starting a quiz</span>
+  <div class="prompt-wide">Create a single HTML file for a multiple-choice quiz about [topic].
+Include 5 questions, each with 4 answer options.
+After each answer, show if it was correct or incorrect.
+Show the final score at the end with a "Play Again" button.
+Use a clean, friendly design — nothing complicated.
+Give me the complete file in a single code block.</div>
+
+  <span class="prompt-label">Starting a clicker game</span>
+  <div class="prompt-wide">Create a single HTML file for a clicker game.
+Clicking a big button earns 1 point.
+Show a running score counter at the top.
+Every 10 clicks, unlock a "power-up" that makes each click worth 2 points.
+Keep the design simple and fun.
+Give me the complete file in a single code block.</div>
+
+  <span class="prompt-label">Starting a random generator</span>
+  <div class="prompt-wide">Create a single HTML file for a random [thing] generator.
+It should have a big "Generate" button in the center.
+Clicking it picks a random [thing] from a list of at least 20 options
+and displays it in large text with a fun animation.
+Give me the complete file in a single code block.</div>
+
+  <div class="sub-heading">Prompt Do's and Don'ts</div>
+  <div class="do-dont">
+    <div class="do-card">
+      <div class="do-head">✓ DO — Good Prompting</div>
+      <div class="do-body">
+        <ul>
+          <li>Be specific about what you want to see</li>
+          <li>Describe the outcome, not the code technique</li>
+          <li>Always paste your current file when modifying</li>
+          <li>Always end with "complete file in a single code block"</li>
+          <li>Tell it what NOT to change if you want to keep something</li>
+          <li>Ask one thing at a time if the request is complex</li>
+          <li>If it's wrong, describe exactly what's still broken</li>
+        </ul>
+      </div>
+    </div>
+    <div class="dont-card">
+      <div class="dont-head">✗ DON'T — Weak Prompting</div>
+      <div class="dont-body">
+        <ul>
+          <li>Don't say "make it look better" — better how?</li>
+          <li>Don't say "add some cool stuff" — what stuff?</li>
+          <li>Don't paste partial code and ask it to fill gaps</li>
+          <li>Don't say "fix my code" without saying what's broken</li>
+          <li>Don't accept code you don't understand — ask why</li>
+          <li>Don't give up after one try — iterate and be specific</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="sub-heading">Git Quick Reference</div>
+  <table class="git-table">
+    <thead>
+      <tr><th>Command</th><th>What it does</th><th>When to use it</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>git add .</td><td>Stages all changed files for the next commit</td><td>Before every commit</td></tr>
+      <tr><td>git commit -m "message"</td><td>Creates a snapshot with a description</td><td>After every meaningful change</td></tr>
+      <tr><td>git push</td><td>Sends your commits to GitHub</td><td>When you want Pages to update</td></tr>
+      <tr><td>git status</td><td>Shows what files have changed since last commit</td><td>When you're not sure what's staged</td></tr>
+      <tr><td>git log --oneline</td><td>Shows your commit history in one line each</td><td>To review your progress</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sub-heading">When AI Gives You Bad Code</div>
+  <div class="info-box">
+    <div class="info-head">🔄 The Iteration Loop</div>
+    <ul>
+      <li><strong>Paste it, test it.</strong> Does it do what you asked? If yes, great. If no, keep going.</li>
+      <li><strong>Describe the problem exactly.</strong> Not "it doesn't work" — "the button exists but clicking it does nothing."</li>
+      <li><strong>Paste the broken code back.</strong> AI has no memory. It can't fix what it can't see.</li>
+      <li><strong>Try a different angle.</strong> Sometimes rephrasing the question gets a better result.</li>
+      <li><strong>Ask for an explanation.</strong> "Why did you do it that way?" teaches you more than just accepting the answer.</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p><strong>VibeCoding EMSI 2026</strong> · Kinkaid School · Instructor: Vladimir Lopez</p>
+</footer>
+
+</body>
+</html>
