@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Idea Tickets · VibeCoding EMSI 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#0f7e9b;--teal-dark:#0b5f77;
+  --teal-gradient:linear-gradient(160deg,#0d839f,#0b5f77);
+  --amber:#d67b19;--amber-light:#ffd9a6;
+  --surface-white:#ffffff;--surface-alt:#f7fcff;--surface-wash:#f0f8fb;
+  --border:#c8dbe3;--text-strong:#123140;--text-body:#4b6570;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:#f0f4f8;color:var(--text-strong);font-size:15px;line-height:1.5;}
+
+.nav{background:var(--teal-dark);border-bottom:4px solid var(--amber);padding:0 2rem;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:100;}
+.nav-brand{font-size:0.88rem;font-weight:700;color:#fff;padding:1rem 1.5rem 1rem 0;margin-right:1rem;border-right:1px solid rgba(255,255,255,0.15);white-space:nowrap;}
+.nav-brand span{color:var(--amber);}
+.nav-back{color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.72rem;font-weight:600;padding:0.4rem 0.75rem;border:1px solid rgba(255,255,255,0.2);border-radius:5px;transition:all 0.15s;}
+.nav-back:hover{color:#fff;border-color:rgba(255,255,255,0.5);}
+
+.hero{background:var(--teal-gradient);padding:2.8rem 2rem 2.4rem;}
+.hero-inner{max-width:900px;margin:0 auto;}
+.hero-eyebrow{font-size:0.62rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--amber-light);margin-bottom:0.5rem;}
+.hero-title{font-size:2rem;font-weight:700;color:#fff;line-height:1.15;margin-bottom:0.4rem;}
+.hero-rule{height:3px;background:linear-gradient(90deg,var(--amber),rgba(255,255,255,0.15));width:60px;margin:0.8rem 0 1rem;}
+.hero-sub{font-size:0.9rem;color:rgba(255,255,255,0.75);font-family:'IBM Plex Sans',sans-serif;max-width:560px;}
+
+.main{max-width:900px;margin:0 auto;padding:2.5rem 2rem 4rem;}
+.sub-heading{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal-dark);padding-bottom:0.4rem;border-bottom:2px solid rgba(15,126,155,0.2);margin:2.2rem 0 1.2rem;}
+
+/* Project tab buttons */
+.proj-tabs{display:flex;gap:0.75rem;margin-bottom:2rem;flex-wrap:wrap;}
+.proj-tab{padding:0.65rem 1.4rem;border-radius:7px;border:2px solid var(--border);background:#fff;font-size:0.8rem;font-weight:700;color:var(--text-body);cursor:pointer;transition:all 0.15s;font-family:'Inter',sans-serif;}
+.proj-tab:hover{border-color:var(--teal);color:var(--teal);}
+.proj-tab.active{background:var(--teal);border-color:var(--teal);color:#fff;}
+
+.proj-pane{display:none;}
+.proj-pane.active{display:block;}
+
+/* Ticket form */
+.ticket{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(12,54,68,0.08);margin-bottom:1.5rem;}
+.ticket-header{background:var(--teal-gradient);padding:1.2rem 1.6rem;display:flex;align-items:flex-start;justify-content:space-between;}
+.ticket-title-area{}
+.ticket-eyebrow{font-size:0.62rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:0.3rem;}
+.ticket-title{font-size:1.2rem;font-weight:700;color:#fff;}
+.ticket-badge{background:var(--amber);color:#fff;font-size:0.65rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:0.25rem 0.7rem;border-radius:4px;white-space:nowrap;margin-top:0.3rem;}
+.ticket-rule{height:2px;background:linear-gradient(90deg,var(--amber),rgba(255,255,255,0.2));margin:0;}
+.ticket-body{padding:1.6rem;}
+
+/* Field */
+.field{margin-bottom:1.4rem;}
+.field-label{display:block;font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal-dark);margin-bottom:0.5rem;}
+.field-input{width:100%;border:1.5px solid var(--border);border-radius:6px;padding:0.65rem 0.9rem;font-size:0.85rem;font-family:'IBM Plex Sans',sans-serif;color:var(--text-strong);background:var(--surface-alt);resize:vertical;outline:none;transition:border-color 0.15s;}
+.field-input:focus{border-color:var(--teal);background:#fff;}
+.field-hint{font-size:0.72rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;margin-top:0.35rem;line-height:1.4;}
+
+/* Checklist */
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-top:0.3rem;}
+@media(max-width:550px){.check-grid{grid-template-columns:1fr;}}
+.check-item{display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;font-family:'IBM Plex Sans',sans-serif;color:var(--text-body);padding:0.4rem 0.6rem;border:1.5px solid var(--border);border-radius:5px;background:var(--surface-alt);cursor:pointer;user-select:none;transition:all 0.12s;}
+.check-item:hover{border-color:var(--teal);background:var(--surface-wash);}
+.check-item input[type=checkbox]{accent-color:var(--teal);width:15px;height:15px;cursor:pointer;}
+
+/* Examples */
+.example-chips{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.5rem;}
+.chip{background:var(--surface-wash);border:1px solid var(--border);border-radius:20px;padding:0.25rem 0.75rem;font-size:0.75rem;color:var(--teal-dark);font-family:'IBM Plex Sans',sans-serif;cursor:pointer;transition:all 0.12s;}
+.chip:hover{background:var(--teal);color:#fff;border-color:var(--teal);}
+
+/* Gates */
+.gate-box{background:var(--surface-wash);border:1.5px solid var(--teal);border-left:5px solid var(--amber);border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin-bottom:1.5rem;}
+.gate-head{font-weight:700;color:var(--amber);font-size:0.82rem;margin-bottom:0.5rem;}
+.gate-box ul{padding-left:1.1rem;margin:0;}
+.gate-box li{font-size:0.82rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;line-height:1.7;}
+
+.info-box{border:1.5px solid var(--teal);border-radius:8px;background:var(--surface-wash);padding:1rem 1.2rem;margin-bottom:1.5rem;}
+.info-head{font-weight:700;color:var(--teal-dark);font-size:0.82rem;margin-bottom:0.4rem;}
+.info-box p,.info-box li{font-size:0.82rem;color:var(--text-body);line-height:1.6;font-family:'IBM Plex Sans',sans-serif;}
+.info-box ul{padding-left:1.2rem;margin-top:0.4rem;}
+
+footer{background:var(--teal-dark);border-top:4px solid var(--amber);padding:1.5rem 2rem;text-align:center;}
+footer p{font-size:0.72rem;color:rgba(255,255,255,0.5);font-family:'IBM Plex Sans',sans-serif;}
+footer strong{color:rgba(255,255,255,0.8);}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">Vibe<span>Coding</span> · EMSI 2026</div>
+  <a href="index.html" class="nav-back">← All Materials</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Projects · Phase 1 &amp; Phase 2</p>
+    <h1 class="hero-title">Idea Tickets</h1>
+    <div class="hero-rule"></div>
+    <p class="hero-sub">Before you build anything, you submit an idea ticket. Your instructor approves it — then you start. No ticket = no building. This prevents scope creep and keeps you on track.</p>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="gate-box">
+    <div class="gate-head">⛔ Approval Gates — Why These Exist</div>
+    <ul>
+      <li><strong>Phase 1 (Day 3):</strong> Idea ticket approved → then you start building your personal site</li>
+      <li><strong>Phase 2 (Day 9):</strong> Idea ticket approved by end of class → then you start building your interactive project</li>
+      <li>Ideas that are too big get scoped down. Ideas that are too vague get clarified. The ticket saves you from building the wrong thing.</li>
+    </ul>
+  </div>
+
+  <div class="proj-tabs">
+    <button class="proj-tab active" onclick="showProject('p1',this)">📁 Project 1 — Personal Website</button>
+    <button class="proj-tab" onclick="showProject('p2',this)">⚡ Project 2 — Interactive App</button>
+  </div>
+
+  <!-- PROJECT 1 -->
+  <div id="p1" class="proj-pane active">
+
+    <div class="info-box">
+      <div class="info-head">📁 Project 1 — Personal Website</div>
+      <p>A personal website about you. One or more HTML pages. Anything you want to share with the world — interests, skills, goals, creative work. Due Day 7 (June 17). Buffer day is June 18.</p>
+    </div>
+
+    <div class="ticket">
+      <div class="ticket-header">
+        <div class="ticket-title-area">
+          <div class="ticket-eyebrow">Phase 1 · Personal Website</div>
+          <div class="ticket-title">Project Idea Ticket</div>
+        </div>
+        <div class="ticket-badge">Submit Day 3</div>
+      </div>
+      <div class="ticket-rule"></div>
+      <div class="ticket-body">
+
+        <div class="field">
+          <label class="field-label">Your Name</label>
+          <input class="field-input" type="text" placeholder="First Last">
+        </div>
+
+        <div class="field">
+          <label class="field-label">Site Title / Name</label>
+          <input class="field-input" type="text" placeholder="e.g. Maria's Corner of the Internet">
+          <div class="field-hint">What is this site called? Give it a name, even if informal.</div>
+        </div>
+
+        <div class="field">
+          <label class="field-label">What is this site about? (2–3 sentences)</label>
+          <textarea class="field-input" rows="3" placeholder="Describe your site in plain English. Who is it for? What will a visitor find here?"></textarea>
+        </div>
+
+        <div class="field">
+          <label class="field-label">Sections / Pages you plan to include</label>
+          <div class="check-grid">
+            <label class="check-item"><input type="checkbox"> About me / bio</label>
+            <label class="check-item"><input type="checkbox"> My interests / hobbies</label>
+            <label class="check-item"><input type="checkbox"> Skills or achievements</label>
+            <label class="check-item"><input type="checkbox"> Projects / portfolio</label>
+            <label class="check-item"><input type="checkbox"> Favorite music / movies</label>
+            <label class="check-item"><input type="checkbox"> Goals / future plans</label>
+            <label class="check-item"><input type="checkbox"> Photo gallery</label>
+            <label class="check-item"><input type="checkbox"> Contact / social links</label>
+          </div>
+          <div class="field-hint">Check all that apply. Add your own below if none of these fit.</div>
+        </div>
+
+        <div class="field">
+          <label class="field-label">Anything else you want to include?</label>
+          <textarea class="field-input" rows="2" placeholder="Other sections, ideas, or features not listed above"></textarea>
+        </div>
+
+        <div class="field">
+          <label class="field-label">Visual Style — How should it look and feel?</label>
+          <textarea class="field-input" rows="2" placeholder="e.g. Dark background, neon green accents, clean and minimal. OR: Bright and colorful, fun, lots of photos."></textarea>
+          <div class="field-hint">Colors, mood, aesthetic. The more specific, the better the AI output.</div>
+        </div>
+
+        <div class="field">
+          <label class="field-label">One thing you are NOT sure how to do yet</label>
+          <textarea class="field-input" rows="2" placeholder="e.g. I don't know how to add a photo gallery. OR: I'm not sure how to make it look good on a phone."></textarea>
+          <div class="field-hint">Honesty here helps your instructor know where to focus support.</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /p1 -->
+
+  <!-- PROJECT 2 -->
+  <div id="p2" class="proj-pane">
+
+    <div class="info-box">
+      <div class="info-head">⚡ Project 2 — Interactive App</div>
+      <p>A single HTML file that does something interactive. The user clicks, types, or interacts — and something happens. Due Day 13 (June 29, Demo Day). Idea ticket due end of Day 9 (June 22).</p>
+    </div>
+
+    <div class="sub-heading">Approved Project Types</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0.75rem;margin-bottom:1.5rem;">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;box-shadow:0 2px 6px rgba(12,54,68,0.05);">
+        <div style="font-size:1.4rem;margin-bottom:0.35rem;">❓</div>
+        <div style="font-size:0.82rem;font-weight:700;color:var(--text-strong);">Quiz</div>
+        <div style="font-size:0.75rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;">Multiple choice questions, score tracking, feedback</div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;box-shadow:0 2px 6px rgba(12,54,68,0.05);">
+        <div style="font-size:1.4rem;margin-bottom:0.35rem;">🎮</div>
+        <div style="font-size:0.82rem;font-weight:700;color:var(--text-strong);">Game</div>
+        <div style="font-size:0.75rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;">Clicker, reflex game, simple browser game</div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;box-shadow:0 2px 6px rgba(12,54,68,0.05);">
+        <div style="font-size:1.4rem;margin-bottom:0.35rem;">🎲</div>
+        <div style="font-size:0.82rem;font-weight:700;color:var(--text-strong);">Random Generator</div>
+        <div style="font-size:0.75rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;">Button → random output from a curated list</div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;box-shadow:0 2px 6px rgba(12,54,68,0.05);">
+        <div style="font-size:1.4rem;margin-bottom:0.35rem;">📖</div>
+        <div style="font-size:0.82rem;font-weight:700;color:var(--text-strong);">Interactive Story</div>
+        <div style="font-size:0.75rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;">Choose-your-own-adventure with branching paths</div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;box-shadow:0 2px 6px rgba(12,54,68,0.05);">
+        <div style="font-size:1.4rem;margin-bottom:0.35rem;">🛠️</div>
+        <div style="font-size:0.82rem;font-weight:700;color:var(--text-strong);">Tool / Calculator</div>
+        <div style="font-size:0.75rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;">User inputs → meaningful computed output</div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;box-shadow:0 2px 6px rgba(12,54,68,0.05);">
+        <div style="font-size:1.4rem;margin-bottom:0.35rem;">💡</div>
+        <div style="font-size:0.82rem;font-weight:700;color:var(--text-strong);">Your Idea</div>
+        <div style="font-size:0.75rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;">Anything interactive that fits in one HTML file</div>
+      </div>
+    </div>
+
+    <div class="ticket">
+      <div class="ticket-header">
+        <div class="ticket-title-area">
+          <div class="ticket-eyebrow">Phase 2 · Interactive App</div>
+          <div class="ticket-title">Project Idea Ticket</div>
+        </div>
+        <div class="ticket-badge">Submit Day 9</div>
+      </div>
+      <div class="ticket-rule"></div>
+      <div class="ticket-body">
+
+        <div class="field">
+          <label class="field-label">Your Name</label>
+          <input class="field-input" type="text" placeholder="First Last">
+        </div>
+
+        <div class="field">
+          <label class="field-label">Project Name</label>
+          <input class="field-input" type="text" placeholder="e.g. Houston Trivia Challenge">
+        </div>
+
+        <div class="field">
+          <label class="field-label">Project Type</label>
+          <select class="field-input">
+            <option value="">— Select a type —</option>
+            <option>Quiz</option>
+            <option>Game (clicker / reflex)</option>
+            <option>Random Generator</option>
+            <option>Interactive Story</option>
+            <option>Tool / Calculator</option>
+            <option>Other (describe below)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="field-label">Describe what your app does (2–4 sentences)</label>
+          <textarea class="field-input" rows="4" placeholder="What does the user do? What happens when they interact? What is the goal or outcome?"></textarea>
+          <div class="field-hint">Example: "A trivia quiz about Houston sports. The user picks answers to 10 questions and sees their score. Each question shows if they were right or wrong before moving on."</div>
+        </div>
+
+        <div class="field">
+          <label class="field-label">What will the user click, type, or choose?</label>
+          <textarea class="field-input" rows="2" placeholder="Describe the interaction clearly — buttons, dropdowns, text input, drag, etc."></textarea>
+        </div>
+
+        <div class="field">
+          <label class="field-label">Topic / Theme</label>
+          <input class="field-input" type="text" placeholder="e.g. Houston Rockets, anime, cooking, space exploration">
+          <div class="field-hint">The more specific the topic, the more personality the project has.</div>
+          <div class="example-chips">
+            <span class="chip">Sports</span>
+            <span class="chip">Music</span>
+            <span class="chip">Movies / TV</span>
+            <span class="chip">Science</span>
+            <span class="chip">Food</span>
+            <span class="chip">Gaming</span>
+            <span class="chip">History</span>
+            <span class="chip">My interests</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field-label">Minimum Viable Version (what counts as "done"?)</label>
+          <textarea class="field-input" rows="3" placeholder="Describe the simplest version that would still be worth demoing on Day 13. Not your dream version — the minimum workable version."></textarea>
+          <div class="field-hint">This is your checkpoint. If you ship at least this, you pass.</div>
+        </div>
+
+        <div class="field">
+          <label class="field-label">Stretch Goal (if you finish early)</label>
+          <textarea class="field-input" rows="2" placeholder="What feature would you add if the basics are done and you have extra time?"></textarea>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /p2 -->
+
+</div>
+
+<footer>
+  <p><strong>VibeCoding EMSI 2026</strong> · Kinkaid School · Instructor: Vladimir Lopez</p>
+</footer>
+
+<script>
+function showProject(id, btn) {
+  document.querySelectorAll('.proj-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.proj-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+
+</body>
+</html>

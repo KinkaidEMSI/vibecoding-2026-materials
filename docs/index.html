@@ -3,126 +3,248 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VibeCoding 2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<title>VibeCoding EMSI 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg: #090E1A; --surface: #0F1829; --border: #1B2D48;
-  --text: #B8C8DC; --bright: #E8F0FA; --dim: #4A607A;
-  --cyan: #22D3EE; --green: #4ADE80; --yellow: #FCD34D; --red: #F87171;
-  --mono: 'Space Mono', monospace; --sans: 'DM Sans', sans-serif;
+  --teal:          #0f7e9b;
+  --teal-dark:     #0b5f77;
+  --teal-gradient: linear-gradient(160deg, #0d839f, #0b5f77);
+  --amber:         #d67b19;
+  --amber-light:   #ffd9a6;
+  --surface-white: #ffffff;
+  --surface-alt:   #f7fcff;
+  --surface-wash:  #f0f8fb;
+  --border:        #c8dbe3;
+  --text-strong:   #123140;
+  --text-body:     #4b6570;
 }
-body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.6; min-height: 100vh; }
-nav { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 24px; display: flex; align-items: center; gap: 20px; height: 52px; flex-wrap: wrap; }
-.logo { font-family: var(--mono); font-size: 12px; color: var(--cyan); text-decoration: none; letter-spacing: .04em; }
-nav a { font-size: 14px; color: var(--dim); text-decoration: none; transition: color .15s; }
-nav a:hover { color: var(--bright); }
-main { max-width: 800px; margin: 0 auto; padding: 48px 24px 80px; }
-h1 { font-family: var(--mono); font-size: 1.75rem; color: var(--bright); margin-bottom: 8px; line-height: 1.2; }
-h2 { font-family: var(--mono); font-size: .8rem; color: var(--cyan); margin: 40px 0 14px; letter-spacing: .1em; }
-h3 { font-size: 1rem; font-weight: 600; color: var(--bright); margin-bottom: 6px; }
-p { margin-bottom: 12px; }
-p:last-child { margin-bottom: 0; }
-.sub { color: var(--dim); font-size: 14px; margin-bottom: 36px; }
-.card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 12px; }
-a.clink { text-decoration: none; display: block; color: inherit; }
-a.clink .card { transition: border-color .15s; }
-a.clink .card:hover { border-color: rgba(34,211,238,.5); }
-table { width: 100%; border-collapse: collapse; }
-th { text-align: left; padding: 8px 12px; color: var(--cyan); font-family: var(--mono); font-size: 11px; letter-spacing: .05em; border-bottom: 1px solid var(--border); }
-td { padding: 10px 12px; font-size: 15px; }
-tr + tr td { border-top: 1px solid var(--border); }
-@media (max-width: 600px) { h1 { font-size: 1.4rem; } main { padding: 28px 16px 60px; } }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:#f0f4f8;color:var(--text-strong);font-size:15px;line-height:1.5;}
+
+/* NAV */
+.nav{background:var(--teal-dark);border-bottom:4px solid var(--amber);padding:0 2rem;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:100;}
+.nav-brand{font-size:0.88rem;font-weight:700;color:#fff;padding:1rem 1.5rem 1rem 0;margin-right:1rem;border-right:1px solid rgba(255,255,255,0.15);white-space:nowrap;letter-spacing:0.02em;}
+.nav-brand span{color:var(--amber);}
+.nav-links{display:flex;gap:0;}
+.nav-link{color:rgba(255,255,255,0.55);text-decoration:none;font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:1.1rem 0.9rem;border-bottom:3px solid transparent;margin-bottom:-4px;transition:all 0.15s;white-space:nowrap;}
+.nav-link:hover{color:rgba(255,255,255,0.85);}
+
+/* HERO */
+.hero{background:var(--teal-gradient);padding:3.5rem 2rem 3rem;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:320px;height:320px;border-radius:50%;background:rgba(255,255,255,0.04);pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:-40px;left:10%;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,0.03);pointer-events:none;}
+.hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1;}
+.hero-eyebrow{font-size:0.62rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--amber-light);margin-bottom:0.6rem;}
+.hero-title{font-size:2.4rem;font-weight:700;color:#fff;line-height:1.1;margin-bottom:0.5rem;}
+.hero-title span{color:var(--amber);}
+.hero-sub{font-size:0.95rem;color:rgba(255,255,255,0.75);font-family:'IBM Plex Sans',sans-serif;margin-bottom:2rem;max-width:560px;}
+.hero-rule{height:3px;background:linear-gradient(90deg,var(--amber) 0%,rgba(255,255,255,0.2) 100%);width:80px;margin-bottom:2rem;}
+.stat-row{display:flex;gap:2.5rem;flex-wrap:wrap;}
+.stat{display:flex;flex-direction:column;}
+.stat-val{font-size:1.6rem;font-weight:700;color:#fff;font-family:'IBM Plex Mono',monospace;line-height:1;}
+.stat-label{font-size:0.65rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-top:0.25rem;}
+
+/* MAIN */
+.main{max-width:960px;margin:0 auto;padding:2.5rem 2rem 4rem;}
+
+/* SECTION */
+.eyebrow{font-size:0.62rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal-dark);margin-bottom:0.3rem;}
+.section-title{font-size:1.4rem;font-weight:700;color:var(--text-strong);margin-bottom:0.35rem;line-height:1.2;}
+.section-sub{font-size:0.88rem;color:var(--text-body);margin-bottom:1.8rem;font-family:'IBM Plex Sans',sans-serif;}
+.sub-heading{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal-dark);padding-bottom:0.4rem;border-bottom:2px solid rgba(15,126,155,0.2);margin:2rem 0 1.2rem;}
+
+/* CARDS GRID */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-bottom:2rem;}
+.card{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(12,54,68,0.06);transition:box-shadow 0.15s,transform 0.15s;text-decoration:none;display:flex;flex-direction:column;}
+.card:hover{box-shadow:0 6px 20px rgba(12,54,68,0.12);transform:translateY(-2px);}
+.card-header{background:var(--teal-gradient);padding:1.1rem 1.2rem;display:flex;align-items:center;gap:0.7rem;}
+.card-icon{font-size:1.4rem;line-height:1;}
+.card-label{font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.75);}
+.card-body{padding:1rem 1.2rem;flex:1;}
+.card-title{font-size:0.92rem;font-weight:700;color:var(--text-strong);margin-bottom:0.35rem;}
+.card-desc{font-size:0.8rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;line-height:1.5;}
+.card-footer{padding:0.6rem 1.2rem;border-top:1px solid var(--border);background:var(--surface-alt);}
+.card-link{font-size:0.72rem;font-weight:600;color:var(--teal);letter-spacing:0.04em;display:flex;align-items:center;gap:0.3rem;}
+.card-link::after{content:'→';}
+
+/* PHASE TABLE */
+.phase-table{width:100%;border-collapse:collapse;font-size:0.82rem;margin-bottom:1.5rem;}
+.phase-table th{background:var(--teal);color:#fff;padding:0.55rem 0.9rem;text-align:left;font-size:0.68rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;}
+.phase-table td{padding:0.55rem 0.9rem;border-bottom:1px solid var(--border);vertical-align:top;font-family:'IBM Plex Sans',sans-serif;color:var(--text-body);}
+.phase-table tr:nth-child(even) td{background:var(--surface-alt);}
+.phase-table td:first-child{font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:var(--teal);white-space:nowrap;font-weight:600;}
+.phase-label{display:inline-block;padding:0.15rem 0.5rem;border-radius:4px;font-size:0.68rem;font-weight:700;letter-spacing:0.04em;background:var(--surface-wash);color:var(--teal-dark);border:1px solid var(--border);}
+.phase-label.amber{background:rgba(214,123,25,0.1);color:var(--amber);border-color:rgba(214,123,25,0.3);}
+
+/* INFO BOX */
+.info-box{border:1.5px solid var(--teal);border-radius:8px;background:var(--surface-wash);padding:1rem 1.2rem;margin-bottom:1.5rem;}
+.info-head{font-weight:700;color:var(--teal-dark);font-size:0.82rem;margin-bottom:0.4rem;}
+.info-box p,.info-box li{font-size:0.82rem;color:var(--text-body);line-height:1.6;font-family:'IBM Plex Sans',sans-serif;}
+.info-box ul{padding-left:1.2rem;margin-top:0.4rem;}
+
+/* WORKFLOW */
+.workflow{display:flex;align-items:center;gap:0;flex-wrap:wrap;background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:1.5rem;}
+.wf-step{flex:1;min-width:120px;padding:1rem;text-align:center;position:relative;}
+.wf-step:not(:last-child)::after{content:'→';position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--teal);font-size:1.1rem;font-weight:700;z-index:1;}
+.wf-num{width:28px;height:28px;border-radius:50%;background:var(--teal);color:#fff;font-size:0.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 0.4rem;}
+.wf-text{font-size:0.75rem;font-weight:600;color:var(--text-strong);}
+.wf-sub{font-size:0.68rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;margin-top:0.15rem;}
+
+/* FOOTER */
+footer{background:var(--teal-dark);border-top:4px solid var(--amber);padding:1.5rem 2rem;text-align:center;}
+footer p{font-size:0.72rem;color:rgba(255,255,255,0.5);font-family:'IBM Plex Sans',sans-serif;}
+footer strong{color:rgba(255,255,255,0.8);}
 </style>
 </head>
 <body>
-<nav>
-  <a href="index.html" class="logo">VIBECODING 2026</a>
-  <a href="day1.html">Day 1</a>
-  <a href="ai-guide.html">AI Guide</a>
-  <a href="project-tickets.html">Projects</a>
-  <a href="git-card.html">Git</a>
+
+<nav class="nav">
+  <div class="nav-brand">Vibe<span>Coding</span> · EMSI 2026</div>
+  <div class="nav-links">
+    <a href="day1-onboarding.html" class="nav-link">Day 1 Setup</a>
+    <a href="day2-debug-exercise.html" class="nav-link">Debug Lab</a>
+    <a href="ai-cheatsheet.html" class="nav-link">AI Cheat Sheet</a>
+    <a href="idea-tickets.html" class="nav-link">Idea Tickets</a>
+    <a href="../TEACHER-MANUAL.html" class="nav-link">Teacher Manual</a>
+  </div>
 </nav>
-<main>
-  <h1>VibeCoding 2026</h1>
-  <p class="sub">Kinkaid EMSI &middot; Jun 8&ndash;29 &middot; 13 sessions &middot; 3 projects</p>
 
-  <h2>MATERIALS</h2>
-
-  <a href="day1.html" class="clink">
-    <div class="card">
-      <h3>Day 1 Setup Guide &nbsp;<span style="display:inline-block;font-size:11px;font-family:var(--mono);padding:2px 8px;border-radius:4px;background:rgba(252,211,77,.1);color:var(--yellow);border:1px solid rgba(252,211,77,.25)">40 min</span></h3>
-      <p style="font-size:15px">GitHub account &rarr; Codespace &rarr; Gemini AI &rarr; first page &rarr; first push.</p>
+<div class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">EMSI Summer Program · Kinkaid School · June 2026</p>
+    <h1 class="hero-title">You don't write code.<br>You <span>direct</span> it.</h1>
+    <div class="hero-rule"></div>
+    <p class="hero-sub">VibeCoding is a 13-session course where you ship real web projects by prompting AI — not by memorizing syntax. Your job is to think, design, and iterate.</p>
+    <div class="stat-row">
+      <div class="stat"><span class="stat-val">13</span><span class="stat-label">Sessions</span></div>
+      <div class="stat"><span class="stat-val">2</span><span class="stat-label">Projects</span></div>
+      <div class="stat"><span class="stat-val">Jun 8</span><span class="stat-label">Day 1</span></div>
+      <div class="stat"><span class="stat-val">Jun 29</span><span class="stat-label">Demo Day</span></div>
     </div>
-  </a>
+  </div>
+</div>
 
-  <a href="ai-guide.html" class="clink">
-    <div class="card">
-      <h3>AI Guide</h3>
-      <p style="font-size:15px">How to use Gemini Code Assist. Prompts that work. What to do when AI gives you garbage.</p>
-    </div>
-  </a>
+<div class="main">
 
-  <a href="project-tickets.html" class="clink">
-    <div class="card">
-      <h3>Project Tickets</h3>
-      <p style="font-size:15px">Idea starters for all three projects: personal page, interactive page, free project.</p>
-    </div>
-  </a>
+  <p class="eyebrow">Course Materials</p>
+  <h2 class="section-title">Everything you need, one click away.</h2>
+  <p class="section-sub">Use these resources throughout the course. They're always live at this URL.</p>
 
-  <a href="git-card.html" class="clink">
-    <div class="card">
-      <h3>Git Cheat Sheet</h3>
-      <p style="font-size:15px">3 commands. Print it, memorize it, use it every class.</p>
-    </div>
-  </a>
-
-  <h2>SCHEDULE</h2>
-  <div class="card">
-    <table>
-      <thead><tr><th>PROJECT</th><th>DAYS</th><th>DATES</th><th>GOAL</th></tr></thead>
-      <tbody>
-        <tr>
-          <td><strong style="color:var(--bright)">P1 &mdash; Personal Page</strong></td>
-          <td style="color:var(--dim);font-family:var(--mono);font-size:13px">1&ndash;3</td>
-          <td style="color:var(--dim)">Jun 8&ndash;10</td>
-          <td>A page about you. Ship it.</td>
-        </tr>
-        <tr>
-          <td><strong style="color:var(--bright)">P2 &mdash; Interactive</strong></td>
-          <td style="color:var(--dim);font-family:var(--mono);font-size:13px">4&ndash;8</td>
-          <td style="color:var(--dim)">Jun 11&ndash;18</td>
-          <td>Something that does something. Quiz, game, generator.</td>
-        </tr>
-        <tr>
-          <td><strong style="color:var(--bright)">P3 &mdash; Free Project</strong></td>
-          <td style="color:var(--dim);font-family:var(--mono);font-size:13px">9&ndash;12</td>
-          <td style="color:var(--dim)">Jun 22&ndash;25</td>
-          <td>Your idea, your call.</td>
-        </tr>
-        <tr>
-          <td><strong style="color:var(--bright)">Demo Day</strong></td>
-          <td style="color:var(--dim);font-family:var(--mono);font-size:13px">13</td>
-          <td style="color:var(--dim)">Jun 29</td>
-          <td>3-min live demo from your Pages URL.</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="cards">
+    <a href="day1-onboarding.html" class="card">
+      <div class="card-header"><span class="card-icon">🚀</span><span class="card-label">Day 1</span></div>
+      <div class="card-body">
+        <div class="card-title">Setup & Onboarding</div>
+        <div class="card-desc">GitHub account → Codespace → first live URL. Step-by-step.</div>
+      </div>
+      <div class="card-footer"><span class="card-link">Open guide</span></div>
+    </a>
+    <a href="day2-debug-exercise.html" class="card">
+      <div class="card-header"><span class="card-icon">🐛</span><span class="card-label">Day 2</span></div>
+      <div class="card-body">
+        <div class="card-title">Debug Exercise</div>
+        <div class="card-desc">Fix the broken HTML file. Learn the commit loop the hard way.</div>
+      </div>
+      <div class="card-footer"><span class="card-link">Open exercise</span></div>
+    </a>
+    <a href="ai-cheatsheet.html" class="card">
+      <div class="card-header"><span class="card-icon">🤖</span><span class="card-label">Reference</span></div>
+      <div class="card-body">
+        <div class="card-title">AI Cheat Sheet</div>
+        <div class="card-desc">Prompt patterns that work. How to get complete files, not fragments.</div>
+      </div>
+      <div class="card-footer"><span class="card-link">Open cheat sheet</span></div>
+    </a>
+    <a href="idea-tickets.html" class="card">
+      <div class="card-header"><span class="card-icon">💡</span><span class="card-label">Projects</span></div>
+      <div class="card-body">
+        <div class="card-title">Idea Tickets</div>
+        <div class="card-desc">Project proposal templates for your Portfolio and Interactive App.</div>
+      </div>
+      <div class="card-footer"><span class="card-link">Open tickets</span></div>
+    </a>
   </div>
 
-  <h2>HOW GRADING WORKS</h2>
-  <div class="card">
-    <p style="margin-bottom:16px"><strong style="color:var(--bright)">Show up, commit your work, ship your project = full credit.</strong> There is no code quality rubric. The grade is about whether you built something and pushed it.</p>
-    <table>
-      <tbody>
-        <tr><td>Daily commits (show up + push)</td><td style="text-align:right;font-family:var(--mono);color:var(--cyan)">20%</td></tr>
-        <tr><td>3 shipped projects</td><td style="text-align:right;font-family:var(--mono);color:var(--cyan)">70%</td></tr>
-        <tr><td>Demo Day</td><td style="text-align:right;font-family:var(--mono);color:var(--cyan)">10%</td></tr>
-      </tbody>
-    </table>
+  <div class="sub-heading">Course Schedule</div>
+  <table class="phase-table">
+    <thead>
+      <tr><th>Days</th><th>Dates</th><th>Phase</th><th>What Happens</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1–2</td>
+        <td>Jun 8–9</td>
+        <td><span class="phase-label">Phase 0</span></td>
+        <td><strong>Git Onboarding</strong> — GitHub account, Codespace, first commit, Pages live</td>
+      </tr>
+      <tr>
+        <td>3–8</td>
+        <td>Jun 10–18</td>
+        <td><span class="phase-label">Phase 1</span></td>
+        <td><strong>Personal Website</strong> — Idea ticket, build, CSS polish, peer feedback, submit</td>
+      </tr>
+      <tr>
+        <td>—</td>
+        <td>Jun 19</td>
+        <td><span class="phase-label amber">OFF</span></td>
+        <td>Juneteenth — no class</td>
+      </tr>
+      <tr>
+        <td>9–12</td>
+        <td>Jun 22–25</td>
+        <td><span class="phase-label">Phase 2</span></td>
+        <td><strong>Interactive Project</strong> — Quiz, game, generator, or clicker — single HTML file</td>
+      </tr>
+      <tr>
+        <td>13</td>
+        <td>Jun 29</td>
+        <td><span class="phase-label amber">Demo Day</span></td>
+        <td><strong>3-min live demo</strong> from your Pages URL + reflection</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="sub-heading">The Submission Workflow</div>
+  <div class="workflow">
+    <div class="wf-step">
+      <div class="wf-num">1</div>
+      <div class="wf-text">Build in Codespace</div>
+      <div class="wf-sub">VS Code in browser</div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-num">2</div>
+      <div class="wf-text">Commit + Push</div>
+      <div class="wf-sub">git add / commit / push</div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-num">3</div>
+      <div class="wf-text">Pages Deploys</div>
+      <div class="wf-sub">Auto — ~60 seconds</div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-num">4</div>
+      <div class="wf-text">Submit URL</div>
+      <div class="wf-sub">Google Classroom</div>
+    </div>
   </div>
-</main>
+
+  <div class="sub-heading">How Grading Works</div>
+  <div class="info-box">
+    <div class="info-head">📋 Participation-Based — Ship and Commit = Full Credit</div>
+    <ul>
+      <li><strong>20%</strong> — Git workflow: at least one meaningful commit per session</li>
+      <li><strong>35%</strong> — Personal website live on GitHub Pages with ≥3 commits</li>
+      <li><strong>35%</strong> — Interactive project live on GitHub Pages with ≥3 commits</li>
+      <li><strong>10%</strong> — Demo Day: 3-minute live demo + reflection submitted</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p><strong>VibeCoding EMSI 2026</strong> · Kinkaid School · Instructor: Vladimir Lopez</p>
+</footer>
+
 </body>
 </html>
