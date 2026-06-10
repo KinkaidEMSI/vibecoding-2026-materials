@@ -7,81 +7,80 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --teal:#0f7e9b;--teal-dark:#0b5f77;
-  --teal-gradient:linear-gradient(160deg,#0d839f,#0b5f77);
-  --amber:#d67b19;--amber-light:#ffd9a6;
-  --surface-white:#ffffff;--surface-alt:#f7fcff;--surface-wash:#f0f8fb;
-  --border:#c8dbe3;--text-strong:#123140;--text-body:#4b6570;
+  --gold:#FFC61E;--gold-dark:#E5A800;--gold-light:#FFF9E0;
+  --purple:#59118E;--purple-dark:#3d0a66;--purple-light:#7B2FBE;--purple-pale:#F3EAFB;
+  --dark:#1A1A1A;--mid:#555;--light:#F8F8F8;--border:#E0E0E0;--white:#fff;
+  --green:#1A7F4B;--green-bg:#EDFAF3;--red-bg:#FDF2F2;--red:#C0392B;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Inter',sans-serif;background:#f0f4f8;color:var(--text-strong);font-size:15px;line-height:1.5;}
+body{font-family:'Inter',sans-serif;background:var(--white);color:var(--dark);font-size:15px;line-height:1.5;}
 
-.nav{background:var(--teal-dark);border-bottom:4px solid var(--amber);padding:0 2rem;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:100;}
+.nav{background:var(--purple-dark);border-bottom:4px solid var(--gold);padding:0 2rem;display:flex;align-items:center;gap:0;position:sticky;top:0;z-index:100;}
 .nav-brand{font-size:0.88rem;font-weight:700;color:#fff;padding:1rem 1.5rem 1rem 0;margin-right:1rem;border-right:1px solid rgba(255,255,255,0.15);white-space:nowrap;}
-.nav-brand span{color:var(--amber);}
+.nav-brand span{color:var(--gold);}
 .nav-back{color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.72rem;font-weight:600;padding:0.4rem 0.75rem;border:1px solid rgba(255,255,255,0.2);border-radius:5px;transition:all 0.15s;}
 .nav-back:hover{color:#fff;border-color:rgba(255,255,255,0.5);}
 
-.hero{background:var(--teal-gradient);padding:2.8rem 2rem 2.4rem;}
-.hero-inner{max-width:900px;margin:0 auto;}
-.hero-eyebrow{font-size:0.62rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--amber-light);margin-bottom:0.5rem;}
+.hero{background:var(--purple);padding:2.8rem 2rem 2.4rem;}
+.hero-inner{max-width:1100px;margin:0 auto;}
+.hero-eyebrow{font-size:0.62rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,198,30,0.85);margin-bottom:0.5rem;}
 .hero-title{font-size:2rem;font-weight:700;color:#fff;line-height:1.15;margin-bottom:0.4rem;}
-.hero-rule{height:3px;background:linear-gradient(90deg,var(--amber),rgba(255,255,255,0.15));width:60px;margin:0.8rem 0 1rem;}
+.hero-rule{height:3px;background:linear-gradient(90deg,var(--gold),rgba(255,255,255,0.15));width:60px;margin:0.8rem 0 1rem;}
 .hero-sub{font-size:0.9rem;color:rgba(255,255,255,0.75);font-family:'IBM Plex Sans',sans-serif;max-width:560px;}
 
-.main{max-width:900px;margin:0 auto;padding:2.5rem 2rem 4rem;}
-.sub-heading{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal-dark);padding-bottom:0.4rem;border-bottom:2px solid rgba(15,126,155,0.2);margin:2.2rem 0 1.2rem;}
+.main{max-width:1100px;margin:0 auto;padding:2.5rem 2rem 4rem;}
+.sub-heading{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple-dark);padding-bottom:0.4rem;border-bottom:2px solid rgba(89,17,142,0.2);margin:2.2rem 0 1.2rem;}
 
 /* Project tab buttons */
 .proj-tabs{display:flex;gap:0.75rem;margin-bottom:2rem;flex-wrap:wrap;}
-.proj-tab{padding:0.65rem 1.4rem;border-radius:7px;border:2px solid var(--border);background:#fff;font-size:0.8rem;font-weight:700;color:var(--text-body);cursor:pointer;transition:all 0.15s;font-family:'Inter',sans-serif;}
-.proj-tab:hover{border-color:var(--teal);color:var(--teal);}
-.proj-tab.active{background:var(--teal);border-color:var(--teal);color:#fff;}
+.proj-tab{padding:0.65rem 1.4rem;border-radius:7px;border:2px solid var(--border);background:#fff;font-size:0.8rem;font-weight:700;color:var(--mid);cursor:pointer;transition:all 0.15s;font-family:'Inter',sans-serif;}
+.proj-tab:hover{border-color:var(--purple);color:var(--purple);}
+.proj-tab.active{background:var(--purple);border-color:var(--purple);color:#fff;}
 
 .proj-pane{display:none;}
 .proj-pane.active{display:block;}
 
 /* Ticket form */
-.ticket{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(12,54,68,0.08);margin-bottom:1.5rem;}
-.ticket-header{background:var(--teal-gradient);padding:1.2rem 1.6rem;display:flex;align-items:flex-start;justify-content:space-between;}
+.ticket{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 4px 16px rgba(89,17,142,0.08);margin-bottom:1.5rem;}
+.ticket-header{background:var(--purple);padding:1.2rem 1.6rem;display:flex;align-items:flex-start;justify-content:space-between;}
 .ticket-title-area{}
 .ticket-eyebrow{font-size:0.62rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:0.3rem;}
 .ticket-title{font-size:1.2rem;font-weight:700;color:#fff;}
-.ticket-badge{background:var(--amber);color:#fff;font-size:0.65rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:0.25rem 0.7rem;border-radius:4px;white-space:nowrap;margin-top:0.3rem;}
-.ticket-rule{height:2px;background:linear-gradient(90deg,var(--amber),rgba(255,255,255,0.2));margin:0;}
+.ticket-badge{background:var(--gold);color:#fff;font-size:0.65rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:0.25rem 0.7rem;border-radius:4px;white-space:nowrap;margin-top:0.3rem;}
+.ticket-rule{height:2px;background:linear-gradient(90deg,var(--gold),rgba(255,255,255,0.2));margin:0;}
 .ticket-body{padding:1.6rem;}
 
 /* Field */
 .field{margin-bottom:1.4rem;}
-.field-label{display:block;font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal-dark);margin-bottom:0.5rem;}
-.field-input{width:100%;border:1.5px solid var(--border);border-radius:6px;padding:0.65rem 0.9rem;font-size:0.85rem;font-family:'IBM Plex Sans',sans-serif;color:var(--text-strong);background:var(--surface-alt);resize:vertical;outline:none;transition:border-color 0.15s;}
-.field-input:focus{border-color:var(--teal);background:#fff;}
-.field-hint{font-size:0.72rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;margin-top:0.35rem;line-height:1.4;}
+.field-label{display:block;font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--purple-dark);margin-bottom:0.5rem;}
+.field-input{width:100%;border:1.5px solid var(--border);border-radius:6px;padding:0.65rem 0.9rem;font-size:0.85rem;font-family:'IBM Plex Sans',sans-serif;color:var(--dark);background:var(--light);resize:vertical;outline:none;transition:border-color 0.15s;}
+.field-input:focus{border-color:var(--purple);background:#fff;}
+.field-hint{font-size:0.72rem;color:var(--mid);font-family:'IBM Plex Sans',sans-serif;margin-top:0.35rem;line-height:1.4;}
 
 /* Checklist */
 .check-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-top:0.3rem;}
 @media(max-width:550px){.check-grid{grid-template-columns:1fr;}}
-.check-item{display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;font-family:'IBM Plex Sans',sans-serif;color:var(--text-body);padding:0.4rem 0.6rem;border:1.5px solid var(--border);border-radius:5px;background:var(--surface-alt);cursor:pointer;user-select:none;transition:all 0.12s;}
-.check-item:hover{border-color:var(--teal);background:var(--surface-wash);}
-.check-item input[type=checkbox]{accent-color:var(--teal);width:15px;height:15px;cursor:pointer;}
+.check-item{display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;font-family:'IBM Plex Sans',sans-serif;color:var(--mid);padding:0.4rem 0.6rem;border:1.5px solid var(--border);border-radius:5px;background:var(--light);cursor:pointer;user-select:none;transition:all 0.12s;}
+.check-item:hover{border-color:var(--purple);background:var(--purple-pale);}
+.check-item input[type=checkbox]{accent-color:var(--purple);width:15px;height:15px;cursor:pointer;}
 
 /* Examples */
 .example-chips{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.5rem;}
-.chip{background:var(--surface-wash);border:1px solid var(--border);border-radius:20px;padding:0.25rem 0.75rem;font-size:0.75rem;color:var(--teal-dark);font-family:'IBM Plex Sans',sans-serif;cursor:pointer;transition:all 0.12s;}
-.chip:hover{background:var(--teal);color:#fff;border-color:var(--teal);}
+.chip{background:var(--purple-pale);border:1px solid var(--border);border-radius:20px;padding:0.25rem 0.75rem;font-size:0.75rem;color:var(--purple-dark);font-family:'IBM Plex Sans',sans-serif;cursor:pointer;transition:all 0.12s;}
+.chip:hover{background:var(--purple);color:#fff;border-color:var(--purple);}
 
 /* Gates */
-.gate-box{background:var(--surface-wash);border:1.5px solid var(--teal);border-left:5px solid var(--amber);border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin-bottom:1.5rem;}
-.gate-head{font-weight:700;color:var(--amber);font-size:0.82rem;margin-bottom:0.5rem;}
+.gate-box{background:var(--purple-pale);border:1.5px solid var(--purple);border-left:5px solid var(--gold);border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin-bottom:1.5rem;}
+.gate-head{font-weight:700;color:var(--gold);font-size:0.82rem;margin-bottom:0.5rem;}
 .gate-box ul{padding-left:1.1rem;margin:0;}
-.gate-box li{font-size:0.82rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;line-height:1.7;}
+.gate-box li{font-size:0.82rem;color:var(--mid);font-family:'IBM Plex Sans',sans-serif;line-height:1.7;}
 
-.info-box{border:1.5px solid var(--teal);border-radius:8px;background:var(--surface-wash);padding:1rem 1.2rem;margin-bottom:1.5rem;}
-.info-head{font-weight:700;color:var(--teal-dark);font-size:0.82rem;margin-bottom:0.4rem;}
-.info-box p,.info-box li{font-size:0.82rem;color:var(--text-body);line-height:1.6;font-family:'IBM Plex Sans',sans-serif;}
+.info-box{border:1.5px solid var(--purple);border-radius:8px;background:var(--purple-pale);padding:1rem 1.2rem;margin-bottom:1.5rem;}
+.info-head{font-weight:700;color:var(--purple-dark);font-size:0.82rem;margin-bottom:0.4rem;}
+.info-box p,.info-box li{font-size:0.82rem;color:var(--mid);line-height:1.6;font-family:'IBM Plex Sans',sans-serif;}
 .info-box ul{padding-left:1.2rem;margin-top:0.4rem;}
 
-footer{background:var(--teal-dark);border-top:4px solid var(--amber);padding:1.5rem 2rem;text-align:center;}
+footer{background:var(--purple-dark);border-top:4px solid var(--gold);padding:1.5rem 2rem;text-align:center;}
 footer p{font-size:0.72rem;color:rgba(255,255,255,0.5);font-family:'IBM Plex Sans',sans-serif;}
 footer strong{color:rgba(255,255,255,0.8);}
 </style>
@@ -200,35 +199,35 @@ footer strong{color:rgba(255,255,255,0.8);}
 
     <div class="sub-heading">Approved Project Types</div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0.75rem;margin-bottom:1.5rem;">
-      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;box-shadow:0 2px 6px rgba(12,54,68,0.05);">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;box-shadow:0 2px 6px rgba(89,17,142,0.05);">
         <div style="font-size:1.4rem;margin-bottom:0.35rem;">❓</div>
-        <div style="font-size:0.82rem;font-weight:700;color:var(--text-strong);">Quiz</div>
-        <div style="font-size:0.75rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;">Multiple choice questions, score tracking, feedback</div>
+        <div style="font-size:0.82rem;font-weight:700;color:var(--dark);">Quiz</div>
+        <div style="font-size:0.75rem;color:var(--mid);font-family:'IBM Plex Sans',sans-serif;">Multiple choice questions, score tracking, feedback</div>
       </div>
-      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;box-shadow:0 2px 6px rgba(12,54,68,0.05);">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;box-shadow:0 2px 6px rgba(89,17,142,0.05);">
         <div style="font-size:1.4rem;margin-bottom:0.35rem;">🎮</div>
-        <div style="font-size:0.82rem;font-weight:700;color:var(--text-strong);">Game</div>
-        <div style="font-size:0.75rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;">Clicker, reflex game, simple browser game</div>
+        <div style="font-size:0.82rem;font-weight:700;color:var(--dark);">Game</div>
+        <div style="font-size:0.75rem;color:var(--mid);font-family:'IBM Plex Sans',sans-serif;">Clicker, reflex game, simple browser game</div>
       </div>
-      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;box-shadow:0 2px 6px rgba(12,54,68,0.05);">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;box-shadow:0 2px 6px rgba(89,17,142,0.05);">
         <div style="font-size:1.4rem;margin-bottom:0.35rem;">🎲</div>
-        <div style="font-size:0.82rem;font-weight:700;color:var(--text-strong);">Random Generator</div>
-        <div style="font-size:0.75rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;">Button → random output from a curated list</div>
+        <div style="font-size:0.82rem;font-weight:700;color:var(--dark);">Random Generator</div>
+        <div style="font-size:0.75rem;color:var(--mid);font-family:'IBM Plex Sans',sans-serif;">Button → random output from a curated list</div>
       </div>
-      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;box-shadow:0 2px 6px rgba(12,54,68,0.05);">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;box-shadow:0 2px 6px rgba(89,17,142,0.05);">
         <div style="font-size:1.4rem;margin-bottom:0.35rem;">📖</div>
-        <div style="font-size:0.82rem;font-weight:700;color:var(--text-strong);">Interactive Story</div>
-        <div style="font-size:0.75rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;">Choose-your-own-adventure with branching paths</div>
+        <div style="font-size:0.82rem;font-weight:700;color:var(--dark);">Interactive Story</div>
+        <div style="font-size:0.75rem;color:var(--mid);font-family:'IBM Plex Sans',sans-serif;">Choose-your-own-adventure with branching paths</div>
       </div>
-      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;box-shadow:0 2px 6px rgba(12,54,68,0.05);">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;box-shadow:0 2px 6px rgba(89,17,142,0.05);">
         <div style="font-size:1.4rem;margin-bottom:0.35rem;">🛠️</div>
-        <div style="font-size:0.82rem;font-weight:700;color:var(--text-strong);">Tool / Calculator</div>
-        <div style="font-size:0.75rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;">User inputs → meaningful computed output</div>
+        <div style="font-size:0.82rem;font-weight:700;color:var(--dark);">Tool / Calculator</div>
+        <div style="font-size:0.75rem;color:var(--mid);font-family:'IBM Plex Sans',sans-serif;">User inputs → meaningful computed output</div>
       </div>
-      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;box-shadow:0 2px 6px rgba(12,54,68,0.05);">
+      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;box-shadow:0 2px 6px rgba(89,17,142,0.05);">
         <div style="font-size:1.4rem;margin-bottom:0.35rem;">💡</div>
-        <div style="font-size:0.82rem;font-weight:700;color:var(--text-strong);">Your Idea</div>
-        <div style="font-size:0.75rem;color:var(--text-body);font-family:'IBM Plex Sans',sans-serif;">Anything interactive that fits in one HTML file</div>
+        <div style="font-size:0.82rem;font-weight:700;color:var(--dark);">Your Idea</div>
+        <div style="font-size:0.75rem;color:var(--mid);font-family:'IBM Plex Sans',sans-serif;">Anything interactive that fits in one HTML file</div>
       </div>
     </div>
 
